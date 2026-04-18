@@ -23,12 +23,13 @@ body{font-family:Arial,sans-serif;background:#f8f8f6;color:#222;font-size:14px;l
 .ftab.on{background:#222;color:#fff;border-color:#222;font-weight:600}
 .ftab-clear{padding:4px 10px;border-radius:99px;border:1px solid #eee;cursor:pointer;font-size:11px;background:transparent;color:#bbb;transition:all .12s;margin-left:2px}
 .ftab-clear:hover{color:#888;border-color:#ddd}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:1.5rem}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:1.5rem}
 .stat{background:#fff;border:1px solid #eee;border-radius:8px;padding:12px 14px}
 .sl{font-size:10px;color:#aaa;text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px}
 .sv{font-size:22px;font-weight:600;color:#222}
 .ss{font-size:11px;color:#999;margin-top:2px}
-.victories-panel{background:#fffcf0;border:1px solid #e4cb78;border-radius:10px;padding:12px 16px;margin-bottom:1.25rem}
+/* Victories panel */
+.victories-panel{background:#fffcf0;border:1px solid #e4cb78;border-radius:10px;padding:12px 16px;margin-bottom:.75rem}
 .victories-hd{display:flex;align-items:center;gap:8px;margin-bottom:8px}
 .victories-ttl{font-size:11px;font-weight:700;color:#7a5c0a;text-transform:uppercase;letter-spacing:.08em;flex:1}
 .victories-hint{font-size:10px;color:#b89030;font-style:italic}
@@ -38,6 +39,23 @@ body{font-family:Arial,sans-serif;background:#f8f8f6;color:#222;font-size:14px;l
 .vchk.dn::after{content:'';display:block;width:7px;height:5px;border-left:1.5px solid #fff;border-bottom:1.5px solid #fff;transform:rotate(-45deg) translate(0,-1px)}
 .vtxt{font-size:12px;color:#5a4008}
 .vtxt.dn{text-decoration:line-through;color:#c0aa70}
+/* Delegation panel */
+.deleg-panel{background:#f0f4ff;border:1px solid #c0d0f0;border-radius:10px;padding:12px 16px;margin-bottom:1.25rem}
+.deleg-hd{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.deleg-ttl{font-size:11px;font-weight:700;color:#2050a0;text-transform:uppercase;letter-spacing:.08em;flex:1}
+.deleg-hint{font-size:10px;color:#6080c0;font-style:italic}
+.deleg-row{display:flex;align-items:center;gap:8px;padding:3px 0}
+.deleg-badge{font-size:10px;padding:1px 7px;border-radius:99px;background:#dde8ff;color:#3050a0;font-weight:600;white-space:nowrap}
+/* Delegation choice inline */
+.dc-wrap{background:#eef2ff;border:1px solid #b0c0f0;border-radius:8px;padding:10px 12px;margin:6px 0}
+.dc-title{font-size:11px;font-weight:700;color:#2050a0;margin-bottom:8px}
+.dc-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.dc-self{padding:5px 14px;border-radius:6px;border:none;background:#222;color:#fff;font-size:12px;cursor:pointer;font-family:Arial,sans-serif;font-weight:600}
+.dc-divider{font-size:11px;color:#aaa}
+.dc-inp{flex:1;min-width:110px;font-size:12px;padding:5px 9px;border:1px solid #c0d0f0;border-radius:6px;outline:none;font-family:Arial,sans-serif}
+.dc-del{padding:5px 14px;border-radius:6px;border:none;background:#378ADD;color:#fff;font-size:12px;cursor:pointer;font-family:Arial,sans-serif;font-weight:600}
+.dc-cancel{padding:5px 10px;border-radius:6px;border:1px solid #ddd;background:#fff;color:#aaa;font-size:12px;cursor:pointer;font-family:Arial,sans-serif}
+/* Sections */
 .grp{font-size:10px;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:.1em;margin:1.5rem 0 .75rem;display:flex;align-items:center;gap:8px}
 .grp::after{content:'';flex:1;height:1px;background:#e5e5e5}
 .sec{margin-bottom:.75rem}
@@ -51,15 +69,18 @@ body{font-family:Arial,sans-serif;background:#f8f8f6;color:#222;font-size:14px;l
 .pf{height:100%;border-radius:2px;transition:width .3s}
 .its{display:none;padding-top:6px}
 .its.op{display:block}
+/* Task items */
 .item{display:flex;align-items:flex-start;gap:8px;padding:7px 10px;border-radius:8px;margin-bottom:2px;transition:background .1s}
 .item:hover{background:#f5f5f2}
 .chk{width:16px;height:16px;border-radius:4px;border:1.5px solid #ccc;cursor:pointer;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:all .15s}
 .chk.dn{background:#222;border-color:#222}
 .chk.dn::after{content:'';display:block;width:8px;height:6px;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(-45deg) translate(0,-1px)}
+.cat-pip{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:6px}
 .ib{flex:1;min-width:0}
 .it{font-size:13px;color:#222;line-height:1.5}
 .it.dn{text-decoration:line-through;color:#bbb}
 .inote{font-size:11px;color:#999;margin-top:3px;font-style:italic;line-height:1.4}
+/* Subtasks */
 .subs{margin-top:4px;padding-left:2px}
 .sub{display:flex;align-items:flex-start;gap:8px;padding:3px 0}
 .sc{width:13px;height:13px;border-radius:3px;border:1.5px solid #ddd;cursor:pointer;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:all .15s}
@@ -69,20 +90,23 @@ body{font-family:Arial,sans-serif;background:#f8f8f6;color:#222;font-size:14px;l
 .st{font-size:12px;color:#777;line-height:1.5}
 .st.dn{text-decoration:line-through;color:#ccc}
 .sub-due{font-size:10px;color:#aaa;margin-left:5px;white-space:nowrap}
-.sub-due.late{color:#a32d2d}
-.sub-due.today{color:#854f0b}
+.sub-due.late{color:#a32d2d}.sub-due.today{color:#854f0b}
+/* Badges / dates */
 .bdg{display:inline-block;font-size:10px;padding:1px 7px;border-radius:99px;font-weight:600;margin-left:5px;vertical-align:middle}
 .dp{display:inline-flex;font-size:10px;padding:1px 7px;border-radius:99px;margin-left:6px;cursor:pointer;border:1px solid #ddd;color:#aaa;vertical-align:middle;transition:all .12s}
 .dp:hover{background:#f5f5f2}
 .dp.ov{border-color:#f09595;color:#a32d2d;background:#fcebeb}
 .dp.sw{border-color:#ef9f27;color:#854f0b;background:#faeeda}
 .dp.ok{border-color:#5dcaa5;color:#0f6e56;background:#e1f5ee}
+/* Icon buttons */
 .task-acts{display:flex;gap:1px;flex-shrink:0;align-items:flex-start;margin-top:1px}
-.ib-btn{width:22px;height:22px;border-radius:4px;border:none;background:transparent;cursor:pointer;font-size:12px;display:flex;align-items:center;justify-content:center;opacity:.25;transition:all .15s;padding:0;line-height:1}
+.ib-btn{width:22px;height:22px;border-radius:4px;border:none;background:transparent;cursor:pointer;font-size:12px;display:flex;align-items:center;justify-content:center;opacity:.22;transition:all .15s;padding:0;line-height:1}
 .ib-btn:hover{background:#eee;opacity:.8}
 .ib-btn.on{opacity:1}
 .ib-btn.star.on{color:#BA7517}
 .ib-btn.flag.on{color:#378ADD}
+.ib-btn.delegate.on{color:#2050a0}
+/* Edit form */
 .ef{background:#f5f5f2;border-radius:8px;padding:12px 14px;margin:5px 0 10px;border:1px solid #e0e0dc}
 .ef label{font-size:10px;color:#aaa;text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:3px;margin-top:8px}
 .ef label:first-child{margin-top:0}
@@ -100,14 +124,17 @@ body{font-family:Arial,sans-serif;background:#f8f8f6;color:#222;font-size:14px;l
 .ef-save{padding:6px 16px;border-radius:6px;border:none;background:#222;color:#fff;font-size:12px;cursor:pointer;font-family:Arial,sans-serif;font-weight:600}
 .ef-cancel{padding:6px 16px;border-radius:6px;border:1px solid #ddd;background:#fff;color:#888;font-size:12px;cursor:pointer;font-family:Arial,sans-serif}
 .ef-del{padding:6px 12px;border-radius:6px;border:1px solid #f09595;background:#fff;color:#a32d2d;font-size:12px;cursor:pointer;font-family:Arial,sans-serif;margin-left:auto}
+.chk-row{display:flex;align-items:center;gap:8px;margin-top:6px;font-size:12px;color:#555;cursor:pointer}
+.chk-row input[type=checkbox]{width:14px;height:14px;cursor:pointer;flex-shrink:0}
 .sub-erow{display:flex;align-items:center;gap:6px;margin-top:4px}
 .sub-erow input{font-size:12px;padding:5px 8px;border:1px solid #ddd;border-radius:6px;background:#fff;color:#222;outline:none;font-family:Arial,sans-serif}
-.sub-erow .sub-etxt{flex:1}
-.sub-erow .sub-edate{width:130px;flex:none}
+.sub-etxt{flex:1}
+.sub-edate{width:130px;flex:none}
 .sub-xbtn{width:20px;height:20px;border:none;background:transparent;cursor:pointer;color:#ccc;font-size:15px;flex-shrink:0;padding:0;border-radius:4px;line-height:1}
 .sub-xbtn:hover{background:#fee;color:#a32d2d}
 .add-sub-btn{font-size:11px;color:#888;background:transparent;border:1px dashed #ddd;border-radius:6px;padding:4px 10px;cursor:pointer;font-family:Arial,sans-serif;margin-top:4px;width:100%;text-align:left;transition:all .12s}
 .add-sub-btn:hover{border-color:#aaa;color:#555}
+/* Add card */
 .add-card{background:#fff;border:1px solid #e5e5e5;border-radius:10px;padding:1.25rem;margin-bottom:1.25rem}
 .add-card label{font-size:11px;color:#aaa;text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:4px;margin-top:10px}
 .add-card label:first-child{margin-top:0}
@@ -125,21 +152,21 @@ body{font-family:Arial,sans-serif;background:#f8f8f6;color:#222;font-size:14px;l
 .a-submit:hover{background:#444}
 .aflash{font-size:12px;color:#1d9e75;opacity:0;transition:opacity .3s;margin-left:8px}
 .aflash.show{opacity:1}
+/* Categories */
 .cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1rem}
 .cat-card{background:#fff;border:1px solid #eee;border-radius:10px;padding:11px 14px;cursor:pointer;transition:all .15s}
 .cat-card:hover{border-color:#ccc;box-shadow:0 2px 8px rgba(0,0,0,.06)}
-.cat-card.open{border-color:#ccc}
 .cat-hd{display:flex;align-items:center;gap:9px}
 .cat-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}
 .cat-nm{font-size:13px;font-weight:600;color:#222;flex:1}
-.cat-ct{font-size:11px;color:#aaa}
+.cat-ct{font-size:11px;color:#aaa;white-space:nowrap}
 .cat-form{background:#f5f5f2;border-radius:8px;padding:12px 14px;margin-top:6px;border:1px solid #e0e0dc}
 .cat-form label{font-size:10px;color:#aaa;text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:3px;margin-top:8px}
 .cat-form label:first-child{margin-top:0}
 .cat-form input,.cat-form textarea{width:100%;font-size:12px;padding:7px 9px;border:1px solid #ddd;border-radius:6px;background:#fff;color:#222;outline:none;font-family:Arial,sans-serif;display:block}
 .cat-form textarea{resize:vertical;min-height:56px}
 .swatches{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
-.swatch{width:22px;height:22px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:transform .12s,border-color .12s}
+.swatch{width:22px;height:22px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:transform .12s}
 .swatch:hover{transform:scale(1.2)}
 .swatch.sel{border-color:#222;transform:scale(1.15)}
 .cat-btns{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
@@ -148,14 +175,46 @@ body{font-family:Arial,sans-serif;background:#f8f8f6;color:#222;font-size:14px;l
 .cat-del{padding:6px 12px;border-radius:6px;border:1px solid #f09595;background:#fff;color:#a32d2d;font-size:12px;cursor:pointer;font-family:Arial,sans-serif;margin-left:auto}
 .add-cat-btn{width:100%;padding:10px;border-radius:8px;border:1px dashed #ddd;font-size:13px;cursor:pointer;background:transparent;color:#888;font-family:Arial,sans-serif;margin-top:4px;transition:all .15s}
 .add-cat-btn:hover{border-color:#aaa;color:#555;background:#f5f5f2}
+/* Cat goal bar */
+.cat-goal-bar{margin-top:6px}
+.cat-goal-hd{display:flex;justify-content:space-between;font-size:10px;color:#aaa;margin-bottom:3px}
+.cat-goal-track{height:4px;background:#eee;border-radius:2px;overflow:hidden}
+.cat-goal-fill{height:100%;border-radius:2px;transition:width .3s}
+/* Analytics */
 .acard{background:#fff;border:1px solid #e5e5e5;border-radius:10px;padding:1rem 1.25rem;margin-bottom:1rem}
-.atitle{font-size:13px;font-weight:600;color:#222;margin-bottom:.75rem}
+.atitle{font-size:13px;font-weight:600;color:#222;margin-bottom:.75rem;display:flex;align-items:center;gap:8px}
+.atitle-sub{font-size:11px;color:#aaa;font-weight:400;margin-left:auto}
 .otbl{width:100%;border-collapse:collapse;font-size:12px}
 .otbl th{color:#aaa;font-weight:600;text-align:left;padding:5px 7px;font-size:10px;text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid #eee}
 .otbl td{padding:7px 7px;border-bottom:1px solid #f0f0f0;color:#333}
 .otbl tr:last-child td{border-bottom:none}
 .empty{font-size:13px;color:#bbb;padding:1.5rem 0;text-align:center}
-.today-dot{width:7px;height:7px;border-radius:50%;background:#378ADD;display:inline-block;margin-right:4px;flex-shrink:0;margin-top:5px}
+/* Trend chart */
+.trend-chart{display:flex;gap:4px;align-items:flex-end;height:64px;margin:8px 0 2px}
+.trend-col{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:0;position:relative}
+.trend-col:hover .trend-tip{display:block}
+.trend-tip{display:none;position:absolute;bottom:calc(100% + 4px);left:50%;transform:translateX(-50%);font-size:10px;background:#333;color:#fff;padding:3px 7px;border-radius:5px;white-space:nowrap;z-index:10;pointer-events:none}
+.trend-bar-del{width:100%;border-radius:3px 3px 0 0;min-height:0;background:#378ADD;opacity:.75}
+.trend-bar-self{width:100%;min-height:0;background:#7F77DD}
+.trend-bar-empty{width:100%;height:2px;background:#eee;border-radius:3px}
+.trend-labels{display:flex;gap:4px;margin-top:3px}
+.trend-lbl{flex:1;font-size:9px;color:#ccc;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.trend-legend{display:flex;gap:14px;margin-top:6px}
+.trend-leg-item{display:flex;align-items:center;gap:5px;font-size:10px;color:#888}
+.trend-leg-dot{width:8px;height:8px;border-radius:2px}
+/* Streak cards */
+.streak-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:1rem}
+.streak-card{background:#fff;border:1px solid #eee;border-radius:8px;padding:12px 14px;text-align:center}
+.streak-num{font-size:26px;font-weight:700;color:#222}
+.streak-lbl{font-size:10px;color:#aaa;text-transform:uppercase;letter-spacing:.05em;margin-top:2px}
+/* Progress bar inline */
+.prog-row{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+.prog-label{font-size:12px;color:#333;flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;min-width:0}
+.prog-counts{font-size:11px;color:#aaa;width:40px;text-align:right;flex-shrink:0}
+.prog-bar{width:100px;height:5px;border-radius:3px;background:#eee;overflow:hidden;flex-shrink:0}
+.prog-fill{height:100%;border-radius:3px}
+.prog-pct{font-size:11px;color:#bbb;width:32px;text-align:right;flex-shrink:0}
+/* Sheet bar */
 .gsheet-bar{background:#f3f3f0;border:1px solid #e5e5e2;border-radius:8px;padding:8px 14px;margin-bottom:1.25rem;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .gsheet-bar input{flex:1;min-width:180px;font-size:12px;padding:5px 9px;border:1px solid #ddd;border-radius:6px;background:#fff;font-family:Arial,sans-serif;outline:none;color:#222}
 .gsheet-btn{padding:5px 12px;border-radius:6px;border:none;background:#555;color:#fff;font-size:12px;font-weight:600;cursor:pointer;font-family:Arial,sans-serif;white-space:nowrap}
@@ -163,7 +222,11 @@ body{font-family:Arial,sans-serif;background:#f8f8f6;color:#222;font-size:14px;l
 .gsheet-status{font-size:11px;color:#888;font-style:italic}
 .copy-claude-btn{padding:5px 12px;border-radius:6px;border:1px solid #ddd;background:#fff;color:#888;font-size:12px;cursor:pointer;font-family:Arial,sans-serif;white-space:nowrap;margin-left:auto}
 .copy-claude-btn:hover{background:#f5f5f2;color:#555}
-@media(max-width:600px){.stats{grid-template-columns:repeat(2,1fr)}.ar2,.efr2,.cat-grid{grid-template-columns:1fr}}
+.today-dot{width:7px;height:7px;border-radius:50%;background:#378ADD;display:inline-block;margin-right:4px;flex-shrink:0;margin-top:5px}
+@media(max-width:640px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .ar2,.efr2,.cat-grid,.streak-row{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
@@ -178,15 +241,13 @@ body{font-family:Arial,sans-serif;background:#f8f8f6;color:#222;font-size:14px;l
       <span class="save-ind" id="save-ind">✓ Saved</span>
     </div>
   </div>
-
   <div class="gsheet-bar">
     <span style="font-size:11px;font-weight:600;color:#555;white-space:nowrap">API</span>
-    <input id="sheet-url" type="text" placeholder="Vercel API URL" />
+    <input id="sheet-url" type="text" placeholder="Vercel API URL"/>
     <button class="gsheet-btn" onclick="connectSheet()">Connect</button>
     <span class="gsheet-status" id="sheet-status">Not connected</span>
-    <button class="copy-claude-btn" onclick="copyForClaude()" title="Copy all tasks as markdown to paste into Claude Projects">📋 Copy for Claude</button>
+    <button class="copy-claude-btn" onclick="copyForClaude()">📋 Copy for Claude</button>
   </div>
-
   <div class="tabs" id="main-tabs"></div>
   <div class="stats" id="stats-row"></div>
   <div id="plan-view"></div>
@@ -194,377 +255,296 @@ body{font-family:Arial,sans-serif;background:#f8f8f6;color:#222;font-size:14px;l
   <div id="categories-view" style="display:none"></div>
   <div id="analytics-view" style="display:none"></div>
 </div>
-
 <script>
-// ── Dynamic date (no more hardcoded TODAY) ───────────────────────────────────
-const _now = new Date();
-const TODAY = `${_now.getFullYear()}-${String(_now.getMonth()+1).padStart(2,'0')}-${String(_now.getDate()).padStart(2,'0')}`;
-const TODAY_D = new Date(TODAY + 'T00:00:00');
-const MONTHS  = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-const DAYS_W  = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+// ── Date ─────────────────────────────────────────────────────────────────────
+const _n=new Date();
+const TODAY=`${_n.getFullYear()}-${String(_n.getMonth()+1).padStart(2,'0')}-${String(_n.getDate()).padStart(2,'0')}`;
+const TODAY_D=new Date(TODAY+'T00:00:00');
+const MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const DAYS_W=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+function wkStart(ds){const d=new Date(ds+'T00:00:00'),day=d.getDay();d.setDate(d.getDate()-day+(day===0?-6:1));return d.toISOString().slice(0,10);}
+const _ws=wkStart(TODAY),_wsd=new Date(_ws+'T00:00:00');
+document.getElementById('week-pill').textContent=`Week of ${_wsd.getDate()} ${MONTHS[_wsd.getMonth()]}`;
+document.getElementById('today-pill').textContent=`${DAYS_W[TODAY_D.getDay()]} ${TODAY_D.getDate()} ${MONTHS[TODAY_D.getMonth()]}`;
 
-function wkStart(ds) {
-  const d = new Date(ds+'T00:00:00'), day = d.getDay();
-  d.setDate(d.getDate() - day + (day===0 ? -6 : 1));
-  return d.toISOString().slice(0,10);
-}
-const _ws = wkStart(TODAY);
-const _wsd = new Date(_ws+'T00:00:00');
-document.getElementById('week-pill').textContent = `Week of ${_wsd.getDate()} ${MONTHS[_wsd.getMonth()]}`;
-document.getElementById('today-pill').textContent = `${DAYS_W[TODAY_D.getDay()]} ${TODAY_D.getDate()} ${MONTHS[TODAY_D.getMonth()]}`;
-
-// ── Config ───────────────────────────────────────────────────────────────────
-const SK = 'rpm_v2';
-const DEFAULT_SHEET_URL = 'https://rpm-dashboard-api.vercel.app/api/sheets';
-
-const SC = {
-  innovation: {label:'Innovation',         color:'#7F77DD', group:'work'},
-  sales:      {label:'Sales mastery',      color:'#1D9E75', group:'work'},
-  marketing:  {label:'Marketing',          color:'#378ADD', group:'work'},
-  training:   {label:'Training',           color:'#6C8EBF', group:'support'},
-  citizenship:{label:'Australian citizenship', color:'#E24B4A', group:'personal'},
-  finances:   {label:'Finances',           color:'#BA7517', group:'personal'},
-  realestate: {label:'Real estate',        color:'#D85A30', group:'personal'},
-  health:     {label:'Health & energy',    color:'#5DCAA5', group:'personal'},
-  brand:      {label:'Personal brand',     color:'#D4537E', group:'personal'},
-  lifestyle:  {label:'Lifestyle',          color:'#888780', group:'personal'},
+// ── Config ────────────────────────────────────────────────────────────────────
+const SK='rpm_v2',DEFAULT_SHEET_URL='https://rpm-dashboard-api.vercel.app/api/sheets';
+const SC={
+  innovation:{label:'Innovation',color:'#7F77DD',group:'work'},
+  sales:{label:'Sales mastery',color:'#1D9E75',group:'work'},
+  marketing:{label:'Marketing',color:'#378ADD',group:'work'},
+  training:{label:'Training',color:'#6C8EBF',group:'support'},
+  citizenship:{label:'Australian citizenship',color:'#E24B4A',group:'personal'},
+  finances:{label:'Finances',color:'#BA7517',group:'personal'},
+  realestate:{label:'Real estate',color:'#D85A30',group:'personal'},
+  health:{label:'Health & energy',color:'#5DCAA5',group:'personal'},
+  brand:{label:'Personal brand',color:'#D4537E',group:'personal'},
+  lifestyle:{label:'Lifestyle',color:'#888780',group:'personal'},
 };
-const GC = [
-  {key:'work',     label:'Work — 3 to thrive',  streams:['innovation','sales','marketing']},
-  {key:'support',  label:'Support & training',  streams:['training']},
-  {key:'personal', label:'Personal RPM',         streams:['citizenship','finances','realestate','health','brand','lifestyle']},
+const GC=[
+  {key:'work',label:'Work — 3 to thrive',streams:['innovation','sales','marketing']},
+  {key:'support',label:'Support & training',streams:['training']},
+  {key:'personal',label:'Personal RPM',streams:['citizenship','finances','realestate','health','brand','lifestyle']},
 ];
-const PC = {
-  urgent:    {l:'Urgent',     bg:'#FCEBEB',tc:'#A32D2D'},
-  priority:  {l:'Priority',   bg:'#FAECE7',tc:'#993C1D'},
-  normal:    {l:'',           bg:'',       tc:''},
-  backburner:{l:'Backburner', bg:'#F1EFE8',tc:'#5F5E5A'},
-  awaiting:  {l:'Awaiting',   bg:'#FAEEDA',tc:'#854F0B'},
-};
-const PRI_ORDER = {urgent:0,priority:1,normal:2,backburner:3,awaiting:4};
-const priCls = {urgent:'eu',priority:'ep',normal:'en',backburner:'eb',awaiting:'ea'};
-const aCls   = {urgent:'au',priority:'ap',normal:'an',backburner:'ab',awaiting:'aa'};
-const CAT_COLORS = ['#5DCAA5','#7F77DD','#D4537E','#378ADD','#E24B4A','#D85A30','#1D9E75','#6C8EBF','#BA7517','#888780','#A85555','#5A9A7A','#2E86AB','#E8A838','#9C89B8'];
-
-// Pre-seeded RPM categories from Jacy's master plan
-const DEFAULT_CATEGORIES = [
-  {id:'cat01',name:'Physical Body',           color:'#5DCAA5'},
-  {id:'cat02',name:'Wellbeing & Happiness',   color:'#7F77DD'},
-  {id:'cat03',name:'Romance',                  color:'#D4537E'},
-  {id:'cat04',name:'Friendships & Family',    color:'#378ADD'},
-  {id:'cat05',name:'Adventure & Travel',      color:'#E24B4A'},
-  {id:'cat06',name:'Energy & Rejuvenation',   color:'#5A9A7A'},
-  {id:'cat07',name:'Contribution',             color:'#1D9E75'},
-  {id:'cat08',name:'Jacy Enterprises',        color:'#6C8EBF'},
-  {id:'cat09',name:'PlanTech Business',       color:'#2E86AB'},
-  {id:'cat10',name:'Brand & Influence',       color:'#D85A30'},
-  {id:'cat11',name:'Execution & Discipline',  color:'#888780'},
-  {id:'cat12',name:'Finance & Wealth',        color:'#BA7517'},
-  {id:'cat13',name:'Tax & Accounting',        color:'#A85555'},
+const PC={urgent:{l:'Urgent',bg:'#FCEBEB',tc:'#A32D2D'},priority:{l:'Priority',bg:'#FAECE7',tc:'#993C1D'},normal:{l:'',bg:'',tc:''},backburner:{l:'Backburner',bg:'#F1EFE8',tc:'#5F5E5A'},awaiting:{l:'Awaiting',bg:'#FAEEDA',tc:'#854F0B'}};
+const PRI_ORDER={urgent:0,priority:1,normal:2,backburner:3,awaiting:4};
+const priCls={urgent:'eu',priority:'ep',normal:'en',backburner:'eb',awaiting:'ea'};
+const aCls={urgent:'au',priority:'ap',normal:'an',backburner:'ab',awaiting:'aa'};
+const CAT_COLORS=['#5DCAA5','#7F77DD','#D4537E','#378ADD','#E24B4A','#D85A30','#1D9E75','#6C8EBF','#BA7517','#888780','#A85555','#5A9A7A','#2E86AB','#E8A838','#9C89B8'];
+const DEFAULT_CATEGORIES=[
+  {id:'cat01',name:'Physical Body',color:'#5DCAA5'},
+  {id:'cat02',name:'Wellbeing & Happiness',color:'#7F77DD'},
+  {id:'cat03',name:'Romance',color:'#D4537E'},
+  {id:'cat04',name:'Friendships & Family',color:'#378ADD'},
+  {id:'cat05',name:'Adventure & Travel',color:'#E24B4A'},
+  {id:'cat06',name:'Energy & Rejuvenation',color:'#5A9A7A'},
+  {id:'cat07',name:'Contribution',color:'#1D9E75'},
+  {id:'cat08',name:'Jacy Enterprises',color:'#6C8EBF'},
+  {id:'cat09',name:'PlanTech Business',color:'#2E86AB'},
+  {id:'cat10',name:'Brand & Influence',color:'#D85A30'},
+  {id:'cat11',name:'Execution & Discipline',color:'#888780'},
+  {id:'cat12',name:'Finance & Wealth',color:'#BA7517'},
+  {id:'cat13',name:'Tax & Accounting',color:'#A85555'},
   {id:'cat14',name:'Professional Connections',color:'#9C89B8'},
-  {id:'cat15',name:'Mentoring & Team',        color:'#E8A838'},
-  {id:'cat16',name:'Learning & Skills',       color:'#5DCAA5'},
-  {id:'cat17',name:'Opportunities',           color:'#7F77DD'},
-].map(c => ({...c, vision:'', purpose:'', result:'', createdAt:TODAY, archived:false}));
+  {id:'cat15',name:'Mentoring & Team',color:'#E8A838'},
+  {id:'cat16',name:'Learning & Skills',color:'#5DCAA5'},
+  {id:'cat17',name:'Opportunities',color:'#7F77DD'},
+].map(c=>({...c,vision:'',purpose:'',result:'',createdAt:TODAY,archived:false}));
 
 // ── State ─────────────────────────────────────────────────────────────────────
-let tasks=[], log=[], categories=[];
-let openSecs={}, tab='plan', activeFilters=new Set();
-let editingId=null, editState={}, editSubs=[];
-let addPri='normal', addSubs=[];
+let tasks=[],log=[],categories=[];
+let openSecs={},tab='plan',activeFilters=new Set();
+let editingId=null,editState={},editSubs=[];
+let addPri='normal',addSubs=[];
 let sheetUrl=DEFAULT_SHEET_URL;
-let editingCatId=null, editingCatState={};
+let editingCatId=null,editingCatState={};
+let pendingDelegationId=null; // Wave 2: delegation flow
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
-function uid() { return 'u'+Date.now()+Math.random().toString(36).slice(2,5); }
-function dd(d) { if(!d)return''; const[,m,day]=d.split('-'); return`${parseInt(day)} ${MONTHS[parseInt(m)-1]}`; }
-function dn(d) { if(!d)return''; return DAYS_W[new Date(d+'T00:00:00').getDay()]; }
-// Compare YYYY-MM-DD strings directly — avoids timezone parsing bugs
-function isToday(t)  { return t.dueDate === TODAY; }
-function isOv(t)     { return !!(t.dueDate && !t.done && t.dueDate < TODAY); }
-function daysDiff(a,b) { return Math.round((new Date(b+'T00:00:00')-new Date(a+'T00:00:00'))/86400000); }
-function dpC(t)   { if(!t.dueDate||t.done)return''; if(t.dueDate<TODAY)return'ov'; if(t.dueDate===TODAY)return'sw'; return'ok'; }
-function dpTxt(t) {
-  if(!t.dueDate) return'+ due date';
+function uid(){return 'u'+Date.now()+Math.random().toString(36).slice(2,5);}
+function dd(d){if(!d)return'';const[,m,day]=d.split('-');return`${parseInt(day)} ${MONTHS[parseInt(m)-1]}`;}
+function dn(d){if(!d)return'';return DAYS_W[new Date(d+'T00:00:00').getDay()];}
+function isToday(t){return t.dueDate===TODAY;}
+function isOv(t){return !!(t.dueDate&&!t.done&&t.dueDate<TODAY);}
+function daysDiff(a,b){return Math.round((new Date(b+'T00:00:00')-new Date(a+'T00:00:00'))/86400000);}
+function dpC(t){if(!t.dueDate||t.done)return'';if(t.dueDate<TODAY)return'ov';if(t.dueDate===TODAY)return'sw';return'ok';}
+function dpTxt(t){
+  if(!t.dueDate)return'+ due date';
   const s=`${dn(t.dueDate)} ${dd(t.dueDate)}`;
-  if(t.done) return s;
-  if(t.dueDate<TODAY) return`${s} · ${daysDiff(t.dueDate,TODAY)}d late`;
-  if(t.dueDate===TODAY) return`${s} · today`;
+  if(t.done)return s;
+  if(t.dueDate<TODAY)return`${s} · ${daysDiff(t.dueDate,TODAY)}d late`;
+  if(t.dueDate===TODAY)return`${s} · today`;
   return s;
 }
-function bHtml(pri) { const p=PC[pri]; if(!p||!p.l)return''; return`<span class="bdg" style="background:${p.bg};color:${p.tc}">${p.l}</span>`; }
-function leafCount(t) { return 1+(t.subs||[]).length; }
-function doneCount(t) { return (t.done?1:0)+((t.subs||[]).filter(s=>s.done).length); }
-function showSaved() {
-  const el=document.getElementById('save-ind');
-  if(!el)return;
-  el.classList.add('show');
-  clearTimeout(el._t);
-  el._t=setTimeout(()=>el.classList.remove('show'),2000);
-}
+function bHtml(pri){const p=PC[pri];if(!p||!p.l)return'';return`<span class="bdg" style="background:${p.bg};color:${p.tc}">${p.l}</span>`;}
+function leafCount(t){return 1+(t.subs||[]).length;}
+function doneCount(t){return(t.done?1:0)+((t.subs||[]).filter(s=>s.done).length);}
+function showSaved(){const el=document.getElementById('save-ind');if(!el)return;el.classList.add('show');clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('show'),2000);}
+function catOf(t){return categories.find(c=>c.id===t.categoryId);}
 
 // ── Persistence ───────────────────────────────────────────────────────────────
-async function save() {
+async function save(){
   const payload={tasks,log,categories};
-  if(sheetUrl) {
-    try {
-      const r=await fetch(sheetUrl,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
-      if(r.ok){showSaved();return;}
-      throw new Error('HTTP '+r.status);
-    } catch(e) { console.warn('Sheet write failed, falling back to localStorage',e); }
+  if(sheetUrl){
+    try{const r=await fetch(sheetUrl,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});if(r.ok){showSaved();return;}throw new Error('HTTP '+r.status);}
+    catch(e){console.warn('Sheet write failed',e);}
   }
-  localStorage.setItem(SK,JSON.stringify(payload));
-  showSaved();
+  localStorage.setItem(SK,JSON.stringify(payload));showSaved();
 }
-
-async function loadData() {
-  if(sheetUrl) {
-    try {
+async function loadData(){
+  if(sheetUrl){
+    try{
       const r=await fetch(sheetUrl);
-      if(r.ok) {
-        const d=await r.json();
-        if(d.tasks&&d.tasks.length) {
-          tasks=d.tasks;
-          log=d.log||[];
-          categories=(d.categories&&d.categories.length)?d.categories:DEFAULT_CATEGORIES;
-          return;
-        }
-      }
-    } catch(e){ console.warn('Sheet read failed',e); }
+      if(r.ok){const d=await r.json();if(d.tasks&&d.tasks.length){tasks=d.tasks;log=d.log||[];categories=(d.categories&&d.categories.length)?d.categories:DEFAULT_CATEGORIES;return;}}
+    }catch(e){console.warn('Sheet read failed',e);}
   }
-  try {
-    const raw=localStorage.getItem(SK);
-    if(raw){const d=JSON.parse(raw);if(d.tasks&&d.tasks.length){tasks=d.tasks;log=d.log||[];categories=d.categories||DEFAULT_CATEGORIES;return;}}
-  } catch(e){}
+  try{const raw=localStorage.getItem(SK);if(raw){const d=JSON.parse(raw);if(d.tasks&&d.tasks.length){tasks=d.tasks;log=d.log||[];categories=d.categories||DEFAULT_CATEGORIES;return;}}}catch(e){}
   tasks=[];log=[];categories=DEFAULT_CATEGORIES;
 }
-
-function connectSheet() {
+function connectSheet(){
   const url=(document.getElementById('sheet-url').value||'').trim();
   if(!url){alert('Paste your API URL first');return;}
-  sheetUrl=url;
-  localStorage.setItem('rpm_sheet_url',url);
+  sheetUrl=url;localStorage.setItem('rpm_sheet_url',url);
   document.getElementById('sheet-status').textContent='Connecting...';
-  loadData().then(()=>{
-    document.getElementById('sheet-status').textContent='Connected';
-    renderAll();
-  }).catch(()=>document.getElementById('sheet-status').textContent='Connection failed');
+  loadData().then(()=>{document.getElementById('sheet-status').textContent='Connected';renderAll();})
+    .catch(()=>document.getElementById('sheet-status').textContent='Connection failed');
 }
 
 // ── Copy for Claude ───────────────────────────────────────────────────────────
-function copyForClaude() {
-  const lines=['# My RPM Task List','',`Date: ${TODAY}`,`Total tasks: ${tasks.filter(t=>!t.done).length} open`,''  ];
+function copyForClaude(){
+  const lines=['# My RPM Task List','',`Date: ${TODAY}`,`Open tasks: ${tasks.filter(t=>!t.done).length}`,''];
   GC.forEach(g=>{
-    const gTasks=tasks.filter(t=>g.streams.includes(t.stream)&&!t.done);
-    if(!gTasks.length)return;
+    const gT=tasks.filter(t=>g.streams.includes(t.stream)&&!t.done);if(!gT.length)return;
     lines.push(`## ${g.label}`);
     g.streams.forEach(s=>{
-      const its=tasks.filter(t=>t.stream===s&&!t.done);
-      if(!its.length)return;
+      const its=tasks.filter(t=>t.stream===s&&!t.done);if(!its.length)return;
       lines.push(`### ${SC[s].label}`);
       sortedTasks(its).forEach(t=>{
-        let line=`- [${t.done?'x':' '}] ${t.text}`;
-        if(t.pri&&t.pri!=='normal')line+=` [${PC[t.pri].l||t.pri}]`;
-        if(t.dueDate)line+=` (due: ${t.dueDate}${isOv(t)?' LATE':''})`;
-        if(t.isDailyVictory)line+=` ⭐`;
-        if(t.isWeeklyFocus)line+=` 🚩`;
-        lines.push(line);
-        (t.subs||[]).forEach(s=>{
-          let sl=`  - [${s.done?'x':' '}] ${s.text}`;
-          if(s.dueDate)sl+=` (due: ${s.dueDate})`;
-          lines.push(sl);
-        });
-        if(t.note)lines.push(`  *Note: ${t.note}*`);
-      });
-      lines.push('');
+        let l=`- [ ] ${t.text}`;
+        if(t.pri&&t.pri!=='normal')l+=` [${PC[t.pri].l||t.pri}]`;
+        if(t.dueDate)l+=` (due: ${t.dueDate}${isOv(t)?' LATE':''})`;
+        if(t.isDailyVictory)l+=` ⭐`;
+        if(t.isWeeklyFocus)l+=` 🚩`;
+        if(t.delegateIntent)l+=` 🤝${t.delegatedTo?' → '+t.delegatedTo:''}`;
+        lines.push(l);
+        (t.subs||[]).forEach(s=>{let sl=`  - [ ] ${s.text}`;if(s.dueDate)sl+=` (due: ${s.dueDate})`;lines.push(sl);});
+        if(t.note)lines.push(`  *${t.note}*`);
+      });lines.push('');
     });
   });
-  const cats=categories.filter(c=>!c.archived);
-  if(cats.length){
-    lines.push('## RPM Categories');
-    cats.forEach(c=>{
-      const taskCount=tasks.filter(t=>t.categoryId===c.id&&!t.done).length;
-      lines.push(`- **${c.name}** (${taskCount} open tasks)${c.result?': '+c.result.slice(0,80):''}`);
-    });
-  }
   const md=lines.join('\n');
-  navigator.clipboard.writeText(md).then(()=>{
-    const btn=document.querySelector('.copy-claude-btn');
-    const orig=btn.textContent;
-    btn.textContent='✓ Copied!';
-    setTimeout(()=>btn.textContent=orig,2000);
-  }).catch(()=>alert('Copy failed — try a different browser'));
+  navigator.clipboard.writeText(md).then(()=>{const btn=document.querySelector('.copy-claude-btn');const orig=btn.textContent;btn.textContent='✓ Copied!';setTimeout(()=>btn.textContent=orig,2000);}).catch(()=>alert('Copy failed'));
 }
 
 // ── Filters ───────────────────────────────────────────────────────────────────
-function toggleFilter(f) {
-  if(activeFilters.has(f)) activeFilters.delete(f);
-  else activeFilters.add(f);
-  renderPlan();
-}
-function clearFilters() { activeFilters.clear(); renderPlan(); }
-function taskVisible(t) {
-  if(activeFilters.size===0) return true;
-  for(const f of activeFilters) {
-    if(f==='today'    && !isToday(t))                             return false;
-    if(f==='late'     && !isOv(t))                                return false;
-    if(f==='priority' && t.pri!=='urgent'&&t.pri!=='priority')    return false;
-    if(f==='pending'  && t.done)                                   return false;
-    if(f==='done'     && !t.done)                                  return false;
+function toggleFilter(f){if(activeFilters.has(f))activeFilters.delete(f);else activeFilters.add(f);renderPlan();}
+function clearFilters(){activeFilters.clear();renderPlan();}
+function taskVisible(t){
+  if(activeFilters.size===0)return true;
+  for(const f of activeFilters){
+    if(f==='today'     &&!isToday(t))                           return false;
+    if(f==='late'      &&!isOv(t))                              return false;
+    if(f==='priority'  &&t.pri!=='urgent'&&t.pri!=='priority')  return false;
+    if(f==='pending'   &&t.done)                                return false;
+    if(f==='done'      &&!t.done)                               return false;
+    if(f==='delegating'&&!t.delegateIntent)                     return false;
   }
   return true;
 }
 
-// ── Sort: priority then createdAt asc (older = higher) ───────────────────────
-function sortedTasks(arr) {
-  return [...arr].sort((a,b)=>{
-    const pa=PRI_ORDER[a.pri]??2, pb=PRI_ORDER[b.pri]??2;
-    if(pa!==pb) return pa-pb;
-    const ca=a.createdAt||'9999', cb=b.createdAt||'9999';
+// ── Sort ──────────────────────────────────────────────────────────────────────
+function sortedTasks(arr){
+  return[...arr].sort((a,b)=>{
+    const pa=PRI_ORDER[a.pri]??2,pb=PRI_ORDER[b.pri]??2;
+    if(pa!==pb)return pa-pb;
+    const ca=a.createdAt||'9999',cb=b.createdAt||'9999';
     return ca<cb?-1:ca>cb?1:0;
   });
 }
 
 // ── Stats ─────────────────────────────────────────────────────────────────────
-function computeStats() {
-  let total=0,done=0,todayC=0,lateC=0;
+function computeStats(){
+  let total=0,done=0,todayC=0,lateC=0,delegateC=0;
   tasks.forEach(t=>{
-    total+=leafCount(t); done+=doneCount(t);
-    if(isToday(t)&&!t.done) todayC++;
-    if(isOv(t)) lateC++;
+    total+=leafCount(t);done+=doneCount(t);
+    if(isToday(t)&&!t.done)todayC++;
+    if(isOv(t))lateC++;
+    if(t.delegateIntent&&!t.done)delegateC++;
   });
-  return{total,done,today:todayC,late:lateC,pct:total>0?Math.round(done/total*100):0};
+  return{total,done,today:todayC,late:lateC,delegate:delegateC,pct:total>0?Math.round(done/total*100):0};
 }
-function renderStats() {
+function renderStats(){
   const s=computeStats();
   document.getElementById('stats-row').innerHTML=`
     <div class="stat"><div class="sl">Total items</div><div class="sv">${s.total}</div></div>
     <div class="stat"><div class="sl">Completed</div><div class="sv">${s.done}</div><div class="ss">${s.pct}% done</div></div>
     <div class="stat"><div class="sl">Due today</div><div class="sv">${s.today}</div><div class="ss">remaining</div></div>
-    <div class="stat"><div class="sl">Late</div><div class="sv" style="${s.late>0?'color:#a32d2d':''}">${s.late}</div><div class="ss">${s.late>0?'overdue':'on track'}</div></div>`;
+    <div class="stat"><div class="sl">Late</div><div class="sv" style="${s.late>0?'color:#a32d2d':''}">${s.late}</div><div class="ss">${s.late>0?'overdue':'on track'}</div></div>
+    <div class="stat"><div class="sl">To delegate</div><div class="sv" style="${s.delegate>0?'color:#2050a0':''}">${s.delegate}</div><div class="ss">pending</div></div>`;
 }
 
-// ── Task actions ───────────────────────────────────────────────────────────────
-async function togTask(id) {
-  const t=tasks.find(t=>t.id===id); if(!t)return;
-  t.done=!t.done;
+// ── Task actions ──────────────────────────────────────────────────────────────
+async function togTask(id){
+  const t=tasks.find(t=>t.id===id);if(!t)return;
+  // Unchecking — always just un-done
   if(t.done){
-    log.push({taskId:id,completedAt:TODAY,dueDate:t.dueDate||null,daysLate:t.dueDate?daysDiff(t.dueDate,TODAY):null,weekStart:wkStart(TODAY)});
-  } else {
+    t.done=false;t.delegatedTo='';
     log=log.filter(e=>e.taskId!==id);
+    await save();renderAll();return;
   }
-  await save(); renderAll();
-}
-async function togSub(tid,sid) {
-  const t=tasks.find(t=>t.id===tid); if(!t)return;
-  const s=t.subs.find(s=>s.id===sid); if(!s)return;
-  s.done=!s.done; await save(); renderAll();
-}
-async function togVictory(id) {
-  const t=tasks.find(t=>t.id===id); if(!t)return;
-  if(!t.isDailyVictory){
-    const count=tasks.filter(t=>t.isDailyVictory&&!t.done).length;
-    if(count>=5){alert('You already have 5 Daily Victories. Remove one first to add another.');return;}
+  // Marking done — check for delegation intent
+  if(t.delegateIntent&&!pendingDelegationId){
+    pendingDelegationId=id;renderAll();
+    setTimeout(()=>{const inp=document.getElementById('dc-inp-'+id);if(inp)inp.focus();},60);
+    return;
   }
-  t.isDailyVictory=!t.isDailyVictory;
-  await save(); renderAll();
+  // Normal done
+  t.done=true;
+  log.push({taskId:id,completedAt:TODAY,dueDate:t.dueDate||null,daysLate:t.dueDate?daysDiff(t.dueDate,TODAY):null,weekStart:wkStart(TODAY),delegatedTo:''});
+  pendingDelegationId=null;await save();renderAll();
 }
-async function togWeekFocus(id) {
-  const t=tasks.find(t=>t.id===id); if(!t)return;
-  t.isWeeklyFocus=!t.isWeeklyFocus;
-  await save(); renderAll();
+async function togSub(tid,sid){const t=tasks.find(t=>t.id===tid);if(!t)return;const s=t.subs.find(s=>s.id===sid);if(!s)return;s.done=!s.done;await save();renderAll();}
+async function completeDelegation(id,delegatedTo){
+  const t=tasks.find(t=>t.id===id);if(!t)return;
+  t.done=true;t.delegatedTo=delegatedTo||'';
+  log.push({taskId:id,completedAt:TODAY,dueDate:t.dueDate||null,daysLate:t.dueDate?daysDiff(t.dueDate,TODAY):null,weekStart:wkStart(TODAY),delegatedTo:delegatedTo||''});
+  pendingDelegationId=null;await save();renderAll();
+}
+function completeDelegationInput(id){
+  const inp=document.getElementById('dc-inp-'+id);
+  completeDelegation(id,inp?(inp.value.trim()):'');
+}
+function cancelDelegation(){pendingDelegationId=null;renderAll();}
+async function togVictory(id){
+  const t=tasks.find(t=>t.id===id);if(!t)return;
+  if(!t.isDailyVictory&&tasks.filter(t=>t.isDailyVictory&&!t.done).length>=5){alert('You already have 5 Daily Victories. Remove one first.');return;}
+  t.isDailyVictory=!t.isDailyVictory;await save();renderAll();
+}
+async function togWeekFocus(id){const t=tasks.find(t=>t.id===id);if(!t)return;t.isWeeklyFocus=!t.isWeeklyFocus;await save();renderAll();}
+async function togDelegateIntent(id){
+  const t=tasks.find(t=>t.id===id);if(!t)return;
+  t.delegateIntent=!t.delegateIntent;
+  if(!t.delegateIntent)t.delegatedTo='';
+  await save();renderAll();
 }
 
 // ── Edit task ─────────────────────────────────────────────────────────────────
-function syncEditSubsFromDOM() {
-  document.querySelectorAll('[data-esub]').forEach(el=>{
-    const i=parseInt(el.dataset.esub);
-    if(!editSubs[i])return;
-    if(el.classList.contains('sub-etxt'))  editSubs[i].text=el.value;
-    if(el.classList.contains('sub-edate')) editSubs[i].dueDate=el.value;
-  });
-}
-function syncAddSubsFromDOM() {
-  document.querySelectorAll('[data-asub]').forEach(el=>{
-    const i=parseInt(el.dataset.asub);
-    if(!addSubs[i])return;
-    if(el.classList.contains('sub-etxt'))  addSubs[i].text=el.value;
-    if(el.classList.contains('sub-edate')) addSubs[i].dueDate=el.value;
-  });
-}
-
-function startEdit(id) {
-  const t=tasks.find(t=>t.id===id); if(!t)return;
+function syncEditSubsFromDOM(){document.querySelectorAll('[data-esub]').forEach(el=>{const i=parseInt(el.dataset.esub);if(!editSubs[i])return;if(el.classList.contains('sub-etxt'))editSubs[i].text=el.value;if(el.classList.contains('sub-edate'))editSubs[i].dueDate=el.value;});}
+function syncAddSubsFromDOM(){document.querySelectorAll('[data-asub]').forEach(el=>{const i=parseInt(el.dataset.asub);if(!addSubs[i])return;if(el.classList.contains('sub-etxt'))addSubs[i].text=el.value;if(el.classList.contains('sub-edate'))addSubs[i].dueDate=el.value;});}
+function startEdit(id){
+  const t=tasks.find(t=>t.id===id);if(!t)return;
   editingId=id;
-  editState={text:t.text,stream:t.stream,pri:t.pri,dueDate:t.dueDate||'',note:t.note||'',categoryId:t.categoryId||''};
+  editState={text:t.text,stream:t.stream,pri:t.pri,dueDate:t.dueDate||'',note:t.note||'',categoryId:t.categoryId||'',delegateIntent:t.delegateIntent||false,delegatedTo:t.delegatedTo||''};
   editSubs=(t.subs||[]).map(s=>({...s}));
   renderAll();
   setTimeout(()=>{const el=document.getElementById('ef-text');if(el){el.focus();el.selectionStart=el.selectionEnd=el.value.length;}},60);
 }
-function selEP(p) {
-  editState.pri=p;
-  document.querySelectorAll('.epb').forEach(b=>{b.className='epb';if(b.dataset.pri===p)b.classList.add(priCls[p]);});
-}
-function selAP(p) {
-  addPri=p;
-  document.querySelectorAll('.apb').forEach(b=>{b.className='apb';if(b.dataset.p===p)b.classList.add(aCls[p]);});
-}
-function addEditSub() {
+function selEP(p){editState.pri=p;document.querySelectorAll('.epb').forEach(b=>{b.className='epb';if(b.dataset.pri===p)b.classList.add(priCls[p]);});}
+function selAP(p){addPri=p;document.querySelectorAll('.apb').forEach(b=>{b.className='apb';if(b.dataset.p===p)b.classList.add(aCls[p]);});}
+function addEditSub(){syncEditSubsFromDOM();editSubs.push({id:uid(),text:'',done:false,dueDate:'',createdAt:TODAY});renderAll();setTimeout(()=>{const els=document.querySelectorAll('[data-esub].sub-etxt');if(els.length)els[els.length-1].focus();},50);}
+function removeEditSub(i){syncEditSubsFromDOM();editSubs.splice(i,1);renderAll();}
+function addAddSub(){syncAddSubsFromDOM();addSubs.push({id:uid(),text:'',done:false,dueDate:'',createdAt:TODAY});renderAdd();setTimeout(()=>{const els=document.querySelectorAll('[data-asub].sub-etxt');if(els.length)els[els.length-1].focus();},50);}
+function removeAddSub(i){syncAddSubsFromDOM();addSubs.splice(i,1);renderAdd();}
+async function saveEdit(){
   syncEditSubsFromDOM();
-  editSubs.push({id:uid(),text:'',done:false,dueDate:'',createdAt:TODAY});
-  renderAll();
-  setTimeout(()=>{const els=document.querySelectorAll('[data-esub].sub-etxt');if(els.length)els[els.length-1].focus();},50);
-}
-function removeEditSub(i) {
-  syncEditSubsFromDOM();
-  editSubs.splice(i,1);
-  renderAll();
-}
-function addAddSub() {
-  syncAddSubsFromDOM();
-  addSubs.push({id:uid(),text:'',done:false,dueDate:'',createdAt:TODAY});
-  renderAdd();
-  setTimeout(()=>{const els=document.querySelectorAll('[data-asub].sub-etxt');if(els.length)els[els.length-1].focus();},50);
-}
-function removeAddSub(i) {
-  syncAddSubsFromDOM();
-  addSubs.splice(i,1);
-  renderAdd();
-}
-async function saveEdit() {
-  syncEditSubsFromDOM();
-  const t=tasks.find(t=>t.id===editingId); if(!t)return;
-  t.text=editState.text; t.stream=editState.stream; t.pri=editState.pri;
-  t.dueDate=editState.dueDate; t.note=editState.note; t.categoryId=editState.categoryId;
+  const t=tasks.find(t=>t.id===editingId);if(!t)return;
+  t.text=editState.text;t.stream=editState.stream;t.pri=editState.pri;
+  t.dueDate=editState.dueDate;t.note=editState.note;t.categoryId=editState.categoryId;
   t.subs=editSubs.filter(s=>s.text.trim());
-  editingId=null; await save(); renderAll();
+  t.delegateIntent=editState.delegateIntent;t.delegatedTo=editState.delegatedTo;
+  editingId=null;await save();renderAll();
 }
-function cancelEdit() { editingId=null; renderAll(); }
-async function deleteTask(id) { tasks=tasks.filter(t=>t.id!==id); editingId=null; await save(); renderAll(); }
+function cancelEdit(){editingId=null;renderAll();}
+async function deleteTask(id){tasks=tasks.filter(t=>t.id!==id);editingId=null;await save();renderAll();}
 
-// ── Edit form HTML ────────────────────────────────────────────────────────────
-function editFormHtml(t) {
+// ── Edit form HTML ─────────────────────────────────────────────────────────────
+function editFormHtml(t){
   const sOpts=Object.entries(SC).map(([k,v])=>`<option value="${k}"${editState.stream===k?' selected':''}>${v.label}</option>`).join('');
   const catOpts=`<option value="">— no category —</option>`+categories.filter(c=>!c.archived).map(c=>`<option value="${c.id}"${editState.categoryId===c.id?' selected':''}>${c.name}</option>`).join('');
   const pBtns=['urgent','priority','normal','backburner','awaiting'].map(p=>`<button class="epb${editState.pri===p?' '+priCls[p]:''}" data-pri="${p}" onclick="selEP('${p}')">${PC[p].l||'Normal'}</button>`).join('');
-  const subRows=editSubs.map((s,i)=>`<div class="sub-erow">
-    <input class="sub-etxt" data-esub="${i}" value="${(s.text||'').replace(/"/g,'&quot;')}" placeholder="Subtask…">
-    <input class="sub-edate" data-esub="${i}" type="date" value="${s.dueDate||''}" title="Subtask due date">
-    <button class="sub-xbtn" onclick="removeEditSub(${i})">×</button>
-  </div>`).join('');
+  const subRows=editSubs.map((s,i)=>`<div class="sub-erow"><input class="sub-etxt" data-esub="${i}" value="${(s.text||'').replace(/"/g,'&quot;')}" placeholder="Subtask…"><input class="sub-edate" data-esub="${i}" type="date" value="${s.dueDate||''}"><button class="sub-xbtn" onclick="removeEditSub(${i})">×</button></div>`).join('');
+  // Category goal line-of-sight
+  const cat=catOf({categoryId:editState.categoryId});
+  const catGoal=cat&&cat.result?`<div style="background:#f8f8f0;border:1px solid #e8e0c0;border-radius:6px;padding:7px 10px;font-size:11px;color:#666;margin-top:4px;line-height:1.5"><span style="font-weight:700;color:#444">90-day goal:</span> ${cat.result}</div>`:'';
   return`<div class="ef">
-    <label>Task</label>
-    <textarea id="ef-text" oninput="editState.text=this.value">${editState.text}</textarea>
+    <label>Task</label><textarea id="ef-text" oninput="editState.text=this.value">${editState.text}</textarea>
     <div class="efr2">
       <div><label>Stream</label><select onchange="editState.stream=this.value">${sOpts}</select></div>
       <div><label>Due date</label><input type="date" value="${editState.dueDate}" onchange="editState.dueDate=this.value"></div>
     </div>
-    <div class="efr2" style="margin-top:8px">
-      <div><label>Category</label><select onchange="editState.categoryId=this.value">${catOpts}</select></div>
-    </div>
+    <label>Category (RPM)</label>
+    <select onchange="editState.categoryId=this.value;this.closest('.ef').querySelector('.cat-goal-wrap').innerHTML=catGoalHtml(this.value)">${catOpts}</select>
+    <div class="cat-goal-wrap">${catGoal}</div>
     <label>Priority</label><div class="eprow">${pBtns}</div>
-    <label>Note</label>
-    <input type="text" value="${(editState.note||'').replace(/"/g,'&quot;')}" oninput="editState.note=this.value" placeholder="Context, blockers…">
+    <label>Note</label><input type="text" value="${(editState.note||'').replace(/"/g,'&quot;')}" oninput="editState.note=this.value" placeholder="Context, blockers…">
+    <label>Delegation</label>
+    <label class="chk-row" style="text-transform:none;font-size:12px;letter-spacing:0">
+      <input type="checkbox" ${editState.delegateIntent?'checked':''} onchange="editState.delegateIntent=this.checked;document.getElementById('ef-delto-wrap').style.display=this.checked?'block':'none'">
+      🤝 Intend to delegate this task
+    </label>
+    <div id="ef-delto-wrap" style="display:${editState.delegateIntent?'block':'none'};margin-top:4px">
+      <input type="text" value="${(editState.delegatedTo||'').replace(/"/g,'&quot;')}" oninput="editState.delegatedTo=this.value" placeholder="Delegate to (name, optional)…" style="font-size:12px">
+    </div>
     <label>Subtasks</label>${subRows}
     <button class="add-sub-btn" onclick="addEditSub()">+ Add subtask</button>
     <div class="efbtns">
@@ -574,129 +554,126 @@ function editFormHtml(t) {
     </div>
   </div>`;
 }
+function catGoalHtml(catId){
+  const cat=categories.find(c=>c.id===catId);
+  if(!cat||!cat.result)return'';
+  return`<div style="background:#f8f8f0;border:1px solid #e8e0c0;border-radius:6px;padding:7px 10px;font-size:11px;color:#666;margin-top:4px;line-height:1.5"><span style="font-weight:700;color:#444">90-day goal:</span> ${cat.result}</div>`;
+}
 
 // ── Sub due date display ──────────────────────────────────────────────────────
-function subDueTxt(s) {
+function subDueTxt(s){
   if(!s.dueDate)return'';
   let cls='',note='';
-  if(!s.done){
-    if(s.dueDate<TODAY){cls=' late';note=` · ${daysDiff(s.dueDate,TODAY)}d late`;}
-    else if(s.dueDate===TODAY){cls=' today';note=' · today';}
-  }
+  if(!s.done){if(s.dueDate<TODAY){cls=' late';note=` · ${daysDiff(s.dueDate,TODAY)}d late`;}else if(s.dueDate===TODAY){cls=' today';note=' · today';}}
   return`<span class="sub-due${cls}">${dn(s.dueDate)} ${dd(s.dueDate)}${note}</span>`;
 }
 
 // ── Task HTML ─────────────────────────────────────────────────────────────────
-function taskHtml(t) {
-  const isEdit=editingId===t.id;
+function taskHtml(t){
+  const isEdit=editingId===t.id,isPending=pendingDelegationId===t.id;
+  const cat=catOf(t);
   let h=`<div class="item">`;
-  if(isToday(t)&&!t.done) h+=`<div class="today-dot"></div>`;
+  if(isToday(t)&&!t.done)h+=`<div class="today-dot"></div>`;
+  if(cat)h+=`<div class="cat-pip" style="background:${cat.color}" title="${cat.name}"></div>`;
   h+=`<div class="chk${t.done?' dn':''}" onclick="togTask('${t.id}')"></div><div class="ib">`;
   h+=`<span class="it${t.done?' dn':''}">`;
   h+=t.text+bHtml(t.pri);
-  if(isOv(t)&&!t.done) h+=`<span class="bdg" style="background:#fcebeb;color:#a32d2d">Late</span>`;
+  if(isOv(t)&&!t.done)h+=`<span class="bdg" style="background:#fcebeb;color:#a32d2d">Late</span>`;
+  if(t.delegateIntent&&!t.done){
+    const delTxt=t.delegatedTo?`🤝 ${t.delegatedTo}`:'🤝 To delegate';
+    const delBg=t.delegatedTo?'#e1f5ee':'#e8eeff';
+    const delTc=t.delegatedTo?'#0f6e56':'#2050a0';
+    h+=`<span class="bdg" style="background:${delBg};color:${delTc}">${delTxt}</span>`;
+  }
   h+=`<span class="dp ${dpC(t)}" onclick="startEdit('${t.id}')">${dpTxt(t)}</span></span>`;
-  if(t.note&&!t.done) h+=`<div class="inote">${t.note}</div>`;
-  if(isEdit) h+=editFormHtml(t);
-  if(t.subs&&t.subs.length&&!isEdit) {
+  if(t.note&&!t.done)h+=`<div class="inote">${t.note}</div>`;
+  // Delegation choice prompt
+  if(isPending){
+    h+=`<div class="dc-wrap">
+      <div class="dc-title">🤝 How was this completed?</div>
+      <div class="dc-row">
+        <button class="dc-self" onclick="completeDelegation('${t.id}','')">✓ I did it</button>
+        <span class="dc-divider">or</span>
+        <input type="text" id="dc-inp-${t.id}" class="dc-inp" placeholder="Delegated to (name)…" onkeydown="if(event.key==='Enter')completeDelegationInput('${t.id}')">
+        <button class="dc-del" onclick="completeDelegationInput('${t.id}')">✓ Delegated</button>
+        <button class="dc-cancel" onclick="cancelDelegation()">Cancel</button>
+      </div>
+    </div>`;
+  }
+  if(isEdit)h+=editFormHtml(t);
+  if(t.subs&&t.subs.length&&!isEdit&&!isPending){
     h+=`<div class="subs">`;
-    t.subs.forEach(s=>{
-      h+=`<div class="sub"><div class="sc${s.done?' dn':''}" onclick="togSub('${t.id}','${s.id}')"></div><div class="sub-ib"><span class="st${s.done?' dn':''}">${s.text}</span>${subDueTxt(s)}</div></div>`;
-    });
+    t.subs.forEach(s=>{h+=`<div class="sub"><div class="sc${s.done?' dn':''}" onclick="togSub('${t.id}','${s.id}')"></div><div class="sub-ib"><span class="st${s.done?' dn':''}">${s.text}</span>${subDueTxt(s)}</div></div>`;});
     h+=`</div>`;
   }
-  h+=`</div>`;
-  h+=`<div class="task-acts">`;
-  h+=`<button class="ib-btn star${t.isDailyVictory?' on':''}" onclick="togVictory('${t.id}')" title="⭐ Add to Daily Victories (max 5)">⭐</button>`;
-  h+=`<button class="ib-btn flag${t.isWeeklyFocus?' on':''}" onclick="togWeekFocus('${t.id}')" title="🚩 Flag for this week">🚩</button>`;
-  if(!isEdit) h+=`<button class="ib-btn" onclick="startEdit('${t.id}')" title="Edit">✏️</button>`;
+  h+=`</div><div class="task-acts">`;
+  h+=`<button class="ib-btn star${t.isDailyVictory?' on':''}" onclick="togVictory('${t.id}')" title="⭐ Daily Victories">⭐</button>`;
+  h+=`<button class="ib-btn flag${t.isWeeklyFocus?' on':''}" onclick="togWeekFocus('${t.id}')" title="🚩 This Week">🚩</button>`;
+  h+=`<button class="ib-btn delegate${t.delegateIntent?' on':''}" onclick="togDelegateIntent('${t.id}')" title="🤝 Flag for delegation">🤝</button>`;
+  if(!isEdit)h+=`<button class="ib-btn" onclick="startEdit('${t.id}')" title="Edit">✏️</button>`;
   h+=`</div></div>`;
   return h;
 }
 
-// ── Victories panel ───────────────────────────────────────────────────────────
-function victoriesPanel() {
-  const vics=tasks.filter(t=>t.isDailyVictory);
-  if(!vics.length)return'';
+// ── Panel HTML helpers ────────────────────────────────────────────────────────
+function victoriesPanel(){
+  const vics=tasks.filter(t=>t.isDailyVictory);if(!vics.length)return'';
   const doneCt=vics.filter(t=>t.done).length;
   return`<div class="victories-panel">
-    <div class="victories-hd">
-      <div class="victories-ttl">⭐ 5 Daily Victories</div>
-      <span class="victories-hint">${doneCt}/${Math.min(vics.length,5)} complete today</span>
-    </div>
-    ${vics.slice(0,5).map(t=>`<div class="victory-row">
-      <div class="vchk${t.done?' dn':''}" onclick="togTask('${t.id}')"></div>
-      <span class="vtxt${t.done?' dn':''}">${t.text}</span>
-    </div>`).join('')}
+    <div class="victories-hd"><div class="victories-ttl">⭐ 5 Daily Victories</div><span class="victories-hint">${doneCt}/${Math.min(vics.length,5)} complete</span></div>
+    ${vics.slice(0,5).map(t=>`<div class="victory-row"><div class="vchk${t.done?' dn':''}" onclick="togTask('${t.id}')"></div><span class="vtxt${t.done?' dn':''}">${t.text}</span></div>`).join('')}
+  </div>`;
+}
+function delegationPanel(){
+  const pending=tasks.filter(t=>t.delegateIntent&&!t.done);if(!pending.length)return'';
+  const doneThisWk=log.filter(e=>e.weekStart===wkStart(TODAY)&&e.delegatedTo).length;
+  return`<div class="deleg-panel">
+    <div class="deleg-hd"><div class="deleg-ttl">🤝 Pending Delegations</div><span class="deleg-hint">${doneThisWk} delegated this week</span></div>
+    ${pending.slice(0,8).map(t=>`<div class="deleg-row"><div class="chk" onclick="togTask('${t.id}')" style="width:14px;height:14px;border-radius:3px;flex-shrink:0"></div><span style="font-size:12px;color:#333;flex:1">${t.text}</span><span class="deleg-badge">${SC[t.stream]?.label||t.stream}</span></div>`).join('')}
   </div>`;
 }
 
 // ── Plan view ─────────────────────────────────────────────────────────────────
-function secProg(stream) {
-  const its=tasks.filter(t=>t.stream===stream);
-  let total=0,done=0;
-  its.forEach(t=>{total+=leafCount(t);done+=doneCount(t);});
-  return{total,done};
-}
-
-function renderPlan() {
-  const filterDefs=[
-    {f:'today',l:'Today'},{f:'late',l:'Late'},{f:'priority',l:'Priority'},
-    {f:'pending',l:'Pending'},{f:'done',l:'Done'}
-  ];
+function secProg(stream){const its=tasks.filter(t=>t.stream===stream);let total=0,done=0;its.forEach(t=>{total+=leafCount(t);done+=doneCount(t);});return{total,done};}
+function renderPlan(){
+  const filterDefs=[{f:'today',l:'Today'},{f:'late',l:'Late'},{f:'priority',l:'Priority'},{f:'pending',l:'Pending'},{f:'done',l:'Done'},{f:'delegating',l:'🤝 Delegating'}];
   let h=`<div class="ftabs">`;
   filterDefs.forEach(x=>{h+=`<button class="ftab${activeFilters.has(x.f)?' on':''}" onclick="toggleFilter('${x.f}')">${x.l}</button>`;});
-  if(activeFilters.size>0) h+=`<button class="ftab-clear" onclick="clearFilters()">✕ clear</button>`;
+  if(activeFilters.size>0)h+=`<button class="ftab-clear" onclick="clearFilters()">✕ clear</button>`;
   h+=`</div>`;
   h+=victoriesPanel();
-
+  h+=delegationPanel();
   GC.forEach(g=>{
-    const hasAny=g.streams.some(s=>tasks.find(t=>t.stream===s));
-    if(!hasAny)return;
+    const hasAny=g.streams.some(s=>tasks.find(t=>t.stream===s));if(!hasAny)return;
     let grpHtml='';
     g.streams.forEach(s=>{
       const cfg=SC[s];
-      const its=sortedTasks(tasks.filter(t=>t.stream===s));
-      if(!its.length)return;
+      const its=sortedTasks(tasks.filter(t=>t.stream===s));if(!its.length)return;
       const isOpen=openSecs[s]!==false;
-      const {total,done}=secProg(s);
-      const pct=total>0?Math.round(done/total*100):0;
+      const{total,done}=secProg(s);const pct=total>0?Math.round(done/total*100):0;
       let itsH='';
-      its.forEach(t=>{
-        if(!taskVisible(t)&&editingId!==t.id)return;
-        itsH+=taskHtml(t);
-      });
+      its.forEach(t=>{if(!taskVisible(t)&&editingId!==t.id)return;itsH+=taskHtml(t);});
       if(!itsH&&activeFilters.size>0)return;
       grpHtml+=`<div class="sec">
-        <div class="shd" onclick="toggleSec('${s}')">
-          <div class="sdot" style="background:${cfg.color}"></div>
-          <span class="stitle">${cfg.label}</span><span class="sct">${done}/${total}</span>
-          <span class="sch${isOpen?' op':''}">&#9654;</span>
-        </div>
+        <div class="shd" onclick="toggleSec('${s}')"><div class="sdot" style="background:${cfg.color}"></div><span class="stitle">${cfg.label}</span><span class="sct">${done}/${total}</span><span class="sch${isOpen?' op':''}">&#9654;</span></div>
         <div class="pb"><div class="pf" style="width:${pct}%;background:${cfg.color}"></div></div>
         <div class="its${isOpen?' op':''}">${itsH}</div>
       </div>`;
     });
-    if(grpHtml) h+=`<div class="grp">${g.label}</div>`+grpHtml;
+    if(grpHtml)h+=`<div class="grp">${g.label}</div>`+grpHtml;
   });
-
-  if(!h.includes('class="sec"')) h+=`<div class="empty">No tasks match the current filter</div>`;
+  if(!h.includes('class="sec"'))h+=`<div class="empty">No tasks match the current filters</div>`;
   document.getElementById('plan-view').innerHTML=h;
 }
 
 // ── Add task view ─────────────────────────────────────────────────────────────
-function renderAdd() {
+function renderAdd(){
   const sOpts=Object.entries(SC).map(([k,v])=>`<option value="${k}">${v.label}</option>`).join('');
   const catOpts=`<option value="">— no category —</option>`+categories.filter(c=>!c.archived).map(c=>`<option value="${c.id}">${c.name}</option>`).join('');
   const pBtns=['urgent','priority','normal','backburner','awaiting'].map(p=>`<button class="apb${p==='normal'?' an':''}" data-p="${p}" onclick="selAP('${p}')">${PC[p].l||'Normal'}</button>`).join('');
-  const subRows=addSubs.map((s,i)=>`<div class="sub-erow">
-    <input class="sub-etxt" data-asub="${i}" value="${(s.text||'').replace(/"/g,'&quot;')}" placeholder="Subtask…">
-    <input class="sub-edate" data-asub="${i}" type="date" value="${s.dueDate||''}" title="Subtask due date">
-    <button class="sub-xbtn" onclick="removeAddSub(${i})">×</button>
-  </div>`).join('');
+  const subRows=addSubs.map((s,i)=>`<div class="sub-erow"><input class="sub-etxt" data-asub="${i}" value="${(s.text||'').replace(/"/g,'&quot;')}" placeholder="Subtask…"><input class="sub-edate" data-asub="${i}" type="date" value="${s.dueDate||''}"><button class="sub-xbtn" onclick="removeAddSub(${i})">×</button></div>`).join('');
   document.getElementById('add-view').innerHTML=`<div class="add-card">
-    <label>Task</label>
-    <textarea id="a-text" placeholder="What needs to happen?" rows="2"></textarea>
+    <label>Task</label><textarea id="a-text" placeholder="What needs to happen?" rows="2"></textarea>
     <div class="ar2" style="margin-top:10px">
       <div><label>Stream</label><select id="a-stream">${sOpts}</select></div>
       <div><label>Due date</label><input type="date" id="a-date"></div>
@@ -708,8 +685,11 @@ function renderAdd() {
     <div class="aprow">${pBtns}</div>
     <label style="margin-top:10px">Note <span style="color:#ccc;font-size:10px;text-transform:none;letter-spacing:0">(optional)</span></label>
     <input type="text" id="a-note" placeholder="Context, blockers…">
-    <label style="margin-top:10px">Subtasks</label>
-    ${subRows}
+    <label class="chk-row" style="text-transform:none;font-size:12px;letter-spacing:0;margin-top:10px;cursor:pointer">
+      <input type="checkbox" id="a-delegate" style="width:auto;padding:0;border:none">
+      🤝 Intend to delegate this task
+    </label>
+    <label style="margin-top:10px">Subtasks</label>${subRows}
     <button class="add-sub-btn" onclick="addAddSub()">+ Add subtask</button>
     <div style="display:flex;align-items:center;margin-top:2px">
       <button class="a-submit" onclick="addTask()">+ Add task</button>
@@ -717,72 +697,54 @@ function renderAdd() {
     </div>
   </div>`;
 }
-
-async function addTask() {
+async function addTask(){
   syncAddSubsFromDOM();
-  const text=(document.getElementById('a-text').value||'').trim();
-  if(!text)return;
+  const text=(document.getElementById('a-text').value||'').trim();if(!text)return;
   tasks.push({
-    id:uid(), stream:document.getElementById('a-stream').value, text,
-    pri:addPri, dueDate:document.getElementById('a-date').value||'',
+    id:uid(),stream:document.getElementById('a-stream').value,text,pri:addPri,
+    dueDate:document.getElementById('a-date').value||'',
     note:(document.getElementById('a-note').value||'').trim(),
-    done:false, subs:addSubs.filter(s=>s.text.trim()).map(s=>({...s})),
+    done:false,subs:addSubs.filter(s=>s.text.trim()).map(s=>({...s})),
     categoryId:document.getElementById('a-cat').value||'',
-    createdAt:TODAY, isDailyVictory:false, isWeeklyFocus:false,
+    createdAt:TODAY,isDailyVictory:false,isWeeklyFocus:false,
+    delegateIntent:document.getElementById('a-delegate').checked,delegatedTo:'',
   });
-  await save();
-  addSubs=[]; addPri='normal';
-  renderStats(); renderAdd();
-  const fl=document.getElementById('aflash');
-  fl.classList.add('show');
-  setTimeout(()=>fl.classList.remove('show'),1500);
+  await save();addSubs=[];addPri='normal';
+  renderStats();renderAdd();
+  const fl=document.getElementById('aflash');fl.classList.add('show');setTimeout(()=>fl.classList.remove('show'),1500);
 }
 
 // ── Categories view ───────────────────────────────────────────────────────────
-function swatchesHtml(selectedColor) {
-  return CAT_COLORS.map(c=>`<div class="swatch${c===selectedColor?' sel':''}" style="background:${c}" data-color="${c}" onclick="selectCatColor('${c}')"></div>`).join('');
-}
-function selectCatColor(color) {
-  editingCatState.color=color;
-  document.querySelectorAll('.swatch').forEach(el=>el.classList.toggle('sel',el.dataset.color===color));
-}
-function startEditCat(id) {
+function swatchesHtml(sel){return CAT_COLORS.map(c=>`<div class="swatch${c===sel?' sel':''}" style="background:${c}" data-color="${c}" onclick="selectCatColor('${c}')"></div>`).join('');}
+function selectCatColor(color){editingCatState.color=color;document.querySelectorAll('.swatch').forEach(el=>el.classList.toggle('sel',el.dataset.color===color));}
+function startEditCat(id){
   if(editingCatId===id){editingCatId=null;renderCategories();return;}
-  if(id==='new'){
-    editingCatId='new';
-    editingCatState={id:uid(),name:'',color:CAT_COLORS[0],vision:'',purpose:'',result:'',createdAt:TODAY,archived:false};
-  } else {
-    const c=categories.find(c=>c.id===id);
-    if(!c)return;
-    editingCatId=id;
-    editingCatState={...c};
-  }
+  if(id==='new'){editingCatId='new';editingCatState={id:uid(),name:'',color:CAT_COLORS[0],vision:'',purpose:'',result:'',createdAt:TODAY,archived:false};}
+  else{const c=categories.find(c=>c.id===id);if(!c)return;editingCatId=id;editingCatState={...c};}
   renderCategories();
 }
-async function saveCat() {
+async function saveCat(){
   if(!editingCatState.name.trim()){alert('Enter a category name');return;}
   const idx=categories.findIndex(c=>c.id===editingCatId);
-  if(idx>=0) categories[idx]={...editingCatState};
-  else categories.push({...editingCatState});
-  editingCatId=null;
-  await save(); renderCategories();
+  if(idx>=0)categories[idx]={...editingCatState};else categories.push({...editingCatState});
+  editingCatId=null;await save();renderCategories();
 }
-async function deleteCat(id) {
-  if(!confirm('Delete this category? Tasks linked to it will lose the category link.'))return;
-  categories=categories.filter(c=>c.id!==id);
-  editingCatId=null;
-  await save(); renderCategories();
-}
-function catEditForm(isNew) {
+async function deleteCat(id){if(!confirm('Delete this category?'))return;categories=categories.filter(c=>c.id!==id);editingCatId=null;await save();renderCategories();}
+function catEditFormHtml(isNew){
+  const tc=!isNew?tasks.filter(t=>t.categoryId===editingCatState.id).length:0;
+  const done=!isNew?tasks.filter(t=>t.categoryId===editingCatState.id&&t.done).length:0;
+  const pct=tc>0?Math.round(done/tc*100):0;
   return`<div class="cat-form">
     <label>Name</label>
     <input type="text" value="${(editingCatState.name||'').replace(/"/g,'&quot;')}" oninput="editingCatState.name=this.value" placeholder="Category name">
-    <label>Colour</label>
-    <div class="swatches">${swatchesHtml(editingCatState.color)}</div>
-    <label>Vision <span style="color:#ccc;font-size:10px;text-transform:none">(what it looks like)</span></label>
+    <label>Colour</label><div class="swatches">${swatchesHtml(editingCatState.color)}</div>
+    <label>Vision <span style="color:#ccc;font-size:10px;text-transform:none">(what it looks like when achieved)</span></label>
     <textarea placeholder="Paint the picture of success…" oninput="editingCatState.vision=this.value">${editingCatState.vision||''}</textarea>
-    <label>90-Day Result <span style="color:#ccc;font-size:10px;text-transform:none">(specific outcome)</span></label>
-    <textarea placeholder="Specific measurable result in 90 days…" oninput="editingCatState.result=this.value">${editingCatState.result||''}</textarea>
+    <label>Purpose <span style="color:#ccc;font-size:10px;text-transform:none">(why this matters)</span></label>
+    <textarea placeholder="Why does this category matter to you?" oninput="editingCatState.purpose=this.value">${editingCatState.purpose||''}</textarea>
+    <label>90-Day Result <span style="color:#ccc;font-size:10px;text-transform:none">(specific measurable outcome)</span></label>
+    <textarea placeholder="What specifically will be true in 90 days?" oninput="editingCatState.result=this.value">${editingCatState.result||''}</textarea>
+    ${!isNew&&tc>0?`<div class="cat-goal-bar" style="margin-top:10px"><div class="cat-goal-hd"><span>Task progress</span><span>${done}/${tc} · ${pct}%</span></div><div class="cat-goal-track"><div class="cat-goal-fill" style="width:${pct}%;background:${editingCatState.color}"></div></div></div>`:''}
     <div class="cat-btns">
       <button class="cat-save" onclick="saveCat()">Save</button>
       <button class="cat-cancel" onclick="editingCatId=null;renderCategories()">Cancel</button>
@@ -790,73 +752,199 @@ function catEditForm(isNew) {
     </div>
   </div>`;
 }
-function renderCategories() {
+function renderCategories(){
   const active=categories.filter(c=>!c.archived);
   let h=`<div class="cat-grid">`;
   active.forEach(c=>{
     const tc=tasks.filter(t=>t.categoryId===c.id).length;
+    const done=tasks.filter(t=>t.categoryId===c.id&&t.done).length;
+    const pct=tc>0?Math.round(done/tc*100):0;
     const isEd=editingCatId===c.id;
     h+=`<div>
-      <div class="cat-card${isEd?' open':''}" onclick="startEditCat('${c.id}')">
-        <div class="cat-hd">
-          <div class="cat-dot" style="background:${c.color}"></div>
-          <span class="cat-nm">${c.name}</span>
-          <span class="cat-ct">${tc} task${tc!==1?'s':''}</span>
-        </div>
-        ${c.result?`<div style="font-size:11px;color:#aaa;margin-top:4px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">${c.result.slice(0,60)}${c.result.length>60?'…':''}</div>`:''}
+      <div class="cat-card" onclick="startEditCat('${c.id}')">
+        <div class="cat-hd"><div class="cat-dot" style="background:${c.color}"></div><span class="cat-nm">${c.name}</span><span class="cat-ct">${tc-done} open</span></div>
+        ${c.result?`<div style="font-size:11px;color:#aaa;margin-top:4px;line-height:1.4;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical">${c.result}</div>`:''}
+        ${tc>0?`<div class="cat-goal-bar" style="margin-top:6px"><div class="cat-goal-track"><div class="cat-goal-fill" style="width:${pct}%;background:${c.color}"></div></div></div>`:''}
       </div>
-      ${isEd?catEditForm(false):''}
+      ${isEd?catEditFormHtml(false):''}
     </div>`;
   });
   h+=`</div>`;
   h+=`<button class="add-cat-btn" onclick="startEditCat('new')">+ Add category</button>`;
-  if(editingCatId==='new') h+=catEditForm(true);
+  if(editingCatId==='new')h+=`<div style="margin-top:10px">${catEditFormHtml(true)}</div>`;
   document.getElementById('categories-view').innerHTML=h;
 }
 
-// ── Analytics view ────────────────────────────────────────────────────────────
-function renderAnalytics() {
-  const ov=tasks.filter(t=>isOv(t));
+// ── Analytics (Wave 3) ────────────────────────────────────────────────────────
+function renderAnalytics(){
   const thisWk=wkStart(TODAY);
-  const lastWkD=new Date(TODAY_D); lastWkD.setDate(lastWkD.getDate()-7);
+  const lastWkD=new Date(TODAY_D);lastWkD.setDate(lastWkD.getDate()-7);
   const lastWk=wkStart(lastWkD.toISOString().slice(0,10));
   const twLog=log.filter(e=>e.weekStart===thisWk);
   const lwLog=log.filter(e=>e.weekStart===lastWk);
-  const twOT=twLog.filter(e=>e.dueDate&&(e.daysLate===null||e.daysLate<=0)).length;
-  const lwOT=lwLog.filter(e=>e.dueDate&&(e.daysLate===null||e.daysLate<=0)).length;
+  const twDel=twLog.filter(e=>e.delegatedTo&&e.delegatedTo.trim());
+  const lwDel=lwLog.filter(e=>e.delegatedTo&&e.delegatedTo.trim());
   const twDelta=twLog.length-lwLog.length;
+  const twDelDelta=twDel.length-lwDel.length;
+  const ov=tasks.filter(t=>isOv(t));
 
+  // 8-week trend
+  const weeks=[];
+  for(let i=7;i>=0;i--){
+    const d=new Date(TODAY_D);d.setDate(d.getDate()-i*7);
+    const ws=wkStart(d.toISOString().slice(0,10));
+    const wd=new Date(ws+'T00:00:00');
+    const wl=log.filter(e=>e.weekStart===ws);
+    weeks.push({label:`${wd.getDate()} ${MONTHS[wd.getMonth()].slice(0,3)}`,total:wl.length,delegated:wl.filter(e=>e.delegatedTo&&e.delegatedTo.trim()).length});
+  }
+  const maxTotal=Math.max(...weeks.map(w=>w.total),1);
+
+  // Streaks
+  let compStreak=0;
+  const checkD=new Date(TODAY_D);
+  for(let i=0;i<365;i++){
+    const ds=checkD.toISOString().slice(0,10);
+    const had=log.some(e=>e.completedAt===ds);
+    if(!had&&ds!==TODAY)break;
+    if(had)compStreak++;
+    checkD.setDate(checkD.getDate()-1);
+  }
+  let delStreak=0;
+  const checkW=new Date(TODAY_D);
+  for(let i=0;i<52;i++){
+    const ws=wkStart(checkW.toISOString().slice(0,10));
+    const had=log.some(e=>e.weekStart===ws&&e.delegatedTo);
+    if(!had)break;
+    delStreak++;
+    checkW.setDate(checkW.getDate()-7);
+  }
+  const pendingDel=tasks.filter(t=>t.delegateIntent&&!t.done).length;
+
+  // Delegation success rate
+  const doneWithIntent=tasks.filter(t=>t.done&&t.delegateIntent);
+  const successDel=doneWithIntent.filter(t=>t.delegatedTo);
+  const delSuccessRate=doneWithIntent.length>0?Math.round(successDel.length/doneWithIntent.length*100):null;
+
+  // By person
+  const byPerson={};
+  log.filter(e=>e.delegatedTo&&e.delegatedTo.trim()).forEach(e=>{const n=e.delegatedTo.trim();byPerson[n]=(byPerson[n]||0)+1;});
+  const topPeople=Object.entries(byPerson).sort((a,b)=>b[1]-a[1]).slice(0,5);
+
+  // By stream: delegation rate
+  const byStream={};
+  log.forEach(e=>{
+    const t=tasks.find(t=>t.id===e.taskId);if(!t)return;
+    if(!byStream[t.stream])byStream[t.stream]={total:0,delegated:0};
+    byStream[t.stream].total++;
+    if(e.delegatedTo&&e.delegatedTo.trim())byStream[t.stream].delegated++;
+  });
+
+  // Category progress
+  const catProgress=categories.filter(c=>!c.archived).map(c=>{
+    const ct=tasks.filter(t=>t.categoryId===c.id);
+    const open=ct.filter(t=>!t.done).length;
+    const done=ct.filter(t=>t.done).length;
+    return{cat:c,open,done,total:ct.length};
+  }).filter(cp=>cp.total>0).sort((a,b)=>b.total-a.total);
+
+  // ── Render ─────────────────────────────────────────────────────────────────
   let h=`<div class="stats" style="margin-bottom:1rem">
-    <div class="stat"><div class="sl">All-time completed</div><div class="sv">${log.length}</div></div>
-    <div class="stat"><div class="sl">This week</div><div class="sv">${twLog.length}</div><div class="ss" style="${twDelta>=0?'color:#1d9e75':'color:#a32d2d'}">${twDelta>=0?'+':''}${twDelta} vs last week</div></div>
-    <div class="stat"><div class="sl">On-time this week</div><div class="sv">${twOT}</div><div class="ss">vs ${lwOT} last week</div></div>
+    <div class="stat"><div class="sl">All-time done</div><div class="sv">${log.length}</div></div>
+    <div class="stat"><div class="sl">This week</div><div class="sv">${twLog.length}</div><div class="ss" style="${twDelta>=0?'color:#1d9e75':'color:#a32d2d'}">${twDelta>=0?'+':''}${twDelta} vs last wk</div></div>
+    <div class="stat"><div class="sl">Delegated this wk</div><div class="sv" style="color:#2050a0">${twDel.length}</div><div class="ss" style="${twDelDelta>=0?'color:#1d9e75':'color:#a32d2d'}">${twDelDelta>=0?'+':''}${twDelDelta} vs last wk</div></div>
     <div class="stat"><div class="sl">Currently late</div><div class="sv" style="${ov.length>0?'color:#a32d2d':''}">${ov.length}</div></div>
+    <div class="stat"><div class="sl">Pending delegation</div><div class="sv" style="${pendingDel>0?'color:#2050a0':''}">${pendingDel}</div></div>
   </div>`;
 
-  h+=`<div class="acard"><div class="atitle">Progress by stream</div>`;
-  Object.entries(SC).forEach(([k,v])=>{
-    const its=tasks.filter(t=>t.stream===k);
-    if(!its.length)return;
-    let tot=0,dn=0;
-    its.forEach(t=>{tot+=leafCount(t);dn+=doneCount(t);});
-    const pct=tot>0?Math.round(dn/tot*100):0;
-    h+=`<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-      <div style="width:8px;height:8px;border-radius:50%;background:${v.color};flex-shrink:0"></div>
-      <span style="font-size:12px;flex:1;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">${v.label}</span>
-      <span style="font-size:11px;color:#999;width:40px;text-align:right">${dn}/${tot}</span>
-      <div style="width:110px;height:5px;border-radius:3px;background:#eee;overflow:hidden"><div style="height:100%;width:${pct}%;background:${v.color};border-radius:3px"></div></div>
-      <span style="font-size:11px;color:#bbb;width:32px;text-align:right">${pct}%</span>
+  // Streak row
+  h+=`<div class="streak-row">
+    <div class="streak-card"><div class="streak-num">${compStreak}</div><div class="streak-lbl">day completion streak</div></div>
+    <div class="streak-card"><div class="streak-num">${delStreak}</div><div class="streak-lbl">week delegation streak</div></div>
+    <div class="streak-card"><div class="streak-num">${delSuccessRate!==null?delSuccessRate+'%':'—'}</div><div class="streak-lbl">delegation success rate</div></div>
+  </div>`;
+
+  // 8-week trend
+  const trendBars=weeks.map(w=>{
+    const selfH=Math.round((w.total-w.delegated)/maxTotal*60);
+    const delH=Math.round(w.delegated/maxTotal*60);
+    return`<div class="trend-col">
+      <div class="trend-tip">${w.label}: ${w.total} done${w.delegated?', '+w.delegated+' delegated':''}</div>
+      ${delH>0?`<div class="trend-bar-del" style="height:${delH}px"></div>`:''}
+      ${selfH>0?`<div class="trend-bar-self" style="height:${selfH}px;border-radius:${delH===0?'3px 3px':'0 0'} 0 0"></div>`:''}
+      ${w.total===0?`<div class="trend-bar-empty"></div>`:''}
     </div>`;
+  }).join('');
+  const trendLbls=weeks.map(w=>`<div class="trend-lbl">${w.label}</div>`).join('');
+  h+=`<div class="acard">
+    <div class="atitle">8-Week Completion Trend <span class="atitle-sub">${twLog.length} completions this week</span></div>
+    <div class="trend-chart">${trendBars}</div>
+    <div class="trend-labels">${trendLbls}</div>
+    <div class="trend-legend">
+      <div class="trend-leg-item"><div class="trend-leg-dot" style="background:#7F77DD"></div>Done by you</div>
+      <div class="trend-leg-item"><div class="trend-leg-dot" style="background:#378ADD"></div>Delegated</div>
+    </div>
+  </div>`;
+
+  // Delegation by person
+  h+=`<div class="acard"><div class="atitle">Delegation by Person <span class="atitle-sub">${log.filter(e=>e.delegatedTo).length} total delegations</span></div>`;
+  if(!topPeople.length){h+=`<div class="empty">No delegations recorded yet. Use the 🤝 flag to start tracking.</div>`;}
+  else{
+    topPeople.forEach(([name,count])=>{
+      const maxCount=topPeople[0][1];
+      const pct=Math.round(count/maxCount*100);
+      h+=`<div class="prog-row"><div class="prog-label">🤝 ${name}</div><div class="prog-counts">${count}</div><div class="prog-bar"><div class="prog-fill" style="width:${pct}%;background:#378ADD"></div></div><div class="prog-pct">${count}x</div></div>`;
+    });
+  }
+  h+=`</div>`;
+
+  // Delegation by stream
+  const streamDelEntries=Object.entries(byStream).filter(([,v])=>v.total>0);
+  if(streamDelEntries.length>0){
+    h+=`<div class="acard"><div class="atitle">Delegation by Stream</div>`;
+    streamDelEntries.sort((a,b)=>b[1].delegated-a[1].delegated).forEach(([k,v])=>{
+      const pct=v.total>0?Math.round(v.delegated/v.total*100):0;
+      const cfg=SC[k];if(!cfg)return;
+      h+=`<div class="prog-row"><div class="prog-label"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:${cfg.color};margin-right:5px;vertical-align:middle"></span>${cfg.label}</div><div class="prog-counts">${v.delegated}/${v.total}</div><div class="prog-bar"><div class="prog-fill" style="width:${pct}%;background:${cfg.color}"></div></div><div class="prog-pct">${pct}%</div></div>`;
+    });
+    h+=`</div>`;
+  }
+
+  // Stream progress
+  h+=`<div class="acard"><div class="atitle">Progress by Stream</div>`;
+  Object.entries(SC).forEach(([k,v])=>{
+    const its=tasks.filter(t=>t.stream===k);if(!its.length)return;
+    let tot=0,dn=0;its.forEach(t=>{tot+=leafCount(t);dn+=doneCount(t);});
+    const pct=tot>0?Math.round(dn/tot*100):0;
+    h+=`<div class="prog-row"><div class="prog-label"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:${v.color};margin-right:5px;vertical-align:middle"></span>${v.label}</div><div class="prog-counts">${dn}/${tot}</div><div class="prog-bar"><div class="prog-fill" style="width:${pct}%;background:${v.color}"></div></div><div class="prog-pct">${pct}%</div></div>`;
   });
   h+=`</div>`;
 
-  h+=`<div class="acard"><div class="atitle">Overdue items</div>`;
+  // Category progress (goal line of sight)
+  if(catProgress.length>0){
+    h+=`<div class="acard"><div class="atitle">RPM Category Progress <span class="atitle-sub">goal line of sight</span></div>`;
+    catProgress.forEach(({cat,open,done,total})=>{
+      const pct=total>0?Math.round(done/total*100):0;
+      h+=`<div style="margin-bottom:10px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px">
+          <div style="width:9px;height:9px;border-radius:50%;background:${cat.color};flex-shrink:0"></div>
+          <span style="font-size:12px;font-weight:600;flex:1">${cat.name}</span>
+          <span style="font-size:11px;color:#aaa">${done}/${total} · ${pct}%</span>
+        </div>
+        ${cat.result?`<div style="font-size:11px;color:#888;margin-bottom:4px;padding-left:17px;line-height:1.4">→ ${cat.result.slice(0,100)}${cat.result.length>100?'…':''}</div>`:''}
+        <div style="padding-left:17px"><div style="height:5px;background:#eee;border-radius:3px;overflow:hidden"><div style="height:100%;width:${pct}%;background:${cat.color};border-radius:3px;transition:width .3s"></div></div></div>
+      </div>`;
+    });
+    h+=`</div>`;
+  }
+
+  // Overdue items
+  h+=`<div class="acard"><div class="atitle">Overdue Items</div>`;
   if(!ov.length){h+=`<div class="empty">No overdue items 🎉</div>`;}
   else{
-    h+=`<table class="otbl"><tr><th>Task</th><th>Stream</th><th>Days late</th></tr>`;
+    h+=`<table class="otbl"><tr><th>Task</th><th>Stream</th><th>Days late</th><th>Delegate?</th></tr>`;
     ov.sort((a,b)=>(a.dueDate<b.dueDate?-1:1)).forEach(t=>{
       const dv=daysDiff(t.dueDate,TODAY);
-      h+=`<tr><td style="max-width:220px">${t.text}</td><td>${SC[t.stream]?.label||t.stream}</td><td style="color:#a32d2d;font-weight:600">${dv}d</td></tr>`;
+      h+=`<tr><td style="max-width:200px">${t.text}</td><td>${SC[t.stream]?.label||t.stream}</td><td style="color:#a32d2d;font-weight:600">${dv}d</td><td style="color:${t.delegateIntent?'#2050a0':'#ccc'}">${t.delegateIntent?'🤝 yes':'—'}</td></tr>`;
     });
     h+=`</table>`;
   }
@@ -865,20 +953,18 @@ function renderAnalytics() {
 }
 
 // ── Render all ────────────────────────────────────────────────────────────────
-function renderAll() {
+function renderAll(){
   renderStats();
-  if(tab==='plan')       renderPlan();
-  else if(tab==='add')   renderAdd();
-  else if(tab==='categories') renderCategories();
-  else if(tab==='analytics')  renderAnalytics();
+  if(tab==='plan')renderPlan();
+  else if(tab==='add')renderAdd();
+  else if(tab==='categories')renderCategories();
+  else if(tab==='analytics')renderAnalytics();
 }
-function toggleSec(id) { openSecs[id]=openSecs[id]===false?true:false; renderAll(); }
-function setTab(t) {
+function toggleSec(id){openSecs[id]=openSecs[id]===false?true:false;renderAll();}
+function setTab(t){
   tab=t;
   document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('on',b.dataset.t===t));
-  ['plan','add','categories','analytics'].forEach(v=>{
-    document.getElementById(v+'-view').style.display=t===v?'block':'none';
-  });
+  ['plan','add','categories','analytics'].forEach(v=>{document.getElementById(v+'-view').style.display=t===v?'block':'none';});
   renderAll();
 }
 
@@ -888,16 +974,10 @@ document.getElementById('main-tabs').innerHTML=`
   <button class="tab" data-t="add" onclick="setTab('add')">+ Add task</button>
   <button class="tab" data-t="categories" onclick="setTab('categories')">Categories</button>
   <button class="tab" data-t="analytics" onclick="setTab('analytics')">Analytics</button>`;
-
 const savedUrl=localStorage.getItem('rpm_sheet_url');
-if(savedUrl) sheetUrl=savedUrl;
-if(sheetUrl){
-  const urlEl=document.getElementById('sheet-url');
-  const stEl=document.getElementById('sheet-status');
-  if(urlEl) urlEl.value=sheetUrl;
-  if(stEl)  stEl.textContent='Connected';
-}
-(async()=>{ await loadData(); renderAll(); })();
+if(savedUrl)sheetUrl=savedUrl;
+if(sheetUrl){const u=document.getElementById('sheet-url');const s=document.getElementById('sheet-status');if(u)u.value=sheetUrl;if(s)s.textContent='Connected';}
+(async()=>{await loadData();renderAll();})();
 </script>
 </body>
 </html>
