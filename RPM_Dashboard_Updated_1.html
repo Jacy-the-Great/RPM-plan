@@ -409,11 +409,12 @@ function catOf(t){return categories.find(c=>c.id===t.categoryId);}
 // ── Persistence ───────────────────────────────────────────────────────────────
 async function save(){
   const payload={tasks,log,categories};
+  localStorage.setItem(SK,JSON.stringify(payload)); // always keep local copy fresh
   if(sheetUrl){
     try{const r=await fetch(sheetUrl,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});if(r.ok){showSaved();return;}throw new Error('HTTP '+r.status);}
     catch(e){console.warn('Sheet write failed',e);}
   }
-  localStorage.setItem(SK,JSON.stringify(payload));showSaved();
+  showSaved();
 }
 async function loadData(){
   if(sheetUrl){
