@@ -252,6 +252,10 @@ body{font-family:Arial,sans-serif;background:#f8f8f6;color:#222;font-size:14px;l
 .chat-task-row-value{color:#222;flex:1}
 .chat-add-btn{display:inline-block;margin-top:6px;padding:4px 10px;background:#378ADD;color:#fff;border-radius:4px;border:none;cursor:pointer;font-size:11px;font-family:Arial,sans-serif;font-weight:600}
 .chat-add-btn:hover{background:#2a6fa6}
+.chat-speak-toggle{width:26px;height:26px;border-radius:6px;border:1px solid #eee;background:#fff;color:#aaa;font-size:13px;cursor:pointer;padding:0;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.15s}
+.chat-speak-toggle.active{background:#e8f5e9;border-color:#81c784;color:#2e7d32}
+.chat-msg-speak{background:none;border:none;font-size:10px;cursor:pointer;padding:1px 4px;border-radius:4px;color:#ccc;margin-left:4px;vertical-align:middle;line-height:1}
+.chat-msg-speak:hover{color:#555}
 /* Subtask row mobile fix */
 @media(max-width:640px){
   .stats{grid-template-columns:repeat(2,1fr)}
@@ -273,6 +277,7 @@ body{font-family:Arial,sans-serif;background:#f8f8f6;color:#222;font-size:14px;l
       <div class="chat-header">
         <button onclick="toggleChat()">←</button>
         <h3>AI Assistant</h3>
+        <button class="chat-speak-toggle" id="speak-toggle" onclick="toggleAutoSpeak()" title="Enable voice — AI will speak responses">🔇</button>
       </div>
       <div id="chat-messages"></div>
       <div class="chat-quick-prompts" id="chat-quick-prompts"></div>
@@ -377,6 +382,7 @@ let editingCatId=null,editingCatState={};
 let pendingDelegationId=null; // Wave 2: delegation flow
 // Wave 4: AI Chat state
 let chatMessages=[],chatOpen=false,chatLoading=false,chatContext={};
+let autoSpeak=false, currentAudio=null; // Voice output state
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 function uid(){return 'u'+Date.now()+Math.random().toString(36).slice(2,5);}
@@ -1010,6 +1016,41 @@ function renderAnalytics(){
   document.getElementById('analytics-view').innerHTML=h;
 }
 
+// ── Voice Output / TTS (Wave 4.5) ────────────────────────────────────────────
+function stopSpeaking(){
+  if(currentAudio){ currentAudio.pause(); currentAudio.src=''; currentAudio=null; }
+}
+
+async function speakText(text){
+  stopSpeaking();
+  try{
+    const r=await fetch(TTS_API_URL,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({text,voice:'nova'}),
+    });
+    if(!r.ok) throw new Error('TTS API error '+r.status);
+    const blob=await r.blob();
+    const url=URL.createObjectURL(blob);
+    currentAudio=new Audio(url);
+    await currentAudio.play();
+    currentAudio.onended=()=>{ URL.revokeObjectURL(url); currentAudio=null; };
+  }catch(e){
+    console.error('TTS error:',e);
+  }
+}
+
+function toggleAutoSpeak(){
+  autoSpeak=!autoSpeak;
+  const btn=document.getElementById('speak-toggle');
+  if(btn){
+    btn.textContent=autoSpeak?'🔊':'🔇';
+    btn.classList.toggle('active',autoSpeak);
+    btn.title=autoSpeak?'Voice on — click to mute':'Enable voice — AI will speak responses';
+  }
+  if(!autoSpeak) stopSpeaking();
+}
+
 // ── Voice Input (Wave 4) ──────────────────────────────────────────────────────
 let voiceRec = null, voiceActive = false;
 function toggleVoice(){
@@ -1045,6 +1086,7 @@ function toggleVoice(){
 
 // ── Chat (Wave 4) ────────────────────────────────────────────────────────────
 const OPENAI_API_URL = 'https://rpm-dashboard-api.vercel.app/api/openai';
+const TTS_API_URL = 'https://rpm-dashboard-api.vercel.app/api/tts';
 
 function toggleChat(){
   chatOpen=!chatOpen;
@@ -1072,9 +1114,14 @@ function renderChatQuickPrompts(){
 
 function renderChat(){
   let html='';
-  chatMessages.forEach(m=>{
+  chatMessages.forEach((m,i)=>{
     const cls=m.role==='user'?'user':'assistant';
-    html+=`<div class="chat-message ${cls}">${m.content.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>`;
+    if(m.role==='assistant'){
+      const speakBtn=`<button class="chat-msg-speak" onclick="speakText(chatMessages[${i}].content)" title="Read aloud">🔊</button>`;
+      html+=`<div class="chat-message ${cls}">${m.content.replace(/</g,'&lt;').replace(/>/g,'&gt;')}${speakBtn}</div>`;
+    }else{
+      html+=`<div class="chat-message ${cls}">${m.content.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>`;
+    }
     if(m.taskData){
       const td=m.taskData;
       let thtml=`<div class="chat-task-preview">`;
@@ -1189,6 +1236,7 @@ async function sendChat(){
     const d=await r.json();
     const taskData=d.taskData;
     chatMessages.push({role:'assistant',content:d.response,taskData});
+    if(autoSpeak) speakText(d.response);
   }catch(e){
     chatMessages.push({role:'assistant',content:'Sorry, I encountered an error. Please try again.'});
     console.error('Chat error:',e);
