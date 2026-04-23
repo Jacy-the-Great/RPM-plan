@@ -134,6 +134,10 @@ body{font-family:Arial,sans-serif;background:#f8f8f6;color:#222;font-size:14px;l
 .sub-xbtn:hover{background:#fee;color:#a32d2d}
 .add-sub-btn{font-size:11px;color:#888;background:transparent;border:1px dashed #ddd;border-radius:6px;padding:4px 10px;cursor:pointer;font-family:Arial,sans-serif;margin-top:4px;width:100%;text-align:left;transition:all .12s}
 .add-sub-btn:hover{border-color:#aaa;color:#555}
+/* Fix subtask inputs inside add-card — .add-card input{width:100%} has higher specificity and breaks flex layout */
+.add-card .sub-erow input{width:auto;padding:5px 8px;font-size:12px;}
+.add-card .sub-erow .sub-etxt{flex:1;min-width:0;}
+.add-card .sub-erow .sub-edate{width:120px;flex:none;}
 /* Add card */
 .add-card{background:#fff;border:1px solid #e5e5e5;border-radius:10px;padding:1.25rem;margin-bottom:1.25rem}
 .add-card label{font-size:11px;color:#aaa;text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:4px;margin-top:10px}
