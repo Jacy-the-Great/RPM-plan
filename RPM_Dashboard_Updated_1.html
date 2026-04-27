@@ -227,34 +227,30 @@ body{font-family:Arial,sans-serif;background:#f8f8f6;color:#222;font-size:14px;l
 .copy-claude-btn{padding:5px 12px;border-radius:6px;border:1px solid #ddd;background:#fff;color:#888;font-size:12px;cursor:pointer;font-family:Arial,sans-serif;white-space:nowrap;margin-left:auto}
 .copy-claude-btn:hover{background:#f5f5f2;color:#555}
 .today-dot{width:7px;height:7px;border-radius:50%;background:#378ADD;display:inline-block;margin-right:4px;flex-shrink:0;margin-top:5px}
-/* Chat sidebar styles */
-.chat-wrapper{display:flex;gap:0;align-items:flex-start}
-.chat-sidebar{width:300px;flex-shrink:0;border-right:1px solid #eee;background:#fff;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow:hidden;transition:width 0.3s ease}
-.chat-sidebar.collapsed{width:0;border:none}
-.chat-sidebar-inner{display:flex;flex-direction:column;height:100%;width:300px;overflow:hidden}
-.chat-header{padding:12px 16px;border-bottom:1px solid #eee;display:flex;align-items:center;gap:8px;flex-shrink:0}
-.chat-header button{background:none;border:none;font-size:20px;cursor:pointer;color:#888;padding:0;width:24px;height:24px;display:flex;align-items:center;justify-content:center}
-.chat-header h3{font-size:13px;font-weight:700;color:#222;margin:0;flex:1}
-#chat-messages{flex:1;overflow-y:auto;padding:12px 16px;display:flex;flex-direction:column;gap:8px;min-height:0}
-.chat-message{padding:10px 12px;border-radius:8px;font-size:12px;line-height:1.5}
-.chat-message.user{background:#e3f2fd;color:#1565c0}
-.chat-message.assistant{background:#f5f5f5;color:#222}
-.chat-quick-prompts{padding:8px 16px;border-top:1px solid #eee;display:flex;flex-direction:column;gap:5px;flex-shrink:0}
-.chat-quick-btn{padding:5px 10px;border-radius:6px;border:1px solid #ddd;background:#fff;color:#555;font-size:11px;cursor:pointer;text-align:left;transition:all 0.15s;font-family:Arial,sans-serif}
-.chat-quick-btn:hover{background:#f5f5f5;border-color:#ccc}
-.chat-input{padding:10px 14px;border-top:1px solid #eee;flex-shrink:0}
-.chat-input textarea{width:100%;min-height:52px;padding:7px 8px;border:1px solid #ddd;border-radius:6px;font-size:12px;font-family:Arial,sans-serif;resize:none;outline:none;box-sizing:border-box}
-.chat-input-btns{display:flex;gap:6px;margin-top:6px}
-.chat-send-btn{flex:1;padding:6px;border-radius:6px;border:none;background:#222;color:#fff;font-size:12px;font-weight:600;cursor:pointer;font-family:Arial,sans-serif}
+/* AI Assistant tab styles */
+.ai-tab-layout{display:flex;flex-direction:column;height:calc(100vh - 220px);min-height:400px;background:#fff;border-radius:10px;border:1px solid #eee;overflow:hidden}
+.ai-messages-area{flex:1;overflow-y:auto;padding:14px 18px;display:flex;flex-direction:column;gap:10px}
+.ai-empty-state{text-align:center;color:#bbb;font-size:12px;padding:40px 20px}
+.ai-empty-state .ai-empty-icon{font-size:40px;margin-bottom:10px}
+.ai-quick-row{padding:10px 18px;border-top:1px solid #f0f0f0;display:flex;gap:6px;flex-wrap:wrap;flex-shrink:0;background:#fafafa}
+.ai-input-area{padding:12px 18px;border-top:1px solid #eee;flex-shrink:0;background:#fff}
+.ai-input-area textarea{width:100%;min-height:60px;padding:9px 11px;border:1px solid #ddd;border-radius:8px;font-size:13px;font-family:Arial,sans-serif;resize:none;outline:none;box-sizing:border-box;line-height:1.5}
+.ai-input-area textarea:focus{border-color:#378ADD}
+.chat-input-btns{display:flex;gap:6px;margin-top:7px;align-items:center}
+.ai-input-hint{flex:1;font-size:10px;color:#bbb}
+.chat-send-btn{padding:7px 20px;border-radius:6px;border:none;background:#222;color:#fff;font-size:13px;font-weight:600;cursor:pointer;font-family:Arial,sans-serif}
 .chat-send-btn:hover{background:#333}
-.chat-voice-btn{width:34px;flex-shrink:0;padding:6px;border-radius:6px;border:1px solid #ddd;background:#fff;color:#555;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.chat-voice-btn{width:36px;height:34px;flex-shrink:0;padding:0;border-radius:6px;border:1px solid #ddd;background:#fff;color:#555;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .chat-voice-btn.active{background:#fee;border-color:#f09595;color:#a32d2d}
-.chat-task-preview{border:1px solid #ddd;padding:10px 12px;margin:4px 0;border-radius:6px;background:#fafafa;font-size:11px;line-height:1.5}
-.chat-task-preview strong{display:block;font-weight:700;color:#222;margin-bottom:4px}
-.chat-task-row{display:flex;gap:8px;margin:2px 0;font-size:11px}
-.chat-task-row-label{font-weight:600;color:#888;min-width:70px}
-.chat-task-row-value{color:#222;flex:1}
-.chat-add-btn{display:inline-block;margin-top:6px;padding:4px 10px;background:#378ADD;color:#fff;border-radius:4px;border:none;cursor:pointer;font-size:11px;font-family:Arial,sans-serif;font-weight:600}
+.chat-message{padding:10px 13px;border-radius:8px;font-size:13px;line-height:1.6;max-width:85%;white-space:pre-wrap}
+.chat-message.user{background:#e3f2fd;color:#1565c0;align-self:flex-end}
+.chat-message.assistant{background:#f5f5f5;color:#222;align-self:flex-start}
+.chat-loading{color:#bbb;font-size:12px;font-style:italic;align-self:flex-start;padding:8px 0}
+.chat-quick-btn{padding:5px 12px;border-radius:99px;border:1px solid #ddd;background:#fff;color:#555;font-size:11px;cursor:pointer;text-align:left;transition:all 0.15s;font-family:Arial,sans-serif;white-space:nowrap}
+.chat-quick-btn:hover{background:#f0f0f0;border-color:#ccc}
+.chat-task-preview{border:1px solid #c0d8f0;padding:12px 14px;margin:4px 0;border-radius:8px;background:#f0f7ff;font-size:12px;line-height:1.5;align-self:flex-start;max-width:90%}
+.chat-task-preview strong{display:block;font-weight:700;color:#222;margin-bottom:6px;font-size:13px}
+.chat-add-btn{display:inline-block;margin-top:8px;padding:5px 14px;background:#378ADD;color:#fff;border-radius:6px;border:none;cursor:pointer;font-size:12px;font-family:Arial,sans-serif;font-weight:600}
 .chat-add-btn:hover{background:#2a6fa6}
 /* Strategic Priorities Panel */
 .prio-panel{background:#f0f4ff;border:1px solid #c0d0f0;border-radius:10px;padding:10px 14px;margin-bottom:.75rem}
@@ -291,32 +287,12 @@ body{font-family:Arial,sans-serif;background:#f8f8f6;color:#222;font-size:14px;l
   .sub-etxt{min-width:calc(100% - 28px);order:1}
   .sub-edate{flex:1;min-width:0;width:auto;order:2}
   .sub-xbtn{order:2;flex-shrink:0}
-  .chat-sidebar{position:fixed;left:0;top:0;height:100vh;z-index:1000;width:280px}
-  .chat-sidebar-inner{width:280px}
-  .chat-sidebar.collapsed{width:0}
+  .ai-tab-layout{height:calc(100vh - 180px)}
 }
 </style>
 </head>
 <body>
-<div class="chat-wrapper">
-  <div class="chat-sidebar collapsed" id="chat-sidebar">
-    <div class="chat-sidebar-inner">
-      <div class="chat-header">
-        <button onclick="toggleChat()">←</button>
-        <h3>AI Assistant</h3>
-      </div>
-      <div id="chat-messages"></div>
-      <div class="chat-quick-prompts" id="chat-quick-prompts"></div>
-      <div class="chat-input">
-        <textarea id="chat-input" placeholder="Dump your ideas here..."></textarea>
-        <div class="chat-input-btns">
-          <button class="chat-voice-btn" id="voice-btn" onclick="toggleVoice()" title="Tap to speak">🎤</button>
-          <button class="chat-send-btn" onclick="sendChat()">Send</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="container">
+<div class="container">
     <div class="header">
       <h1>RPM Weekly Plan</h1>
       <p>Tony Robbins RPM · Rapid Planning Method</p>
@@ -340,8 +316,21 @@ body{font-family:Arial,sans-serif;background:#f8f8f6;color:#222;font-size:14px;l
     <div id="add-view" style="display:none"></div>
     <div id="categories-view" style="display:none"></div>
     <div id="analytics-view" style="display:none"></div>
+    <div id="ai-view" style="display:none">
+      <div class="ai-tab-layout">
+        <div class="ai-messages-area" id="chat-messages"></div>
+        <div class="ai-quick-row" id="chat-quick-prompts"></div>
+        <div class="ai-input-area">
+          <textarea id="chat-input" placeholder="Ask for strategic advice, or describe a task to create... e.g. 'What should I focus on today?' or 'Create a task for Christina to coordinate hoodies, due next week, marketing category'" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChat();}"></textarea>
+          <div class="chat-input-btns">
+            <button class="chat-voice-btn" id="voice-btn" onclick="toggleVoice()" title="Tap to speak">🎤</button>
+            <span class="ai-input-hint">Shift+Enter for new line · Enter to send</span>
+            <button class="chat-send-btn" onclick="sendChat()">Send →</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
 <script>
 // ── Date ─────────────────────────────────────────────────────────────────────
 const _n=new Date();
@@ -407,7 +396,7 @@ let sheetUrl=DEFAULT_SHEET_URL;
 let editingCatId=null,editingCatState={};
 let pendingDelegationId=null; // Wave 2: delegation flow
 // Wave 4: AI Chat state
-let chatMessages=[],chatOpen=false,chatLoading=false,chatContext={};
+let chatMessages=[],chatLoading=false;
 let priorities={quarter:'',month:'',weekly:[],threeToThrive:[]};
 let prioritiesOpen=false;
 
@@ -1144,22 +1133,11 @@ function toggleVoice(){
     if(btn){ btn.textContent='🎤'; btn.classList.remove('active'); btn.title='Tap to speak'; }
   };
   voiceRec.start();
-  if(!chatOpen) toggleChat();
+  if(tab!=='ai') setTab('ai');
 }
 
-// ── Chat (Wave 4) ────────────────────────────────────────────────────────────
+// ── Chat / AI Tab (Wave 4) ───────────────────────────────────────────────────
 const OPENAI_API_URL = 'https://rpm-dashboard-api.vercel.app/api/openai';
-
-function toggleChat(){
-  chatOpen=!chatOpen;
-  const sb=document.getElementById('chat-sidebar');
-  if(chatOpen){
-    sb.classList.remove('collapsed');
-    document.getElementById('chat-input').focus();
-  }else{
-    sb.classList.add('collapsed');
-  }
-}
 
 function renderChatQuickPrompts(){
   const prompts=[
@@ -1175,10 +1153,16 @@ function renderChatQuickPrompts(){
 }
 
 function renderChat(){
+  const el=document.getElementById('chat-messages');
+  if(!el)return;
+  if(chatMessages.length===0){
+    el.innerHTML=`<div class="ai-empty-state"><div class="ai-empty-icon">🤖</div><div><strong>AI Assistant</strong></div><div style="margin-top:6px">Ask for strategic advice or describe a task to create.<br>Try: <em>"What should I focus on today?"</em></div></div>`;
+    return;
+  }
   let html='';
   chatMessages.forEach((m,i)=>{
     const cls=m.role==='user'?'user':'assistant';
-    html+=`<div class="chat-message ${cls}">${m.content.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>`;
+    html+=`<div class="chat-message ${cls}">${m.content.replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>')}</div>`;
     if(m.taskData){
       const td=m.taskData;
       const streamOpts=Object.entries(SC).map(([k,v])=>`<option value="${k}"${(td.stream||'innovation')===k?' selected':''}>${v.label}</option>`).join('');
@@ -1202,8 +1186,9 @@ function renderChat(){
       html+=thtml;
     }
   });
-  document.getElementById('chat-messages').innerHTML=html;
-  document.getElementById('chat-messages').scrollTop=document.getElementById('chat-messages').scrollHeight;
+  if(chatLoading) html+=`<div class="chat-loading">⏳ Thinking...</div>`;
+  el.innerHTML=html;
+  el.scrollTop=el.scrollHeight;
 }
 
 function parseTaskFromAI(aiText){
@@ -1284,11 +1269,10 @@ async function sendChat(){
   renderChat();
 
   try{
-    const context={categories,streams:Object.keys(SC)};
     const r=await fetch(OPENAI_API_URL,{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({message:msg,categories,streams:Object.keys(SC)})
+      body:JSON.stringify({message:msg,categories,streams:Object.keys(SC),priorities,tasks:tasks.filter(t=>!t.done).slice(0,40)})
     });
     if(!r.ok)throw new Error('API error');
     const d=await r.json();
@@ -1310,18 +1294,19 @@ function quickPrompt(prompt){
 // ── Render all ────────────────────────────────────────────────────────────────
 function renderAll(){
   renderStats();
-  if(chatOpen){renderChat();renderChatQuickPrompts();}
   if(tab==='plan')renderPlan();
   else if(tab==='add')renderAdd();
   else if(tab==='categories')renderCategories();
   else if(tab==='analytics')renderAnalytics();
+  else if(tab==='ai'){renderChat();renderChatQuickPrompts();}
 }
 function toggleSec(id){openSecs[id]=openSecs[id]===false?true:false;renderAll();}
 function setTab(t){
   tab=t;
   document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('on',b.dataset.t===t));
-  ['plan','add','categories','analytics'].forEach(v=>{document.getElementById(v+'-view').style.display=t===v?'block':'none';});
+  ['plan','add','categories','analytics','ai'].forEach(v=>{document.getElementById(v+'-view').style.display=t===v?'block':'none';});
   renderAll();
+  if(t==='ai') document.getElementById('chat-input')?.focus();
 }
 
 // ── Init ──────────────────────────────────────────────────────────────────────
@@ -1329,7 +1314,8 @@ document.getElementById('main-tabs').innerHTML=`
   <button class="tab on" data-t="plan" onclick="setTab('plan')">Plan</button>
   <button class="tab" data-t="add" onclick="setTab('add')">+ Add task</button>
   <button class="tab" data-t="categories" onclick="setTab('categories')">Categories</button>
-  <button class="tab" data-t="analytics" onclick="setTab('analytics')">Analytics</button>`;
+  <button class="tab" data-t="analytics" onclick="setTab('analytics')">Analytics</button>
+  <button class="tab" data-t="ai" onclick="setTab('ai')">🤖 AI Assistant</button>`;
 const savedUrl=localStorage.getItem('rpm_sheet_url');
 if(savedUrl)sheetUrl=savedUrl;
 if(sheetUrl){const u=document.getElementById('sheet-url');const s=document.getElementById('sheet-status');if(u)u.value=sheetUrl;if(s)s.textContent='Connected';}
