@@ -256,10 +256,33 @@ body{font-family:Arial,sans-serif;background:#f8f8f6;color:#222;font-size:14px;l
 .chat-task-row-value{color:#222;flex:1}
 .chat-add-btn{display:inline-block;margin-top:6px;padding:4px 10px;background:#378ADD;color:#fff;border-radius:4px;border:none;cursor:pointer;font-size:11px;font-family:Arial,sans-serif;font-weight:600}
 .chat-add-btn:hover{background:#2a6fa6}
-.chat-speak-toggle{width:26px;height:26px;border-radius:6px;border:1px solid #eee;background:#fff;color:#aaa;font-size:13px;cursor:pointer;padding:0;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.15s}
-.chat-speak-toggle.active{background:#e8f5e9;border-color:#81c784;color:#2e7d32}
-.chat-msg-speak{background:none;border:none;font-size:10px;cursor:pointer;padding:1px 4px;border-radius:4px;color:#ccc;margin-left:4px;vertical-align:middle;line-height:1}
-.chat-msg-speak:hover{color:#555}
+/* Strategic Priorities Panel */
+.prio-panel{background:#f0f4ff;border:1px solid #c0d0f0;border-radius:10px;padding:10px 14px;margin-bottom:.75rem}
+.prio-hd{display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none;padding:2px 0}
+.prio-icon{font-size:14px;flex-shrink:0}
+.prio-ttl{font-size:11px;font-weight:700;color:#2050a0;text-transform:uppercase;letter-spacing:.08em;flex:1}
+.prio-ch{font-size:10px;color:#6080c0;transition:transform .2s;flex-shrink:0}
+.prio-body{padding-top:8px}
+.prio-section{margin-bottom:10px}
+.prio-section-label{font-size:10px;font-weight:700;color:#2050a0;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+.prio-textarea{width:100%;font-size:12px;padding:6px 8px;border:1px solid #c0d0f0;border-radius:6px;background:#fff;color:#222;outline:none;font-family:Arial,sans-serif;resize:vertical;min-height:44px;box-sizing:border-box}
+.prio-item-row{display:flex;align-items:center;gap:6px;margin-bottom:4px}
+.prio-item-inp{flex:1;font-size:12px;padding:5px 8px;border:1px solid #c0d0f0;border-radius:6px;background:#fff;color:#222;outline:none;font-family:Arial,sans-serif}
+.prio-item-rm{border:none;background:transparent;color:#ccc;cursor:pointer;font-size:16px;padding:0 3px;line-height:1;flex-shrink:0}
+.prio-item-rm:hover{color:#a32d2d}
+.prio-3tt-num{font-size:11px;font-weight:700;color:#2050a0;width:16px;text-align:center;flex-shrink:0}
+.prio-add-btn{font-size:11px;color:#6080c0;background:transparent;border:1px dashed #c0d0f0;border-radius:6px;padding:3px 10px;cursor:pointer;font-family:Arial,sans-serif;width:100%;text-align:left;margin-top:2px;transition:all .12s}
+.prio-add-btn:hover{border-color:#8aabe0;color:#2050a0}
+.prio-save-btn{font-size:12px;padding:5px 14px;border-radius:6px;border:none;background:#378ADD;color:#fff;cursor:pointer;font-family:Arial,sans-serif;font-weight:600}
+.prio-save-btn:hover{background:#2a6fa6}
+/* Task age badge */
+.task-age{font-size:10px;color:#bbb;border:1px solid #eee;border-radius:4px;padding:0 4px;margin-left:4px;font-weight:400;white-space:nowrap}
+.task-age.old{color:#c07a40;border-color:#f0d0b0;background:#fff8f2}
+/* Chat task preview editable fields */
+.ctf-grid{display:flex;flex-direction:column;gap:4px;margin-top:6px;margin-bottom:6px}
+.ctf-row{display:flex;align-items:center;gap:6px}
+.ctf-lbl{font-size:10px;font-weight:600;color:#888;min-width:68px;flex-shrink:0}
+.ctf-sel,.ctf-inp{flex:1;font-size:11px;padding:3px 6px;border:1px solid #ddd;border-radius:4px;background:#fff;color:#222;outline:none;font-family:Arial,sans-serif;min-width:0}
 /* Subtask row mobile fix */
 @media(max-width:640px){
   .stats{grid-template-columns:repeat(2,1fr)}
@@ -276,12 +299,11 @@ body{font-family:Arial,sans-serif;background:#f8f8f6;color:#222;font-size:14px;l
 </head>
 <body>
 <div class="chat-wrapper">
-  <div class="chat-sidebar" id="chat-sidebar">
+  <div class="chat-sidebar collapsed" id="chat-sidebar">
     <div class="chat-sidebar-inner">
       <div class="chat-header">
         <button onclick="toggleChat()">←</button>
         <h3>AI Assistant</h3>
-        <button class="chat-speak-toggle" id="speak-toggle" onclick="toggleAutoSpeak()" title="Enable voice — AI will speak responses">🔇</button>
       </div>
       <div id="chat-messages"></div>
       <div class="chat-quick-prompts" id="chat-quick-prompts"></div>
@@ -386,7 +408,8 @@ let editingCatId=null,editingCatState={};
 let pendingDelegationId=null; // Wave 2: delegation flow
 // Wave 4: AI Chat state
 let chatMessages=[],chatOpen=false,chatLoading=false,chatContext={};
-let autoSpeak=false, currentAudio=null, audioCtx=null; // Voice output state
+let priorities={quarter:'',month:'',weekly:[],threeToThrive:[]};
+let prioritiesOpen=false;
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 function uid(){return 'u'+Date.now()+Math.random().toString(36).slice(2,5);}
@@ -466,8 +489,8 @@ function copyForClaude(){
 }
 
 // ── Filters ───────────────────────────────────────────────────────────────────
-function toggleFilter(f){if(activeFilters.has(f))activeFilters.delete(f);else activeFilters.add(f);renderPlan();}
-function clearFilters(){activeFilters.clear();renderPlan();}
+function toggleFilter(f){if(activeFilters.has(f))activeFilters.delete(f);else activeFilters.add(f);localStorage.setItem('rpm_filters',JSON.stringify([...activeFilters]));renderPlan();}
+function clearFilters(){activeFilters.clear();localStorage.removeItem('rpm_filters');renderPlan();}
 function taskVisible(t){
   if(activeFilters.size===0)return true;
   for(const f of activeFilters){
@@ -648,6 +671,7 @@ function taskHtml(t){
   h+=`<span class="it${t.done?' dn':''}">`;
   h+=t.text+bHtml(t.pri);
   if(isOv(t)&&!t.done)h+=`<span class="bdg" style="background:#fcebeb;color:#a32d2d">Late</span>`;
+  if(t.createdAt&&!t.done){const da=daysDiff(t.createdAt,TODAY);if(da>=14)h+=`<span class="task-age${da>=30?' old':''}" title="Added ${t.createdAt}">${da}d old</span>`;}
   if(t.delegateIntent&&!t.done){
     const delTxt=t.delegatedTo?`🤝 ${t.delegatedTo}`:'🤝 To delegate';
     const delBg=t.delegatedTo?'#e1f5ee':'#e8eeff';
@@ -702,11 +726,78 @@ function delegationPanel(){
   </div>`;
 }
 
+// ── Strategic Priorities ──────────────────────────────────────────────────────
+function loadPriorities(){
+  try{const raw=localStorage.getItem('rpm_priorities');if(raw)priorities={...priorities,...JSON.parse(raw)};}catch(e){}
+}
+function syncPrioritiesFromDOM(){
+  const qEl=document.getElementById('prio-quarter');const mEl=document.getElementById('prio-month');
+  if(qEl)priorities.quarter=qEl.value;
+  if(mEl)priorities.month=mEl.value;
+  document.querySelectorAll('[data-prio-weekly]').forEach(el=>{const i=parseInt(el.dataset.prioWeekly);if(priorities.weekly[i]!==undefined)priorities.weekly[i]=el.value;});
+  [0,1,2].forEach(i=>{const el=document.getElementById('prio-3tt-'+i);if(el&&priorities.threeToThrive.length>i)priorities.threeToThrive[i]=el.value;else if(el&&el.value)priorities.threeToThrive[i]=el.value;});
+}
+function savePrioritiesForm(){
+  syncPrioritiesFromDOM();
+  localStorage.setItem('rpm_priorities',JSON.stringify(priorities));
+  const fl=document.getElementById('prio-flash');if(fl){fl.style.opacity=1;setTimeout(()=>fl.style.opacity=0,1500);}
+}
+function addWeeklyPrio(){
+  syncPrioritiesFromDOM();
+  if(priorities.weekly.length<5){priorities.weekly.push('');localStorage.setItem('rpm_priorities',JSON.stringify(priorities));renderPlan();}
+}
+function removeWeeklyPrio(i){
+  syncPrioritiesFromDOM();priorities.weekly.splice(i,1);
+  localStorage.setItem('rpm_priorities',JSON.stringify(priorities));renderPlan();
+}
+function togglePriorities(){
+  prioritiesOpen=!prioritiesOpen;
+  const body=document.getElementById('prio-body');
+  const ch=document.getElementById('prio-ch');
+  if(body)body.style.display=prioritiesOpen?'block':'none';
+  if(ch)ch.style.transform=prioritiesOpen?'rotate(90deg)':'';
+}
+function prioritiesPanel(){
+  const wRows=priorities.weekly.map((w,i)=>`<div class="prio-item-row"><input class="prio-item-inp" data-prio-weekly="${i}" value="${(w||'').replace(/"/g,'&quot;')}" placeholder="Weekly priority ${i+1}…" onblur="syncPrioritiesFromDOM()"><button class="prio-item-rm" onclick="removeWeeklyPrio(${i})">×</button></div>`).join('');
+  const ttRows=[0,1,2].map(i=>`<div class="prio-item-row"><span class="prio-3tt-num">${i+1}</span><input class="prio-item-inp" id="prio-3tt-${i}" value="${(priorities.threeToThrive[i]||'').replace(/"/g,'&quot;')}" placeholder="Must complete today…" onblur="syncPrioritiesFromDOM()"></div>`).join('');
+  return`<div class="prio-panel">
+    <div class="prio-hd" onclick="togglePriorities()">
+      <span class="prio-icon">🎯</span>
+      <span class="prio-ttl">Strategic Priorities</span>
+      <span class="prio-ch" id="prio-ch" style="${prioritiesOpen?'transform:rotate(90deg)':''}">▶</span>
+    </div>
+    <div id="prio-body" class="prio-body" style="display:${prioritiesOpen?'block':'none'}">
+      <div class="prio-section">
+        <div class="prio-section-label">📅 This Quarter</div>
+        <textarea class="prio-textarea" id="prio-quarter" placeholder="What is your #1 result for this quarter?" onblur="syncPrioritiesFromDOM()">${(priorities.quarter||'').replace(/</g,'&lt;')}</textarea>
+      </div>
+      <div class="prio-section">
+        <div class="prio-section-label">🗓 This Month</div>
+        <textarea class="prio-textarea" id="prio-month" placeholder="What must happen this month?" onblur="syncPrioritiesFromDOM()">${(priorities.month||'').replace(/</g,'&lt;')}</textarea>
+      </div>
+      <div class="prio-section">
+        <div class="prio-section-label">⚡ This Week's Focus (up to 5)</div>
+        ${wRows}
+        ${priorities.weekly.length<5?`<button class="prio-add-btn" onclick="addWeeklyPrio()">+ Add weekly priority</button>`:''}
+      </div>
+      <div class="prio-section">
+        <div class="prio-section-label">🔥 3 to Thrive (today's must-dos)</div>
+        ${ttRows}
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;margin-top:4px">
+        <button class="prio-save-btn" onclick="savePrioritiesForm()">Save</button>
+        <span id="prio-flash" style="font-size:11px;color:#1d9e75;opacity:0;transition:opacity .4s">Saved ✓</span>
+      </div>
+    </div>
+  </div>`;
+}
+
 // ── Plan view ─────────────────────────────────────────────────────────────────
 function secProg(stream){const its=tasks.filter(t=>t.stream===stream);let total=0,done=0;its.forEach(t=>{total+=leafCount(t);done+=doneCount(t);});return{total,done};}
 function renderPlan(){
   const filterDefs=[{f:'today',l:'Today'},{f:'late',l:'Late'},{f:'priority',l:'Priority'},{f:'pending',l:'Pending'},{f:'done',l:'Done'},{f:'delegating',l:'🤝 Delegating'}];
-  let h=`<div class="ftabs">`;
+  let h=prioritiesPanel();
+  h+=`<div class="ftabs">`;
   filterDefs.forEach(x=>{h+=`<button class="ftab${activeFilters.has(x.f)?' on':''}" onclick="toggleFilter('${x.f}')">${x.l}</button>`;});
   if(activeFilters.size>0)h+=`<button class="ftab-clear" onclick="clearFilters()">✕ clear</button>`;
   h+=`</div>`;
@@ -1021,47 +1112,6 @@ function renderAnalytics(){
   document.getElementById('analytics-view').innerHTML=h;
 }
 
-// ── Voice Output / TTS (Wave 4.5) ────────────────────────────────────────────
-function stopSpeaking(){
-  if(currentAudio){ try{currentAudio.stop();}catch(e){} currentAudio=null; }
-}
-
-async function speakText(text){
-  stopSpeaking();
-  // Create/resume AudioContext synchronously in the user-gesture call frame.
-  // This unlocks audio on iOS Safari before the async fetch begins.
-  if(!audioCtx) audioCtx=new(window.AudioContext||window.webkitAudioContext)();
-  if(audioCtx.state==='suspended') audioCtx.resume(); // fire-and-forget — unlocks immediately
-  try{
-    const r=await fetch(TTS_API_URL,{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({text,voice:'nova'}),
-    });
-    if(!r.ok) throw new Error('TTS API error '+r.status);
-    const arrayBuf=await r.arrayBuffer();
-    const audioBuf=await audioCtx.decodeAudioData(arrayBuf);
-    const src=audioCtx.createBufferSource();
-    src.buffer=audioBuf;
-    src.connect(audioCtx.destination);
-    src.onended=()=>{ currentAudio=null; };
-    src.start(0);
-    currentAudio=src;
-  }catch(e){
-    console.error('TTS error:',e);
-  }
-}
-
-function toggleAutoSpeak(){
-  autoSpeak=!autoSpeak;
-  const btn=document.getElementById('speak-toggle');
-  if(btn){
-    btn.textContent=autoSpeak?'🔊':'🔇';
-    btn.classList.toggle('active',autoSpeak);
-    btn.title=autoSpeak?'Voice on — click to mute':'Enable voice — AI will speak responses';
-  }
-  if(!autoSpeak) stopSpeaking();
-}
 
 // ── Voice Input (Wave 4) ──────────────────────────────────────────────────────
 let voiceRec = null, voiceActive = false;
@@ -1098,7 +1148,6 @@ function toggleVoice(){
 
 // ── Chat (Wave 4) ────────────────────────────────────────────────────────────
 const OPENAI_API_URL = 'https://rpm-dashboard-api.vercel.app/api/openai';
-const TTS_API_URL = 'https://rpm-dashboard-api.vercel.app/api/tts';
 
 function toggleChat(){
   chatOpen=!chatOpen;
@@ -1128,25 +1177,26 @@ function renderChat(){
   let html='';
   chatMessages.forEach((m,i)=>{
     const cls=m.role==='user'?'user':'assistant';
-    if(m.role==='assistant'){
-      const speakBtn=`<button class="chat-msg-speak" onclick="speakText(chatMessages[${i}].content)" title="Read aloud">🔊</button>`;
-      html+=`<div class="chat-message ${cls}">${m.content.replace(/</g,'&lt;').replace(/>/g,'&gt;')}${speakBtn}</div>`;
-    }else{
-      html+=`<div class="chat-message ${cls}">${m.content.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>`;
-    }
+    html+=`<div class="chat-message ${cls}">${m.content.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>`;
     if(m.taskData){
       const td=m.taskData;
+      const streamOpts=Object.entries(SC).map(([k,v])=>`<option value="${k}"${(td.stream||'innovation')===k?' selected':''}>${v.label}</option>`).join('');
+      const priOpts=['normal','priority','urgent','backburner','awaiting'].map(p=>`<option value="${p}"${(td.priority||'normal')===p?' selected':''}>${p.charAt(0).toUpperCase()+p.slice(1)}</option>`).join('');
+      const catOpts=`<option value="">None</option>`+categories.filter(c=>!c.archived).map(c=>`<option value="${c.id}"${td.categoryId===c.id?' selected':''}>${c.name}</option>`).join('');
       let thtml=`<div class="chat-task-preview">`;
-      thtml+=`<strong>${td.text}</strong>`;
-      if(td.categoryId) thtml+=`<div class="chat-task-row"><span class="chat-task-row-label">Category:</span><span class="chat-task-row-value">${td.categoryId}</span></div>`;
-      if(td.priority) thtml+=`<div class="chat-task-row"><span class="chat-task-row-label">Priority:</span><span class="chat-task-row-value">${td.priority}</span></div>`;
-      if(td.dueDate) thtml+=`<div class="chat-task-row"><span class="chat-task-row-label">Due:</span><span class="chat-task-row-value">${td.dueDate}</span></div>`;
-      if(td.delegatedTo) thtml+=`<div class="chat-task-row"><span class="chat-task-row-label">Delegate:</span><span class="chat-task-row-value">${td.delegatedTo}</span></div>`;
+      thtml+=`<strong>${td.text.replace(/</g,'&lt;')}</strong>`;
+      thtml+=`<div class="ctf-grid">`;
+      thtml+=`<div class="ctf-row"><label class="ctf-lbl">Stream</label><select class="ctf-sel" id="ctf-stream-${i}">${streamOpts}</select></div>`;
+      thtml+=`<div class="ctf-row"><label class="ctf-lbl">Priority</label><select class="ctf-sel" id="ctf-pri-${i}">${priOpts}</select></div>`;
+      thtml+=`<div class="ctf-row"><label class="ctf-lbl">Category</label><select class="ctf-sel" id="ctf-cat-${i}">${catOpts}</select></div>`;
+      thtml+=`<div class="ctf-row"><label class="ctf-lbl">Due date</label><input type="date" class="ctf-inp" id="ctf-due-${i}" value="${td.dueDate||''}"></div>`;
+      thtml+=`<div class="ctf-row"><label class="ctf-lbl">Delegate to</label><input type="text" class="ctf-inp" id="ctf-del-${i}" value="${(td.delegatedTo||'').replace(/"/g,'&quot;')}" placeholder="Name (optional)"></div>`;
+      thtml+=`</div>`;
       if(td.subs&&td.subs.length>0){
-        thtml+=`<div class="chat-task-row"><span class="chat-task-row-label">Subtasks:</span></div>`;
-        td.subs.forEach(s=>thtml+=`<div style="margin-left:70px;margin-top:2px">• ${s.text}</div>`);
+        thtml+=`<div style="font-size:10px;color:#888;margin-bottom:3px">Subtasks:</div>`;
+        td.subs.forEach(s=>thtml+=`<div style="font-size:11px;color:#444;margin:1px 0 1px 8px">• ${s.text.replace(/</g,'&lt;')}</div>`);
       }
-      thtml+=`<button class="chat-add-btn" onclick="addChatTask('${m.taskData.text.replace(/'/g,"\\'")}')" data-idx="${chatMessages.indexOf(m)}">+ Add Task</button>`;
+      thtml+=`<button class="chat-add-btn" onclick="addChatTaskFromPreview(${i})">+ Add Task</button>`;
       thtml+=`</div>`;
       html+=thtml;
     }
@@ -1200,31 +1250,26 @@ function parseTaskFromAI(aiText){
   };
 }
 
-function addChatTask(taskText){
-  const msg=chatMessages.find(m=>m.content===taskText||m.taskData?.text===taskText);
+function addChatTaskFromPreview(idx){
+  const msg=chatMessages[idx];
   if(!msg||!msg.taskData)return;
   const td=msg.taskData;
   if(!td.text){alert('Task text is required');return;}
-
-  const newTask={
-    id:uid(),
-    stream:'innovation',
-    text:td.text,
-    pri:td.priority||'normal',
-    dueDate:td.dueDate||'',
-    note:td.note||'',
-    done:false,
-    subs:td.subs||[],
-    categoryId:td.categoryId||'',
-    createdAt:TODAY,
-    isDailyVictory:false,
-    isWeeklyFocus:false,
-    delegateIntent:td.delegateIntent||false,
-    delegatedTo:td.delegatedTo||'',
-  };
-  tasks.push(newTask);
+  const stream=document.getElementById('ctf-stream-'+idx)?.value||'innovation';
+  const pri=document.getElementById('ctf-pri-'+idx)?.value||'normal';
+  const catId=document.getElementById('ctf-cat-'+idx)?.value||'';
+  const dueDate=document.getElementById('ctf-due-'+idx)?.value||'';
+  const delegateTo=(document.getElementById('ctf-del-'+idx)?.value||'').trim();
+  tasks.push({
+    id:uid(),stream,text:td.text,pri,dueDate,
+    note:td.note||'',done:false,subs:td.subs||[],
+    categoryId:catId,createdAt:TODAY,
+    isDailyVictory:false,isWeeklyFocus:false,
+    delegateIntent:delegateTo.length>0,
+    delegatedTo:delegateTo,
+  });
   save();renderAll();
-  const btn=event.target;btn.textContent='✓ Added!';setTimeout(()=>btn.textContent='+ Add Task',2000);
+  const btn=event.target;btn.textContent='✓ Added!';btn.disabled=true;
 }
 
 async function sendChat(){
@@ -1248,7 +1293,6 @@ async function sendChat(){
     const d=await r.json();
     const taskData=d.taskData;
     chatMessages.push({role:'assistant',content:d.response,taskData});
-    if(autoSpeak) speakText(d.response);
   }catch(e){
     chatMessages.push({role:'assistant',content:'Sorry, I encountered an error. Please try again.'});
     console.error('Chat error:',e);
@@ -1288,6 +1332,10 @@ document.getElementById('main-tabs').innerHTML=`
 const savedUrl=localStorage.getItem('rpm_sheet_url');
 if(savedUrl)sheetUrl=savedUrl;
 if(sheetUrl){const u=document.getElementById('sheet-url');const s=document.getElementById('sheet-status');if(u)u.value=sheetUrl;if(s)s.textContent='Connected';}
+// Restore filter state across sessions
+try{const sf=localStorage.getItem('rpm_filters');if(sf)activeFilters=new Set(JSON.parse(sf));}catch(e){}
+// Load strategic priorities
+loadPriorities();
 (async()=>{await loadData();renderAll();})();
 </script>
 </body>
