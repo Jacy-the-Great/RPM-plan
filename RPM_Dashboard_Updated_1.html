@@ -279,6 +279,76 @@ body{font-family:Arial,sans-serif;background:#f8f8f6;color:#222;font-size:14px;l
 .ctf-row{display:flex;align-items:center;gap:6px}
 .ctf-lbl{font-size:10px;font-weight:600;color:#888;min-width:68px;flex-shrink:0}
 .ctf-sel,.ctf-inp{flex:1;font-size:11px;padding:3px 6px;border:1px solid #ddd;border-radius:4px;background:#fff;color:#222;outline:none;font-family:Arial,sans-serif;min-width:0}
+/* Strategy Tab */
+.str-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-top:8px}
+.str-part-label{font-size:10px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.1em;margin:16px 0 8px}
+.str-part-label:first-child{margin-top:0}
+.str-card{border-radius:10px;border:2px solid #eee;background:#fff;overflow:hidden;cursor:pointer;transition:box-shadow .15s,border-color .15s}
+.str-card:hover{box-shadow:0 3px 12px rgba(0,0,0,.08)}
+.str-card-top{padding:12px 14px 8px;display:flex;align-items:flex-start;gap:8px}
+.str-cat-chip{font-size:9px;font-weight:700;color:#fff;border-radius:4px;padding:2px 6px;flex-shrink:0;margin-top:2px;letter-spacing:.04em}
+.str-card-title{flex:1}
+.str-card-name{font-size:13px;font-weight:700;color:#222;line-height:1.3}
+.str-card-nick{font-size:10px;color:#aaa;margin-top:1px}
+.str-score-pill{font-size:11px;font-weight:700;color:#fff;border-radius:99px;padding:2px 8px;flex-shrink:0;align-self:center}
+.str-card-vis{padding:0 14px 8px;font-size:11px;color:#666;line-height:1.5;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.str-card-3tt{padding:6px 14px 10px;border-top:1px solid #f5f5f5}
+.str-3tt-lbl{font-size:9px;font-weight:700;color:#bbb;text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+.str-3tt-item{font-size:11px;color:#555;padding:1px 0;display:flex;gap:5px;align-items:baseline}
+.str-3tt-num{font-size:9px;font-weight:700;color:#bbb;flex-shrink:0;width:10px}
+.str-map-footer{padding:6px 14px 10px;border-top:1px solid #f5f5f5;display:flex;align-items:center;gap:8px}
+.str-map-bar-wrap{flex:1;height:4px;background:#eee;border-radius:2px;overflow:hidden}
+.str-map-bar-fill{height:100%;border-radius:2px;transition:width .3s}
+.str-map-stat{font-size:10px;color:#bbb;white-space:nowrap}
+/* Expanded view */
+.str-exp{background:#fff;border-radius:10px;border:1px solid #ddd;margin-bottom:16px}
+.str-exp-head{display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid #eee;cursor:pointer}
+.str-exp-color-bar{width:4px;height:36px;border-radius:2px;flex-shrink:0}
+.str-exp-titles{flex:1}
+.str-exp-name{font-size:15px;font-weight:700;color:#222}
+.str-exp-sub{font-size:11px;color:#aaa;margin-top:2px}
+.str-score-row{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.str-score-lbl{font-size:10px;color:#888}
+.str-score-dial{display:flex;gap:3px}
+.str-score-dot{width:14px;height:14px;border-radius:50%;border:2px solid #ddd;cursor:pointer;transition:all .1s;flex-shrink:0}
+.str-score-dot.on{border-color:transparent}
+.str-exp-body{padding:18px}
+.str-section{margin-bottom:16px}
+.str-sec-lbl{font-size:10px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;display:flex;align-items:center;justify-content:space-between}
+.str-sec-lbl span{font-size:10px;font-weight:400;color:#bbb;text-transform:none;letter-spacing:0;cursor:pointer}
+.str-sec-lbl span:hover{color:#555}
+.str-text-block{font-size:12px;color:#444;line-height:1.7;white-space:pre-wrap}
+.str-edit-ta{width:100%;font-size:12px;padding:8px 10px;border:1px solid #ddd;border-radius:6px;font-family:Arial,sans-serif;resize:vertical;min-height:60px;outline:none;color:#333;box-sizing:border-box;line-height:1.6}
+.str-edit-ta:focus{border-color:#378ADD}
+.str-edit-inp{width:100%;font-size:12px;padding:6px 10px;border:1px solid #ddd;border-radius:6px;font-family:Arial,sans-serif;outline:none;color:#333;box-sizing:border-box}
+.str-edit-inp:focus{border-color:#378ADD}
+.str-tag-row{display:flex;flex-wrap:wrap;gap:5px}
+.str-tag{padding:3px 9px;border-radius:99px;font-size:11px;background:#f0f0f0;color:#555;cursor:default}
+.str-map-list{display:flex;flex-direction:column;gap:5px}
+.str-map-row{display:flex;align-items:flex-start;gap:8px;padding:8px 10px;border-radius:6px;border:1px solid #eee;background:#fafafa}
+.str-map-row.done{opacity:.55}
+.str-map-row.priority{background:#fffbf0;border-color:#f0d68a}
+.str-map-cb{width:15px;height:15px;cursor:pointer;flex-shrink:0;margin-top:1px;accent-color:#378ADD}
+.str-map-txt{flex:1;font-size:12px;color:#333;line-height:1.4}
+.str-map-txt.done-txt{text-decoration:line-through;color:#bbb}
+.str-map-push{padding:2px 8px;border-radius:4px;border:1px solid #378ADD;background:#fff;color:#378ADD;font-size:10px;cursor:pointer;white-space:nowrap;flex-shrink:0;font-family:Arial,sans-serif;font-weight:600;transition:all .12s}
+.str-map-push:hover{background:#e8f4fd}
+.str-map-push.pushed{border-color:#ccc;color:#aaa;cursor:default;background:#fafafa}
+.str-map-add-btn{width:100%;padding:5px 10px;border:1px dashed #ddd;border-radius:6px;background:transparent;color:#888;font-size:11px;cursor:pointer;font-family:Arial,sans-serif;text-align:left;margin-top:3px}
+.str-map-add-btn:hover{border-color:#aaa;color:#555}
+.str-save-row{display:flex;gap:8px;justify-content:flex-end;padding-top:8px;border-top:1px solid #f5f5f5;margin-top:4px}
+.str-save-btn{padding:7px 20px;border-radius:6px;border:none;background:#222;color:#fff;font-size:12px;font-weight:600;cursor:pointer;font-family:Arial,sans-serif}
+.str-save-btn:hover{background:#333}
+.str-cancel-btn{padding:7px 16px;border-radius:6px;border:1px solid #ddd;background:#fff;color:#888;font-size:12px;cursor:pointer;font-family:Arial,sans-serif}
+.str-back-btn{background:none;border:none;cursor:pointer;color:#888;font-size:22px;padding:0;line-height:1;flex-shrink:0}
+.str-back-btn:hover{color:#222}
+.str-edit-toggle{padding:4px 10px;border-radius:6px;border:1px solid #ddd;background:#fff;color:#666;font-size:11px;cursor:pointer;font-family:Arial,sans-serif;flex-shrink:0}
+.str-edit-toggle:hover{background:#f5f5f5}
+.str-header-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px}
+.str-overview-stats{display:flex;gap:16px;flex-wrap:wrap}
+.str-ov-stat{text-align:center}
+.str-ov-num{font-size:22px;font-weight:700;color:#222}
+.str-ov-lbl{font-size:10px;color:#aaa;text-transform:uppercase;letter-spacing:.06em}
 /* Subtask row mobile fix */
 @media(max-width:640px){
   .stats{grid-template-columns:repeat(2,1fr)}
@@ -330,6 +400,7 @@ body{font-family:Arial,sans-serif;background:#f8f8f6;color:#222;font-size:14px;l
         </div>
       </div>
     </div>
+    <div id="strategy-view" style="display:none"></div>
   </div>
 <script>
 // ── Date ─────────────────────────────────────────────────────────────────────
@@ -399,6 +470,10 @@ let pendingDelegationId=null; // Wave 2: delegation flow
 let chatMessages=[],chatLoading=false;
 let priorities={quarter:'',month:'',weekly:[],threeToThrive:[]};
 let prioritiesOpen=false;
+// Strategy tab state
+let rpmPlan={categories:[]};
+let strExpandedId=null;
+let strEditMode=false;
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 function uid(){return 'u'+Date.now()+Math.random().toString(36).slice(2,5);}
@@ -427,6 +502,7 @@ async function save(){
   const payload={tasks,log,categories,priorities};
   localStorage.setItem(SK,JSON.stringify(payload)); // always keep local copy fresh
   localStorage.setItem('rpm_priorities',JSON.stringify(priorities)); // dedicated priorities store
+  localStorage.setItem('rpm_strategy',JSON.stringify(rpmPlan)); // strategy plan
   if(sheetUrl){
     try{const r=await fetch(sheetUrl,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});if(r.ok){showSaved();return;}throw new Error('HTTP '+r.status);}
     catch(e){console.warn('Sheet write failed',e);}
@@ -1291,6 +1367,636 @@ function quickPrompt(prompt){
   sendChat();
 }
 
+// ── Strategy Tab ─────────────────────────────────────────────────────────────
+function defaultRpmPlan(){
+  return{categories:[
+    {id:'rpm-01',number:1,name:'Physical Body',nickname:'Muscle Kingdom',color:'#27ae60',part:'personal',
+     vision:'Weigh 90kg+. Sub-10% body fat. Six pack. Fully rehabbed ankle with zero pain or fear. Able to surf all day, run a half marathon, do yoga, sail, play any sport without limitation. Look and feel incredible. Boundless energy from morning to night.',
+     purpose:'Because when my body is strong, everything in my life is better. Because I want to feel intense inner pride, confidence and resolve. Because I want to be the guy who walks into a room and people can feel the energy. Because I refuse to let my ankle or my habits hold me back from the life I want.',
+     roles:['Hercules','Sagittarius Stud','Confident Hulk','Surfing King','Structure Sultan'],
+     threeToThrive:['Physio and rehabilitation (daily routine, measurable improvement, rebuilding the base)','Diet (conscious eating routine, intermittent fasting)','Gym and conditioning (progressive, only once physio foundation is solid)'],
+     resources:['Sean (coach/trainer)','Gym membership','Physio','David Goggins mindset and discipline training','Morning swim and walk routine (already established)'],
+     oneYearResult:'Fully healed and reinforced physical body. Physio\'d to the point where I can train, surf, run and play sport without regression or fear of regression. Underlying postural issues resolved. Only after this foundation is solid: build toward 90kg, sub-10% body fat, and the physique goals.',
+     oneYearPurpose:'To feel like Hercules and Aquaman. To have never-ending energy. To carry intense inner pride and confidence every single day. But first, to heal. Because I can\'t build on a broken foundation and I\'m done pretending I can skip this step.',
+     ninetyDayResult:'Establish a daily physio routine and stick to it without exception. Achieve measurable improvement (documented by physio or self-tracked). Know definitively whether I can train hard without regressing. Resume gym progressively based on physio clearance.',
+     ninetyDayPurpose:'Because right now I still don\'t know if I can do anything without regressing. The next 90 days answer that question. Everything else in this category depends on getting this right first.',
+     ninetyDayMap:[
+       {id:'mx01a',text:'Book physio assessment to establish current baseline and daily routine',done:false,priority:true,pushedToTask:false},
+       {id:'mx01b',text:'Set up daily physio routine (morning, non-negotiable, before anything else)',done:false,priority:true,pushedToTask:false},
+       {id:'mx01c',text:'Create a simple tracking sheet: what exercises, any pain, progression markers',done:false,priority:true,pushedToTask:false},
+       {id:'mx01d',text:'Review with physio every 2 weeks to confirm improvement or adjust',done:false,priority:true,pushedToTask:false},
+       {id:'mx01e',text:'Resume gym at whatever level physio clears',done:false,priority:false,pushedToTask:false},
+       {id:'mx01f',text:'Cut weeknight drinking completely',done:false,priority:false,pushedToTask:false},
+       {id:'mx01g',text:'Set consistent sleep schedule (10:30pm lights out)',done:false,priority:false,pushedToTask:false},
+       {id:'mx01h',text:'Morning walk/swim on days where physio allows',done:false,priority:false,pushedToTask:false},
+     ],
+     weeklyIntegration:'Daily physio is a non-negotiable. Weekly: log progress and any setbacks. Fortnightly: physio check-in.',
+     score:5,updatedAt:TODAY},
+    {id:'rpm-02',number:2,name:'Wellbeing, Happiness and Fulfilment',nickname:'',color:'#2980b9',part:'personal',
+     vision:'I feel outstanding every day. I\'m calm, grounded, present. I don\'t get pulled into anxiety about things I can\'t control. I have deep inner peace even when external circumstances are difficult. I regularly pause to celebrate wins and feel genuine pride in what I\'ve built. I spend time in nature: morning walks, ocean swims, camping trips, boat nights with mates. I feel deeply satisfied with the direction of my life because I\'m progressing toward things that matter, not just things that look good.',
+     purpose:'Because without mental peace, no amount of achievement matters. Because I wasted years worrying about things completely outside my control. Because fulfilment doesn\'t happen by accident: I can tick every box on a to-do list and still feel empty if I\'m not intentionally checking whether this life feels right. Because "progress equals happiness" only works if the progress is toward the right things.',
+     roles:['Joy Buddha','Peace Keeper','State Master','Life Architect','Celebration King'],
+     threeToThrive:['Nature and recharge (morning walks, ocean swims, one camping trip or boat night per month)','Weekly reflection and celebration (deliberately acknowledging progress, fulfilment check)','State management (priming, breathing, emotional awareness)'],
+     resources:['Tony Robbins priming and state management training','Breakthrough app','Morning routine (swim/walk habit)','Ocean and nature access in Sydney','Mastery University progress and tools','RPM weekly review process','Platinum accountability group','Nigel (coach)'],
+     oneYearResult:'Sleep 7+ hours per night consistently. Spend time in nature at least 3x per week. Do at least one camping trip or boat night per month. Can honestly say I\'m fulfilled in the majority of my personal categories. Have dropped at least 3 commitments or habits that don\'t serve my vision. Zero episodes of anxiety-driven paralysis lasting more than 30 minutes.',
+     oneYearPurpose:'Because controlling my state is the most powerful skill I have. Because happiness is a practice, not a destination. Because I want to enjoy this life while I\'m building it, not just after.',
+     ninetyDayResult:'One camping trip or boat night per month for 3 months. Morning walks/swims at least 4x per week. Establish weekly fulfilment check-in as part of Sunday RPM review. Identify and eliminate one time-wasting commitment. Celebrate at least one meaningful win per week (written down).',
+     ninetyDayPurpose:'Because the habits I build in the next 90 days become the baseline for the rest of my life. Because I know what good feels like and I want to make it the default, not the exception.',
+     ninetyDayMap:[
+       {id:'mx02a',text:'Plan and book first camping trip or boat night this month',done:false,priority:true,pushedToTask:false},
+       {id:'mx02b',text:'Lock in morning walk/swim routine (which days, what time)',done:false,priority:true,pushedToTask:false},
+       {id:'mx02c',text:'Add fulfilment check to Sunday RPM review template',done:false,priority:true,pushedToTask:false},
+       {id:'mx02d',text:'Audit current commitments and identify the one to drop',done:false,priority:false,pushedToTask:false},
+       {id:'mx02e',text:'Start a "wins journal" in Apple Notes minimum one entry per week',done:false,priority:false,pushedToTask:false},
+       {id:'mx02f',text:'Stop checking phone for first 30 minutes after waking',done:false,priority:false,pushedToTask:false},
+     ],
+     weeklyIntegration:'Morning routine includes priming + walk/swim. Sunday review ends with: "What am I most proud of this week?" and "Is what I\'m doing aligned with what I say matters?"',
+     score:5,updatedAt:TODAY},
+    {id:'rpm-03',number:3,name:'Romance',nickname:'Mr. Lover-Lover',color:'#e91e8c',part:'personal',
+     vision:'I meet my wife. I\'m dating with confidence, vulnerability, and intention. I\'m not settling, but I\'m also not using "high standards" as an excuse to avoid emotional risk. I show up fully. I\'ve learned from the 4.5-year relationship that ended, and I bring that growth into how I connect with women.',
+     purpose:'Because meeting my wife is one of my top 3 life goals. Because I want to build a beautiful life with someone. Because I know I\'m a better man when I\'m in a great relationship, and I know I\'m ready.',
+     roles:['Mr. Lover-Lover','Beautiful Life Creator','Confident Romantic'],
+     threeToThrive:['Putting myself out there consistently (meeting women IRL, social events, openness)','Emotional vulnerability and presence (not performing, being real)','Standards without walls (knowing what I want without closing off)'],
+     resources:['Date With Destiny relationship learnings','Social network in Sydney','Confidence from personal growth work','Friends who are in great relationships (models to learn from)','Current momentum (dating IRL, going well)'],
+     oneYearResult:'Be in a relationship with someone I\'m genuinely excited about, or have been on enough quality dates that I know exactly what I\'m looking for and am actively building toward it.',
+     oneYearPurpose:'Because a year from now I want to look back knowing I showed up fully, took the risk, and either found her or learned exactly what I need to.',
+     ninetyDayResult:'Go on at least 4 quality dates. Attend at least 2 social events specifically to meet new people. Keep the current momentum going.',
+     ninetyDayPurpose:'Because momentum matters. Because the version of me that puts himself out there consistently is the version who finds what he\'s looking for.',
+     ninetyDayMap:[
+       {id:'mx03a',text:'Say yes to at least 2 social events per month outside my usual circle',done:false,priority:true,pushedToTask:false},
+       {id:'mx03b',text:'Ask one trusted friend to introduce me to someone they think I\'d connect with',done:false,priority:false,pushedToTask:false},
+       {id:'mx03c',text:'Reflect on DWD relationship learnings and write down top 5 non-negotiables',done:false,priority:false,pushedToTask:false},
+     ],
+     weeklyIntegration:'This category doesn\'t need daily actions. It needs weekly awareness: "Am I putting myself in situations where connection is possible?"',
+     score:5,updatedAt:TODAY},
+    {id:'rpm-04',number:4,name:'Friendships & Family Relationships',nickname:'',color:'#f39c12',part:'personal',
+     vision:'I have close friends around me every week. Deep friendships built on trust, joy and respect. An awesome group of friends in Sydney that I see regularly. Strong connections with my childhood and high school friends maintained through regular contact. I see my family multiple times per year and have a great connection.',
+     purpose:'Because life without great friendships is hollow. Because I moved to Sydney with no net and I proved I could build something from nothing, and now I need to build depth, not just breadth. Because the best memories I have are the overseas boys\' trips, the BBQs, the simple nights in with people I care about.',
+     roles:['Excitement Spreader','Adventure Maker','Family Anchor'],
+     threeToThrive:['Regular time with close Sydney friends (weekly or fortnightly)','Family connection (regular calls, visits home each year)','Maintaining long-distance friendships (childhood/high school mates)'],
+     resources:['Sydney social circle (growing)','Family (parents, siblings)','Platinum group peers','Travel budget for home visits'],
+     oneYearResult:'See close friends at least weekly. Call family at least fortnightly. Visit home at least twice. Go on at least one trip with friends. Host at least 4 BBQs or social gatherings.',
+     oneYearPurpose:'Because the people who matter deserve my time, not my leftover energy.',
+     ninetyDayResult:'Host one BBQ or gathering. Call parents weekly. Plan one activity with friends that isn\'t just drinking. Reconnect with one friend I\'ve lost touch with.',
+     ninetyDayPurpose:'Because connection is the foundation of a life well lived, and it requires intentional effort, not just good intentions.',
+     ninetyDayMap:[
+       {id:'mx04a',text:'Set recurring weekly call with parents (lock in a day)',done:false,priority:true,pushedToTask:false},
+       {id:'mx04b',text:'Plan and host a BBQ or gathering this month',done:false,priority:false,pushedToTask:false},
+       {id:'mx04c',text:'Message 3 friends to plan a non-drinking activity (surf, hike, golf)',done:false,priority:false,pushedToTask:false},
+       {id:'mx04d',text:'Reach out to one old friend I haven\'t spoken to in 6+ months',done:false,priority:false,pushedToTask:false},
+     ],
+     weeklyIntegration:'Sunday review: "Who did I connect with this week? Who am I overdue to call?"',
+     score:5,updatedAt:TODAY},
+    {id:'rpm-05',number:5,name:'Adventure and Travel',nickname:'',color:'#16a085',part:'personal',
+     vision:'I live a life filled with experiences. I travel, I explore. I go camping. I ride my motorbike. I don\'t just talk about adventures; I do them. I plan trips, I say yes, I make it happen even when work is busy. I\'m building toward the life where I have my nature hut on GBI, spend time in Hawaii, Europe, NZ.',
+     purpose:'Because adventure is fuel. Because the version of me that rides, explores and says yes to life is the version I like the most. Because I listed "what I\'d do with extra hours" and travel and adventure were at the top.',
+     roles:['Explorer','Motorcycle Maverick','Future Surfing King (when healed)'],
+     threeToThrive:['Plan and execute at least one trip per quarter','Weekly micro-adventures (beach walks, hikes, rides)','Camping or boat night at least once per month'],
+     resources:['Motorbike (licence acquired)','Sydney\'s coastline and mountains','Travel budget','Friends who are up for adventures'],
+     oneYearResult:'Taken at least 3 trips (domestic or international). Done at least 4 camping trips or boat nights. Ridden the motorbike regularly. At least one multi-day adventure.',
+     oneYearPurpose:'Because a year from now I want to look back and know I actually lived, not just worked.',
+     ninetyDayResult:'Do one day trip (Blue Mountains or similar). Plan one bigger trip for next quarter. Ride the motorbike at least weekly. One camping trip or boat night per month.',
+     ninetyDayPurpose:'Because building the adventure habit in the next 90 days means it becomes part of who I am, not a reward I\'m waiting for.',
+     ninetyDayMap:[
+       {id:'mx05a',text:'Decide on and book the Blue Mountains trip this month',done:false,priority:true,pushedToTask:false},
+       {id:'mx05b',text:'Plan first camping trip or boat night for this month',done:false,priority:true,pushedToTask:false},
+       {id:'mx05c',text:'Research and shortlist next quarter\'s bigger trip (NZ? Bali? GBI?)',done:false,priority:false,pushedToTask:false},
+       {id:'mx05d',text:'Ride the motorbike at least once per week',done:false,priority:false,pushedToTask:false},
+     ],
+     weeklyIntegration:'At least one adventure or outdoor activity per week. Non-negotiable. Even if it\'s a 30-minute ocean swim.',
+     score:5,updatedAt:TODAY},
+    {id:'rpm-06',number:6,name:'Energy and Rejuvenation',nickname:'',color:'#8e44ad',part:'personal',
+     vision:'I feel outstanding every day and sleep like a rock. I wake up ready to jump into action. I feel fresh, energised, strong and supple because I sleep well, wind down, manage sobriety, read at night. My energy is not dependent on caffeine or adrenaline; it comes from deep rest, good nutrition, and a body that works well.',
+     purpose:'Because energy is the multiplier. I can have the best plan in the world, but if I\'m running on 5 hours of sleep and recovering from a weekend of drinking, I execute at 40%. Because late nights and weekend drinking have been the biggest drain on my capacity, and I know it.',
+     roles:['Recovery King','Energy Engine'],
+     threeToThrive:['Sleep (consistent 10:30pm wind-down, 7+ hours per night)','Sobriety management (cut weeknight drinking, moderate weekends)','Wind-down routine (reading, no phone, preparation for tomorrow)'],
+     resources:['Wind-down routine design','Sleep tracking (watch or app)','Books for evening reading','Morning swim/walk as energy reset'],
+     oneYearResult:'Average 7+ hours of sleep per night. Zero weeknight drinking. Weekend drinking limited to social occasions only, max 2x per month. Wake up before 6am naturally at least 5 days per week.',
+     oneYearPurpose:'Because a fully rested, sober version of me is 2x more productive, 2x more creative, and 2x more present in every relationship.',
+     ninetyDayResult:'Establish a consistent wind-down routine by 10pm. No weeknight alcohol. Track sleep for 30 days to establish a baseline. Read for 20 minutes before bed at least 5 nights per week.',
+     ninetyDayPurpose:'Because the habits I establish in the next 90 days will determine my energy for the next 10 years.',
+     ninetyDayMap:[
+       {id:'mx06a',text:'Design and write down my wind-down routine (tonight)',done:false,priority:true,pushedToTask:false},
+       {id:'mx06b',text:'Set a 9:30pm "wind down" alarm on my phone',done:false,priority:true,pushedToTask:false},
+       {id:'mx06c',text:'Remove alcohol from the house on weeknights',done:false,priority:false,pushedToTask:false},
+       {id:'mx06d',text:'Buy or download 2 books for bedside reading',done:false,priority:false,pushedToTask:false},
+       {id:'mx06e',text:'Start tracking sleep with phone or watch',done:false,priority:false,pushedToTask:false},
+       {id:'mx06f',text:'Tell one friend about the no-weeknight-drinking commitment (accountability)',done:false,priority:false,pushedToTask:false},
+     ],
+     weeklyIntegration:'Sunday review includes sleep quality rating for the week (1-10) and a note on any nights where the routine broke down and why.',
+     score:5,updatedAt:TODAY},
+    {id:'rpm-07',number:7,name:'Contribution',nickname:'Healer and Magic Man for Good',color:'#1abc9c',part:'personal',
+     vision:'I make a massive positive impact on the planning profession and on sustainability outcomes. I help planners do better work faster. I help communities get better planning outcomes. I give back through my knowledge, my tools, my time. I am known as someone who gives more than he takes.',
+     purpose:'Because planning is the most important check and balance for beautiful communities and environmental abundance. Because planners want to do great work but lack the time and evidence to push for better outcomes. Because I want my work to mean something beyond my own income and career.',
+     roles:['Healer','Magic Man for Good','Planet Healer','Guide'],
+     threeToThrive:['Build products and tools that create real value for planners','Share knowledge freely (content, speaking, mentoring)','Support at least one cause or project that isn\'t about my career'],
+     resources:['Land iQ platform (reaches 128 councils)','PIA network','Speaking platforms (conferences, webinars)','Claude/AI tools for scaling content'],
+     oneYearResult:'Helped at least 5 planners or teams get better outcomes through Land iQ, training, or direct advice. Published content that at least 3 people have told me changed how they think about planning or technology. Supported one external project or cause.',
+     oneYearPurpose:'Because the best measure of a life well lived isn\'t what I accumulated — it\'s what I contributed.',
+     ninetyDayResult:'Identify one external project or pro-bono opportunity to contribute to. Deliver at least 2 pieces of genuinely helpful content. Mentor or support one colleague.',
+     ninetyDayPurpose:'Because contribution is a muscle, and the next 90 days are for building the habit.',
+     ninetyDayMap:[
+       {id:'mx07a',text:'Identify one pro-bono or community planning project worth contributing to',done:false,priority:true,pushedToTask:false},
+       {id:'mx07b',text:'Write and publish one LinkedIn post that teaches something valuable',done:false,priority:true,pushedToTask:false},
+       {id:'mx07c',text:'Offer to help one colleague with a challenge they\'re facing',done:false,priority:false,pushedToTask:false},
+       {id:'mx07d',text:'Review Land iQ user feedback for opportunities to create better training content',done:false,priority:false,pushedToTask:false},
+     ],
+     weeklyIntegration:'Contribution isn\'t a daily action. It\'s a lens: "Did anything I did this week make someone else\'s work or life better?"',
+     score:5,updatedAt:TODAY},
+    {id:'rpm-08',number:8,name:'Jacy Enterprises (Career Management)',nickname:'Career Management',color:'#2c3e50',part:'professional',
+     vision:'I am the indispensable person at Land iQ for marketing, sales and big client relationships. I manage up (James), sideways (Bernie, Lucy) and down (Christina, Milni, Andrew) with strategic intent. My IGP is delivered on time and positions me for advancement. I\'m not just doing the job; I\'m shaping it into the role I want.',
+     purpose:'Because this job funds everything else. Because Land iQ is where I build the skills, the network and the reputation that make my own business viable. Because if I play this right, I exit on my terms with a track record that opens doors.',
+     roles:['Maverick','Mike Ross (the smartest guy in the room who outworks everyone)','Fixer'],
+     threeToThrive:['Marketing and sales leadership (own the client-facing pipeline, be the revenue person)','Stakeholder management (manage James, navigate Bernie and Lucy, protect my scope)','Delivery and execution (hit IGP milestones, deliver the marketing program on time)'],
+     resources:['IGP (April 2026 to April 2027, submitted)','Nigel (external coach)','Platinum accountability group','Land iQ platform and team','Pipedrive CRM','PostHog analytics','Giraffe Technologies partnership'],
+     oneYearResult:'Be recognised as the marketing and sales lead of Land iQ. Close at least 10 new licence deals personally. Successfully deliver the three-month marketing program. Get the Land iQ LinkedIn account approved and launched. Complete IGP milestones on schedule.',
+     oneYearPurpose:'Because owning marketing and sales at Land iQ makes me the person the business can\'t afford to lose. Because every client I close, every deal I own, every speaking gig I land builds my personal brand at the same time.',
+     ninetyDayResult:'Close Nathan Laird deal (2+ licences confirmed). Progress Lendlease deal through Ruk contact. Deliver 7-stream marketing program on track. Submit PIA NSW 2026 abstract by 4 May. Present at PIA National Congress, Canberra, 18 May. Get Land iQ LinkedIn co-brand approval moving toward July launch.',
+     ninetyDayPurpose:'Because the next 90 days establish whether I\'m the marketing and sales leader of Land iQ or just a person in the role. The actions I take now define my reputation for the next 12 months.',
+     ninetyDayMap:[
+       {id:'mx08a',text:'Prepare and deliver Nathan Laird demo',done:false,priority:true,pushedToTask:false},
+       {id:'mx08b',text:'Contact Ruk re Lendlease, propose site-specific demo',done:false,priority:true,pushedToTask:false},
+       {id:'mx08c',text:'Finalise PIA NSW abstract submissions by 28 April',done:false,priority:true,pushedToTask:false},
+       {id:'mx08d',text:'Draft PIA partnership pitch for hands-on Land iQ study tour session',done:false,priority:true,pushedToTask:false},
+       {id:'mx08e',text:'Prepare PIA National Congress booth and materials with Christina',done:false,priority:true,pushedToTask:false},
+       {id:'mx08f',text:'Book Nesuto Canberra for Congress stay',done:false,priority:false,pushedToTask:false},
+       {id:'mx08g',text:'Drive Canberra with one other staff member',done:false,priority:false,pushedToTask:false},
+       {id:'mx08h',text:'Progress co-brand LinkedIn approval with NSW Government comms',done:false,priority:false,pushedToTask:false},
+       {id:'mx08i',text:'Deliver weekly marketing program milestones',done:false,priority:false,pushedToTask:false},
+       {id:'mx08j',text:'Run fortnightly check with Nigel on career strategy',done:false,priority:false,pushedToTask:false},
+     ],
+     weeklyIntegration:'Monday: identify top 3 career actions for the week. Friday: update Pipedrive, review pipeline, note any stakeholder dynamics.',
+     score:5,updatedAt:TODAY},
+    {id:'rpm-09',number:9,name:'PlanTech Business (Own Venture)',nickname:'',color:'#e74c3c',part:'professional',
+     vision:'I own a profitable AI-powered planning analytics business that serves planners across Australia and eventually internationally. It creates unparalleled value in its niche. I have paying clients. I have a product that works. I\'m known as the person who built this.',
+     purpose:'Because I want to give planners the tools they need to do great work. Because I want to become a global leader and successful startup founder. Because I want escape velocity. PlanTech is the focus.',
+     roles:['Titan','Maverick','Business Wizard','Bobby Axelrod (strategic, bold, calculated)'],
+     threeToThrive:['Having incredible knowledge and skills in PlanTech','Delivering outstanding results to create raving fan customers','Having outstanding business and management skills'],
+     resources:['Claude Code (prototype and artifact development)','AI and automation tools','PIA and PlanTech network','Platinum accountability group','Business Mastery training (Dean\'s program)','Toastmasters','Yvonne (design thinking process partner)'],
+     oneYearResult:'Have a working MVP/prototype of my planning technology product. Secure first 5 paying clients. Make $20K-$25K in revenue/profit. Have a rock solid business plan. Complete 3 Toastmasters modules.',
+     oneYearPurpose:'Because a year from now I want to look back and know I stopped talking about this business and started building it.',
+     ninetyDayResult:'Research and identify best technology options. Brainstorm 3 SaaS tool options. Build one working POC/prototype. Build a second fast POC. Map out ideal customer. Run design thinking process with Yvonne. Test prototype with 2-3 ideal clients.',
+     ninetyDayPurpose:'Because the first prototype changes everything. It makes the business real, creates feedback, and proves to me and others that this is more than an idea.',
+     ninetyDayMap:[
+       {id:'mx09a',text:'Block 2 hours this week for technology research and options assessment',done:false,priority:true,pushedToTask:false},
+       {id:'mx09b',text:'Brainstorm 3 SaaS tool options and select the most promising one',done:false,priority:true,pushedToTask:false},
+       {id:'mx09c',text:'Build first POC in Claude Code over one focused weekend',done:false,priority:true,pushedToTask:false},
+       {id:'mx09d',text:'Get legal advice on IP ownership re: published methodology',done:false,priority:true,pushedToTask:false},
+       {id:'mx09e',text:'Schedule design thinking sessions with Yvonne',done:false,priority:false,pushedToTask:false},
+       {id:'mx09f',text:'Map ideal customer persona in detail',done:false,priority:false,pushedToTask:false},
+       {id:'mx09g',text:'Test POC with 2 trusted contacts from PIA network',done:false,priority:false,pushedToTask:false},
+       {id:'mx09h',text:'Set up basic website',done:false,priority:false,pushedToTask:false},
+       {id:'mx09i',text:'Read one business building book',done:false,priority:false,pushedToTask:false},
+       {id:'mx09j',text:'Complete first 2 Toastmasters speeches',done:false,priority:false,pushedToTask:false},
+     ],
+     weeklyIntegration:'Minimum 3 hours per week on personal business development (evenings/weekends). Track hours and output in a simple log.',
+     score:5,updatedAt:TODAY},
+    {id:'rpm-10',number:10,name:'Brand & Influence',nickname:'Marketing and Networking Magician',color:'#d35400',part:'professional',
+     vision:'I\'m recognised nationally and internationally as a leader in AI-enabled planning and PlanTech. I publish weekly content that positions me as an authority. I speak at major conferences. I have 4,000+ followers on LinkedIn. I\'m the person that planning professionals think of when they hear "planning technology" in Australia.',
+     purpose:'Because brand is the asset that compounds over time and follows me regardless of employer. Because attention is the currency of the modern economy and I need to earn it. Because my ideas mean nothing if nobody knows about them.',
+     roles:['Marketing and Networking Magician','PlanTech Voice','Stage Commander'],
+     threeToThrive:['LinkedIn content (personal brand Tuesdays, Land iQ Thursdays)','Conference speaking and industry visibility','Network building (adding value to 20+ key relationships)'],
+     resources:['LinkedIn (personal account, Land iQ account pending July 2026)','PIA membership and conference access','StoryBrand framework','Claude (content development)','Conference platforms'],
+     oneYearResult:'4,000+ LinkedIn followers. Published at least 48 LinkedIn posts (weekly cadence). Spoken at 4+ industry events. Built a network of 20+ active professional relationships. Land iQ LinkedIn account live and growing.',
+     oneYearPurpose:'Because I want to be the name on everyone\'s lips when planning technology comes up in Australia. Because every post, every talk, every connection compounds into something nobody can take from me.',
+     ninetyDayResult:'Publish at least 12 LinkedIn posts. Present at PIA National Congress Canberra (18 May). Prepare AI in Planning Summit Brisbane presentation (10 June). Grow LinkedIn following by 500.',
+     ninetyDayPurpose:'Because the next 90 days establish whether personal brand is a priority or a someday. I\'m choosing priority.',
+     ninetyDayMap:[
+       {id:'mx10a',text:'Create content calendar for next 12 weeks',done:false,priority:true,pushedToTask:false},
+       {id:'mx10b',text:'Batch-write 4 LinkedIn posts this week to build a buffer',done:false,priority:true,pushedToTask:false},
+       {id:'mx10c',text:'Finalise PIA Congress presentation materials',done:false,priority:true,pushedToTask:false},
+       {id:'mx10d',text:'Start drafting AI Summit Brisbane presentation',done:false,priority:false,pushedToTask:false},
+       {id:'mx10e',text:'Submit PIA New Planner article if deadline allows',done:false,priority:false,pushedToTask:false},
+       {id:'mx10f',text:'Identify 5 key network contacts and schedule catch-ups',done:false,priority:false,pushedToTask:false},
+       {id:'mx10g',text:'Post at least 2 pieces on Viva Engage (internal visibility)',done:false,priority:false,pushedToTask:false},
+       {id:'mx10h',text:'Develop a 30-second and 2-minute personal pitch (StoryBrand framework)',done:false,priority:false,pushedToTask:false},
+     ],
+     weeklyIntegration:'Tuesday: publish personal brand post. Thursday: publish Land iQ post. Friday: engage with 5 posts from people in my network.',
+     score:5,updatedAt:TODAY},
+    {id:'rpm-11',number:11,name:'Execution & Discipline',nickname:'Time Genius / Victory Stallion',color:'#7f8c8d',part:'professional',
+     vision:'I quickly identify the most efficient path and blast through it without hesitation. I have tons of free time because I power through my goals without procrastination. I am confident, proud, disciplined, highly skilled at execution. I have a reputation as a hyper productive person with laser focus.',
+     purpose:'Because I want to be unstoppable. Because I\'ve identified that 50% of my time goes to things that are "not important, not urgent" (PS5, phone, Instagram, Netflix, random browsing, worrying). Because discipline is the bridge between the man I am and the man I want to be.',
+     roles:['Time Genius','Accountability Agent','Victory Stallion','Executioner','Productivity Magician'],
+     threeToThrive:['Routine of disciplined achievement (habit stacking, Pomodoro, daily planner)','Rewards system (surf, sauna, golf, beer to celebrate actual output)','Tracking and improvement (monitor planned vs completed tasks weekly and monthly)'],
+     resources:['RPM system','Pomodoro technique','Habit stacking','Compliance journaling','5am club routine','David Goggins discipline training','Rewards: surf, sauna, golf, couple of beers after achievement'],
+     oneYearResult:'3x more productive measured by tasks completed per month. Consistent daily planner use. Maximum 10 focus goals per week. Improved ratio of tasks delegated. 90/1/1 system embedded.',
+     oneYearPurpose:'Because I refuse to keep being the guy with brilliant ideas who executes at 30%.',
+     ninetyDayResult:'Get to 1.5x more productive (tracked). Monitor all planned and completed tasks per week and month. Apply daily planner and habit stacking every day. Pomodoro on all tasks. Prioritise tasks (maximum 10 focus goals per week). Track delegation ratio.',
+     ninetyDayPurpose:'Because the next 90 days either prove that I can build these habits or they don\'t. I choose to prove it.',
+     ninetyDayMap:[
+       {id:'mx11a',text:'Set up a simple daily planner system and use it every morning',done:false,priority:true,pushedToTask:false},
+       {id:'mx11b',text:'Start Pomodoro on all deep work tasks',done:false,priority:true,pushedToTask:false},
+       {id:'mx11c',text:'Create a weekly task tracker (planned vs completed)',done:false,priority:true,pushedToTask:false},
+       {id:'mx11d',text:'Limit weekly focus goals to 10 maximum',done:false,priority:true,pushedToTask:false},
+       {id:'mx11e',text:'At end of each week, log: planned, completed, delegated, dropped',done:false,priority:false,pushedToTask:false},
+       {id:'mx11f',text:'Identify one recurring task to delegate or eliminate this month',done:false,priority:false,pushedToTask:false},
+       {id:'mx11g',text:'Set up habit stack: morning routine chained together',done:false,priority:false,pushedToTask:false},
+       {id:'mx11h',text:'Design 3 rewards that motivate me linked to weekly achievement thresholds',done:false,priority:false,pushedToTask:false},
+     ],
+     weeklyIntegration:'Every morning starts with 10 minutes of planning. Every Friday ends with a 15-minute review.',
+     score:5,updatedAt:TODAY},
+    {id:'rpm-12',number:12,name:'Finance, Wage and Returns',nickname:'Cayman King',color:'#B8860B',part:'professional',
+     vision:'Hit escape velocity: live off investment and money machine income, grow the portfolio every year. Build a real estate portfolio starting with the duplex (purchased through trust), then save for the next deposit. Financial freedom means never trading time for money unless I choose to.',
+     purpose:'Because financial freedom means living life on my terms. Because I want the time to enjoy my life, travel, surf, spend time with family and friends. Because escape velocity means I never have to trade time for money again.',
+     roles:['Cayman King','Money Magician','Trading and Investing King'],
+     threeToThrive:['Real estate (get duplex positively geared, build equity, save $200k for next deposit)','Save more (cut spending, increase savings rate, all excess into money machine)','Invest wisely (diversified portfolio, disciplined trading)'],
+     resources:['Tony Robbins Wealth Mastery framework','Trust structure (established and operating)','Accountant','CoinTracking','Trading platform','Platinum group peers with financial knowledge'],
+     oneYearResult:'Duplex purchased, tenanted, and positively geared. Clear pathway to saving $200k for next deposit. Trading discipline: following rules, taking profits, tracking P&L. Savings rate increased. Net worth tracked monthly.',
+     oneYearPurpose:'Because every dollar saved and invested today is buying me freedom tomorrow.',
+     ninetyDayResult:'Complete duplex purchase through trust (settlement). Set up property management and tenanting plan. Follow disciplined trading routine and plan. Track accounts and tax. Review and cut unnecessary spending. Start tracking monthly savings rate.',
+     ninetyDayPurpose:'Because the duplex is the foundation of the property portfolio, and getting it right from day one matters.',
+     ninetyDayMap:[
+       {id:'mx12a',text:'Complete duplex settlement and all purchase logistics',done:false,priority:true,pushedToTask:false},
+       {id:'mx12b',text:'Appoint property manager and begin tenanting process',done:false,priority:true,pushedToTask:false},
+       {id:'mx12c',text:'Model the duplex cash flow to confirm positive gearing path',done:false,priority:true,pushedToTask:false},
+       {id:'mx12d',text:'Set up CoinTracking correctly and reconcile all positions',done:false,priority:false,pushedToTask:false},
+       {id:'mx12e',text:'Create a trading plan with entry/exit rules',done:false,priority:false,pushedToTask:false},
+       {id:'mx12f',text:'Audit bank statements for last 3 months and identify $500/month in cuts',done:false,priority:false,pushedToTask:false},
+       {id:'mx12g',text:'Set up automatic transfer to savings account on payday',done:false,priority:false,pushedToTask:false},
+       {id:'mx12h',text:'Monthly: update net worth tracker',done:false,priority:false,pushedToTask:false},
+     ],
+     weeklyIntegration:'Sunday: review portfolio, log weekly trading P&L, check savings rate. Monthly: net worth update.',
+     score:5,updatedAt:TODAY},
+    {id:'rpm-13',number:13,name:'Tax and Accounting Genie',nickname:'',color:'#5d6d7e',part:'professional',
+     vision:'My tax affairs are clean, optimised, and under control. I know exactly where I stand financially at all times. My trust is running and the duplex is being purchased through it. I\'m minimising tax legally and maximising what flows into my money machine.',
+     purpose:'Because tax is one of the biggest drags on wealth building if you don\'t manage it. Because the trust structure is live and needs to be managed properly from the start. Because sloppy accounting now creates expensive problems later.',
+     roles:['Tax and Accounting Genie','Structure Sultan'],
+     threeToThrive:['Trust management (proper accounting for duplex income/expenses, compliance)','Quarterly accountant meetings (proactive, not reactive)','Clean records (CoinTracking, bank statements, receipts, deductions)'],
+     resources:['Accountant','CoinTracking','Trust (established and operating)','Tax advisor'],
+     oneYearResult:'Trust operating smoothly with duplex income flowing through it correctly. Met with accountant quarterly. Tax return lodged on time with maximum legal deductions. All crypto and investment records clean and reconciled.',
+     oneYearPurpose:'Because clean tax and accounting is the unsexy foundation of financial freedom.',
+     ninetyDayResult:'Meet with accountant to ensure trust and duplex purchase are structured optimally. Ensure CoinTracking is fully reconciled. Set up proper bookkeeping for the trust. Identify top 5 deductions I\'m currently missing.',
+     ninetyDayPurpose:'Because getting the structure right in the first 90 days means years of clean, optimised tax position.',
+     ninetyDayMap:[
+       {id:'mx13a',text:'Book accountant meeting to review trust structure and duplex tax position',done:false,priority:true,pushedToTask:false},
+       {id:'mx13b',text:'Set up bookkeeping for trust (even a simple spreadsheet)',done:false,priority:true,pushedToTask:false},
+       {id:'mx13c',text:'Reconcile CoinTracking with all exchange accounts',done:false,priority:false,pushedToTask:false},
+       {id:'mx13d',text:'Collect and organise all receipts and deductions for the year so far',done:false,priority:false,pushedToTask:false},
+       {id:'mx13e',text:'Ask accountant about optimal structure for future PlanTech business income',done:false,priority:false,pushedToTask:false},
+     ],
+     weeklyIntegration:'Monthly: 30-minute admin session to file receipts and update records. Quarterly: accountant meeting.',
+     score:5,updatedAt:TODAY},
+    {id:'rpm-14',number:14,name:'Connections and Relationships (Professional)',nickname:'',color:'#17a589',part:'professional',
+     vision:'I have a powerful network of influence: 20+ planners, government decision-makers, industry leaders and business contacts that I meet with regularly and actively support. I\'m the connector. I add value first. My network brings me customers, speaking opportunities, partnerships and deals.',
+     purpose:'Because relationships are the moat that no competitor can replicate. Because every major deal, every speaking invitation, every career opportunity I\'ve had came through a relationship, not a cold email.',
+     roles:['Mr Lover Lover (professional)','Connector','Value-First Networker'],
+     threeToThrive:['Add massive value to my top 20 contacts (share insights, make introductions, help them win)','Maintain regular touchpoints (coffee, calls, events)','Expand into new circles (other states, private sector, adjacent industries)'],
+     resources:['PIA network','Platinum group','Land iQ client relationships','Conference contacts','LinkedIn connections','Industry working groups'],
+     oneYearResult:'Active relationships with 20+ industry contacts I\'ve added value to. Be on at least 2 planning working groups. Known across councils for PlanTech knowledge. 5 new relationships built with people in adjacent industries or other states.',
+     oneYearPurpose:'Because the network I build in the next year is the foundation of every opportunity in the 5 years after.',
+     ninetyDayResult:'Meet with 5 people from my network for genuine value-exchange. Get invited to or join one new working group. Make 3 introductions that help other people.',
+     ninetyDayPurpose:'Because investing in relationships before I need them is what separates connectors from networkers.',
+     ninetyDayMap:[
+       {id:'mx14a',text:'List my top 20 professional relationships and note last contact date',done:false,priority:true,pushedToTask:false},
+       {id:'mx14b',text:'Reach out to the 5 I\'m most overdue with and schedule catch-ups',done:false,priority:true,pushedToTask:false},
+       {id:'mx14c',text:'Identify one working group to join and apply',done:false,priority:false,pushedToTask:false},
+       {id:'mx14d',text:'Make 3 introductions this quarter',done:false,priority:false,pushedToTask:false},
+       {id:'mx14e',text:'Follow up with every new contact from PIA Congress within 48 hours',done:false,priority:false,pushedToTask:false},
+     ],
+     weeklyIntegration:'One networking action per week (reach out, catch up, introduce, share something valuable).',
+     score:5,updatedAt:TODAY},
+    {id:'rpm-15',number:15,name:'Mentor and Total Team Empowerment',nickname:'',color:'#f0a500',part:'professional',
+     vision:'I\'m a leader who makes everyone around me better. Christina, Milni, Andrew, and anyone else in my orbit levels up because of my influence. I\'m the kind of manager and mentor people talk about years later as the person who changed their career trajectory. I build people up without needing credit.',
+     purpose:'Because leadership isn\'t about my output; it\'s about the output I enable in others. Because the best way to scale myself is to develop people who can execute without me.',
+     roles:['Mentor','Kind Boss','Team Empowerment Engine'],
+     threeToThrive:['Regular 1:1s with direct reports (with genuine development focus, not just task updates)','Delegate with trust (give them ownership, not just tasks)','Share knowledge and frameworks (teach them to fish)'],
+     resources:['IGP framework','Leadership training from Mastery University','Nigel (coaching model to learn from)','Land iQ team members'],
+     oneYearResult:'Each person I work with can point to at least one specific skill or outcome they developed because of my support. Delegation ratio improved. Built a reputation internally as someone who develops people.',
+     oneYearPurpose:'Because the best leaders are remembered not for what they achieved but for who they developed.',
+     ninetyDayResult:'Have a genuine development conversation with each team member. Delegate one recurring task to someone with full ownership. Share one framework or approach that helps someone work better.',
+     ninetyDayPurpose:'Because investing 30 minutes per person per month in their development pays back 10x in motivation and output.',
+     ninetyDayMap:[
+       {id:'mx15a',text:'Schedule a 30-minute 1:1 with Christina, Milni, and Andrew focused on their growth',done:false,priority:true,pushedToTask:false},
+       {id:'mx15b',text:'Identify one task I currently do that someone else could own',done:false,priority:false,pushedToTask:false},
+       {id:'mx15c',text:'Share one useful framework (StoryBrand, RPM, or similar) with a team member',done:false,priority:false,pushedToTask:false},
+       {id:'mx15d',text:'Ask each person: "What do you want to get better at?" and find one way to help',done:false,priority:false,pushedToTask:false},
+     ],
+     weeklyIntegration:'Monthly: check in on team development. Am I growing people or just assigning tasks?',
+     score:5,updatedAt:TODAY},
+    {id:'rpm-16',number:16,name:'Learning and Constant Improvement of Skills',nickname:'',color:'#6c3483',part:'professional',
+     vision:'I am an expert in PlanTech with AI. I have outstanding business and management skills. I\'m always learning. I read, I take courses, I experiment, I build. I\'m comfortable at the frontier of technology, not just following trends but shaping the conversation.',
+     purpose:'Because the world is moving fast and the people who stop learning get replaced. Because I\'ve seen what two weeks of deep work with Claude Code can do, and I want to keep that momentum. Because every skill I add compounds with every other skill I have.',
+     roles:['Perpetual Student','Skill Collector','Innovation Leader'],
+     threeToThrive:['AI and Claude Code mastery (weekly practice, new use cases)','Marketing and sales skills (learn by doing at Land iQ, apply to own business)','Business acumen (read, study, apply 7 Forces of Business Mastery)'],
+     resources:['Claude Code and Claude AI','AI Advantage bootcamp','Dean\'s Business Mastermind training','Tony Robbins Business Mastery / 7 Forces','Toastmasters','Books','PIA knowledge base'],
+     oneYearResult:'Recognised as AI lead of Land iQ. National recognition as an AI expert in planning. Completed at least 2 courses or bootcamps. Read at least 6 business/technology books. Built at least 3 functional tools or prototypes with Claude Code.',
+     oneYearPurpose:'Because a year from now I want to look back and know I stopped talking about this and started building it.',
+     ninetyDayResult:'Complete one AI or business course. Read one business book. Build one new prototype or tool with Claude Code. Apply one new marketing technique at Land iQ and measure the result.',
+     ninetyDayPurpose:'Because learning without application is just entertainment. The next 90 days are about applied learning.',
+     ninetyDayMap:[
+       {id:'mx16a',text:'Select and start one AI or business course this month',done:false,priority:true,pushedToTask:false},
+       {id:'mx16b',text:'Choose one business book and schedule 20 min/night reading',done:false,priority:true,pushedToTask:false},
+       {id:'mx16c',text:'Identify one prototype to build with Claude Code this quarter',done:false,priority:true,pushedToTask:false},
+       {id:'mx16d',text:'Apply one new marketing technique (test, measure, report)',done:false,priority:false,pushedToTask:false},
+       {id:'mx16e',text:'Attend at least one webinar or online event in PlanTech or AI',done:false,priority:false,pushedToTask:false},
+       {id:'mx16f',text:'Document what I learn in a personal knowledge base',done:false,priority:false,pushedToTask:false},
+     ],
+     weeklyIntegration:'Minimum 2 hours per week on deliberate learning. Track what I learned each week in Sunday review.',
+     score:5,updatedAt:TODAY},
+    {id:'rpm-17',number:17,name:'Opportunities Magnet',nickname:'',color:'#c0392b',part:'professional',
+     vision:'Opportunities flow to me. Speaking invitations, partnerships, client inquiries, media features, collaboration requests. This happens because I\'m visible, valuable, and easy to find. I\'m the person who gets the call because people already know what I stand for and what I can do.',
+     purpose:'Because opportunities don\'t just happen; they\'re attracted by preparation meeting visibility. Because I want to be in a position where I\'m choosing between options, not chasing them.',
+     roles:['Opportunities Magnet','Lightning Rod'],
+     threeToThrive:['Visibility (content, speaking, networking; the input that creates inbound opportunities)','Readiness (having a clear offer, a clear brand, a way for opportunities to convert)','Saying yes strategically (evaluate each opportunity against my vision, not just ego)'],
+     resources:['LinkedIn platform','PIA and industry networks','Speaking track record','Land iQ reputation','Conference platforms','Personal website (to be built)'],
+     oneYearResult:'Received at least 3 inbound speaking invitations. Been approached for at least one partnership or collaboration. Have a personal website that people can find and contact me through. At least one media feature or industry publication mention.',
+     oneYearPurpose:'Because being an opportunities magnet isn\'t magic; it\'s the compound return on consistent visibility and value creation.',
+     ninetyDayResult:'Receive at least one unsolicited professional opportunity. Ensure LinkedIn profile is fully optimised. Make it easy for someone to understand what I do in 30 seconds.',
+     ninetyDayPurpose:'Because the opportunities I attract in the next 90 days are determined by the visibility I build starting now.',
+     ninetyDayMap:[
+       {id:'mx17a',text:'Ensure LinkedIn profile is fully optimised with clear positioning',done:false,priority:true,pushedToTask:false},
+       {id:'mx17b',text:'Say yes to one opportunity outside my comfort zone this quarter',done:false,priority:false,pushedToTask:false},
+       {id:'mx17c',text:'After every conference or event, follow up with 5 new contacts within 48 hours',done:false,priority:false,pushedToTask:false},
+     ],
+     weeklyIntegration:'The review question is: "Did any new opportunity appear this week? Did I respond to it properly?"',
+     score:5,updatedAt:TODAY},
+  ]};
+}
+
+function scoreColor(s){
+  if(s<=4)return'#e74c3c';
+  if(s<=7)return'#e67e22';
+  return'#27ae60';
+}
+
+function mapProgress(cat){
+  const items=cat.ninetyDayMap||[];
+  return{done:items.filter(i=>i.done).length,total:items.length};
+}
+
+function loadStrategy(){
+  try{
+    const raw=localStorage.getItem('rpm_strategy');
+    if(raw){const d=JSON.parse(raw);if(d&&d.categories&&d.categories.length){rpmPlan=d;return;}}
+  }catch(e){}
+  rpmPlan=defaultRpmPlan();
+}
+
+function saveStrategy(){
+  localStorage.setItem('rpm_strategy',JSON.stringify(rpmPlan));
+}
+
+function renderStrCard(cat){
+  const prog=mapProgress(cat);
+  const pct=prog.total>0?Math.round(prog.done/prog.total*100):0;
+  const sc=scoreColor(cat.score);
+  const ttItems=(cat.threeToThrive||[]).slice(0,3).map((t,i)=>`<div class="str-3tt-item"><span class="str-3tt-num">${i+1}</span><span>${t.replace(/</g,'&lt;')}</span></div>`).join('');
+  return`<div class="str-card" onclick="openStratCategory('${cat.id}')" style="border-color:${cat.color}22">
+    <div class="str-card-top">
+      <div class="str-cat-chip" style="background:${cat.color}">${cat.number}</div>
+      <div class="str-card-title">
+        <div class="str-card-name">${cat.name.replace(/</g,'&lt;')}</div>
+        ${cat.nickname?`<div class="str-card-nick">${cat.nickname.replace(/</g,'&lt;')}</div>`:''}
+      </div>
+      <div class="str-score-pill" style="background:${sc}">${cat.score}/10</div>
+    </div>
+    <div class="str-card-vis">${(cat.vision||'').replace(/</g,'&lt;')}</div>
+    ${ttItems?`<div class="str-card-3tt"><div class="str-3tt-lbl">3 to Thrive</div>${ttItems}</div>`:''}
+    ${prog.total>0?`<div class="str-map-footer">
+      <div class="str-map-bar-wrap"><div class="str-map-bar-fill" style="width:${pct}%;background:${cat.color}"></div></div>
+      <span class="str-map-stat">${prog.done}/${prog.total} MAP</span>
+    </div>`:''}
+  </div>`;
+}
+
+function renderStrExpanded(cat){
+  const sc=scoreColor(cat.score);
+  const prog=mapProgress(cat);
+  const pct=prog.total>0?Math.round(prog.done/prog.total*100):0;
+  const em=strEditMode;
+
+  function textSec(label,field,val,multiline){
+    const safe=(val||'').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+    let content;
+    if(em){
+      content=multiline===false
+        ?`<input class="str-edit-inp" id="strf-${field}" value="${safe}">`
+        :`<textarea class="str-edit-ta" id="strf-${field}" rows="4">${(val||'').replace(/</g,'&lt;')}</textarea>`;
+    }else{
+      content=`<div class="str-text-block">${(val||'<span style="color:#ccc;font-style:italic">Not set</span>').replace(/</g,'&lt;')}</div>`;
+    }
+    return`<div class="str-section"><div class="str-sec-lbl">${label}</div>${content}</div>`;
+  }
+
+  function tagsSec(label,field,arr){
+    if(em){
+      const safe=(arr||[]).join(', ').replace(/"/g,'&quot;');
+      return`<div class="str-section"><div class="str-sec-lbl">${label} <span style="font-size:10px;color:#bbb;font-style:italic">comma separated</span></div><textarea class="str-edit-ta" id="strf-${field}" rows="2">${safe.replace(/</g,'&lt;')}</textarea></div>`;
+    }
+    const tags=(arr||[]).map(t=>`<span class="str-tag">${t.replace(/</g,'&lt;')}</span>`).join('');
+    return`<div class="str-section"><div class="str-sec-lbl">${label}</div><div class="str-tag-row">${tags||'<span style="color:#ccc;font-style:italic;font-size:12px">None set</span>'}</div></div>`;
+  }
+
+  const scoreDots=Array.from({length:10},(_,i)=>{
+    const n=i+1;
+    const on=n<=cat.score;
+    const c=scoreColor(n);
+    return`<div class="str-score-dot${on?' on':''}" style="${on?'background:'+c+';border-color:'+c:''}" onclick="updateStrScore('${cat.id}',${n})" title="${n}/10"></div>`;
+  }).join('');
+
+  const mapItems=(cat.ninetyDayMap||[]).map((item,idx)=>{
+    const pushed=item.pushedToTask;
+    return`<div class="str-map-row${item.done?' done':''}${item.priority?' priority':''}">
+      <input type="checkbox" class="str-map-cb" ${item.done?'checked':''} onchange="toggleMapDone('${cat.id}','${item.id}')">
+      <span class="str-map-txt${item.done?' done-txt':''}">${item.text.replace(/</g,'&lt;')}${item.priority?' ⭐':''}</span>
+      <button class="str-map-push${pushed?' pushed':''}" onclick="pushMapToTask('${cat.id}','${item.id}')" ${pushed?'disabled':''} title="${pushed?'Already pushed to Plan':'Push to Plan'}">
+        ${pushed?'Pushed':'→ Plan'}
+      </button>
+    </div>`;
+  }).join('');
+
+  let h=`<div class="str-exp">
+    <div class="str-exp-head">
+      <button class="str-back-btn" onclick="closeStratCategory()">&#8592;</button>
+      <div class="str-exp-color-bar" style="background:${cat.color}"></div>
+      <div class="str-exp-titles">
+        <div class="str-exp-name">${cat.name.replace(/</g,'&lt;')}</div>
+        ${cat.nickname?`<div class="str-exp-sub">${cat.nickname.replace(/</g,'&lt;')}</div>`:''}
+      </div>
+      <div class="str-score-row">
+        <span class="str-score-lbl">Score</span>
+        <div class="str-score-dial">${scoreDots}</div>
+        <span style="font-size:11px;font-weight:700;color:${sc};min-width:28px;text-align:right">${cat.score}/10</span>
+      </div>
+      <button class="str-edit-toggle" onclick="toggleStrEdit()">${em?'View':'Edit'}</button>
+    </div>
+    <div class="str-exp-body">`;
+
+  h+=textSec('Vision','vision',cat.vision,true);
+  h+=textSec('Purpose','purpose',cat.purpose,true);
+  h+=tagsSec('Roles','roles',cat.roles);
+  h+=tagsSec('3 to Thrive','threeToThrive',cat.threeToThrive);
+  h+=tagsSec('Resources','resources',cat.resources);
+  h+=textSec('1-Year Result','oneYearResult',cat.oneYearResult,true);
+  h+=textSec('1-Year Purpose','oneYearPurpose',cat.oneYearPurpose,true);
+  h+=textSec('90-Day Result','ninetyDayResult',cat.ninetyDayResult,true);
+  h+=textSec('90-Day Purpose','ninetyDayPurpose',cat.ninetyDayPurpose,true);
+
+  h+=`<div class="str-section">
+    <div class="str-sec-lbl">90-Day MAP (Massive Action Plan)
+      <span style="color:#aaa;font-size:10px">${prog.done}/${prog.total} done &nbsp; ${pct}%</span>
+    </div>
+    <div class="str-map-list">${mapItems}</div>
+    <button class="str-map-add-btn" onclick="addMapItem('${cat.id}')">+ Add action</button>
+  </div>`;
+
+  h+=textSec('Weekly Integration','weeklyIntegration',cat.weeklyIntegration,true);
+
+  if(em){
+    h+=`<div class="str-save-row">
+      <button class="str-cancel-btn" onclick="toggleStrEdit()">Cancel</button>
+      <button class="str-save-btn" onclick="saveStratCategory('${cat.id}')">Save changes</button>
+    </div>`;
+  }
+
+  h+=`</div></div>`;
+  return h;
+}
+
+function renderStrategy(){
+  const el=document.getElementById('strategy-view');
+  if(!el)return;
+
+  if(strExpandedId){
+    const cat=rpmPlan.categories.find(c=>c.id===strExpandedId);
+    if(!cat){strExpandedId=null;renderStrategy();return;}
+    const totalMap=rpmPlan.categories.reduce((a,c)=>a+(c.ninetyDayMap||[]).length,0);
+    const doneMap=rpmPlan.categories.reduce((a,c)=>a+(c.ninetyDayMap||[]).filter(i=>i.done).length,0);
+    el.innerHTML=`<div class="str-header-row">
+      <button class="str-cancel-btn" onclick="closeStratCategory()" style="display:flex;align-items:center;gap:5px">&#8592; All Categories</button>
+      <div class="str-overview-stats">
+        <div class="str-ov-stat"><div class="str-ov-num">${doneMap}/${totalMap}</div><div class="str-ov-lbl">MAP Done</div></div>
+      </div>
+    </div>`+renderStrExpanded(cat);
+    return;
+  }
+
+  const personal=rpmPlan.categories.filter(c=>c.part==='personal');
+  const professional=rpmPlan.categories.filter(c=>c.part==='professional');
+  const avgScore=rpmPlan.categories.length>0?Math.round(rpmPlan.categories.reduce((a,c)=>a+c.score,0)/rpmPlan.categories.length*10)/10:0;
+  const totalMap=rpmPlan.categories.reduce((a,c)=>a+(c.ninetyDayMap||[]).length,0);
+  const doneMap=rpmPlan.categories.reduce((a,c)=>a+(c.ninetyDayMap||[]).filter(i=>i.done).length,0);
+
+  let h=`<div class="str-header-row">
+    <div style="font-size:18px;font-weight:700;color:#222">RPM Strategic Plan</div>
+    <div class="str-overview-stats">
+      <div class="str-ov-stat"><div class="str-ov-num">${rpmPlan.categories.length}</div><div class="str-ov-lbl">Categories</div></div>
+      <div class="str-ov-stat"><div class="str-ov-num" style="color:${scoreColor(Math.round(avgScore))}">${avgScore}</div><div class="str-ov-lbl">Avg Score</div></div>
+      <div class="str-ov-stat"><div class="str-ov-num">${doneMap}/${totalMap}</div><div class="str-ov-lbl">MAP Done</div></div>
+    </div>
+  </div>`;
+
+  h+=`<div class="str-part-label">Personal Life</div>`;
+  h+=`<div class="str-grid">`;
+  personal.forEach(cat=>h+=renderStrCard(cat));
+  h+=`</div>`;
+
+  h+=`<div class="str-part-label">Professional & Business</div>`;
+  h+=`<div class="str-grid">`;
+  professional.forEach(cat=>h+=renderStrCard(cat));
+  h+=`</div>`;
+
+  el.innerHTML=h;
+}
+
+function openStratCategory(id){
+  strExpandedId=id;
+  strEditMode=false;
+  renderStrategy();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function closeStratCategory(){
+  strExpandedId=null;
+  strEditMode=false;
+  renderStrategy();
+}
+
+function toggleStrEdit(){
+  strEditMode=!strEditMode;
+  renderStrategy();
+}
+
+function saveStratCategory(id){
+  const cat=rpmPlan.categories.find(c=>c.id===id);
+  if(!cat)return;
+  function gv(fid){const el=document.getElementById('strf-'+fid);return el?el.value:''}
+  function gvArr(fid){const v=gv(fid);return v.split(',').map(s=>s.trim()).filter(Boolean);}
+  cat.vision=gv('vision');
+  cat.purpose=gv('purpose');
+  cat.roles=gvArr('roles');
+  cat.threeToThrive=gvArr('threeToThrive');
+  cat.resources=gvArr('resources');
+  cat.oneYearResult=gv('oneYearResult');
+  cat.oneYearPurpose=gv('oneYearPurpose');
+  cat.ninetyDayResult=gv('ninetyDayResult');
+  cat.ninetyDayPurpose=gv('ninetyDayPurpose');
+  cat.weeklyIntegration=gv('weeklyIntegration');
+  cat.updatedAt=TODAY;
+  strEditMode=false;
+  saveStrategy();
+  renderStrategy();
+}
+
+function updateStrScore(catId,n){
+  const cat=rpmPlan.categories.find(c=>c.id===catId);
+  if(!cat)return;
+  cat.score=n;
+  cat.updatedAt=TODAY;
+  saveStrategy();
+  renderStrategy();
+}
+
+function toggleMapDone(catId,mapId){
+  const cat=rpmPlan.categories.find(c=>c.id===catId);
+  if(!cat)return;
+  const item=(cat.ninetyDayMap||[]).find(i=>i.id===mapId);
+  if(!item)return;
+  item.done=!item.done;
+  saveStrategy();
+  renderStrategy();
+}
+
+function pushMapToTask(catId,mapId){
+  const cat=rpmPlan.categories.find(c=>c.id===catId);
+  if(!cat)return;
+  const item=(cat.ninetyDayMap||[]).find(i=>i.id===mapId);
+  if(!item||item.pushedToTask)return;
+  const stream=cat.part==='personal'?'health':'innovation';
+  tasks.push({
+    id:uid(),
+    stream,
+    text:item.text,
+    pri:item.priority?'priority':'normal',
+    dueDate:'',
+    note:'From RPM Strategy MAP: '+cat.name,
+    done:false,
+    subs:[],
+    categoryId:'',
+    createdAt:TODAY,
+    isDailyVictory:false,
+    isWeeklyFocus:false,
+    delegateIntent:false,
+    delegatedTo:'',
+  });
+  item.pushedToTask=true;
+  saveStrategy();
+  save();
+  renderStrategy();
+  const btn=event&&event.target?event.target:null;
+  if(btn){const orig=btn.textContent;btn.textContent='Added!';btn.disabled=true;setTimeout(()=>{btn.textContent='Pushed';},1200);}
+}
+
+function addMapItem(catId){
+  const cat=rpmPlan.categories.find(c=>c.id===catId);
+  if(!cat)return;
+  if(!cat.ninetyDayMap)cat.ninetyDayMap=[];
+  const newId='mx'+catId.replace('rpm-','')+'_'+Date.now().toString(36);
+  cat.ninetyDayMap.push({id:newId,text:'New action item',done:false,priority:false,pushedToTask:false});
+  saveStrategy();
+  renderStrategy();
+}
+
 // ── Render all ────────────────────────────────────────────────────────────────
 function renderAll(){
   renderStats();
@@ -1299,12 +2005,13 @@ function renderAll(){
   else if(tab==='categories')renderCategories();
   else if(tab==='analytics')renderAnalytics();
   else if(tab==='ai'){renderChat();renderChatQuickPrompts();}
+  else if(tab==='strategy')renderStrategy();
 }
 function toggleSec(id){openSecs[id]=openSecs[id]===false?true:false;renderAll();}
 function setTab(t){
   tab=t;
   document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('on',b.dataset.t===t));
-  ['plan','add','categories','analytics','ai'].forEach(v=>{document.getElementById(v+'-view').style.display=t===v?'block':'none';});
+  ['plan','add','categories','analytics','ai','strategy'].forEach(v=>{document.getElementById(v+'-view').style.display=t===v?'block':'none';});
   renderAll();
   if(t==='ai') document.getElementById('chat-input')?.focus();
 }
@@ -1315,7 +2022,8 @@ document.getElementById('main-tabs').innerHTML=`
   <button class="tab" data-t="add" onclick="setTab('add')">+ Add task</button>
   <button class="tab" data-t="categories" onclick="setTab('categories')">Categories</button>
   <button class="tab" data-t="analytics" onclick="setTab('analytics')">Analytics</button>
-  <button class="tab" data-t="ai" onclick="setTab('ai')">🤖 AI Assistant</button>`;
+  <button class="tab" data-t="ai" onclick="setTab('ai')">🤖 AI Assistant</button>
+  <button class="tab" data-t="strategy" onclick="setTab('strategy')">📋 Strategy</button>`;
 const savedUrl=localStorage.getItem('rpm_sheet_url');
 if(savedUrl)sheetUrl=savedUrl;
 if(sheetUrl){const u=document.getElementById('sheet-url');const s=document.getElementById('sheet-status');if(u)u.value=sheetUrl;if(s)s.textContent='Connected';}
@@ -1323,6 +2031,8 @@ if(sheetUrl){const u=document.getElementById('sheet-url');const s=document.getEl
 try{const sf=localStorage.getItem('rpm_filters');if(sf)activeFilters=new Set(JSON.parse(sf));}catch(e){}
 // Load strategic priorities
 loadPriorities();
+// Load strategy plan
+loadStrategy();
 (async()=>{await loadData();renderAll();})();
 </script>
 </body>
