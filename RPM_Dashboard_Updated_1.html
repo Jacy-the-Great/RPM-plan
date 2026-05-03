@@ -477,6 +477,14 @@ const GC=[
   {key:'support',label:'Support & training',streams:['training']},
   {key:'personal',label:'Personal RPM',streams:['citizenship','finances','realestate','health','brand','lifestyle']},
 ];
+// Sub-streams: work-focus streams that live under a parent RPM category
+// Tasks assigned these streams appear as sub-sections in Plan and count toward the parent in Strategy
+// Change the parent IDs here if you want to reassign which RPM category they roll up to
+const CHILD_STREAMS={
+  innovation:{label:'Innovation',       color:'#7F77DD', parent:'rpm-08'},
+  sales:     {label:'Sales Mastery',    color:'#1D9E75', parent:'rpm-08'},
+  marketing: {label:'Marketing',        color:'#378ADD', parent:'rpm-08'},
+};
 const PC={urgent:{l:'Urgent',bg:'#FCEBEB',tc:'#A32D2D'},priority:{l:'Priority',bg:'#FAECE7',tc:'#993C1D'},normal:{l:'',bg:'',tc:''},backburner:{l:'Backburner',bg:'#F1EFE8',tc:'#5F5E5A'},awaiting:{l:'Awaiting',bg:'#FAEEDA',tc:'#854F0B'}};
 const PRI_ORDER={urgent:0,priority:1,normal:2,backburner:3,awaiting:4};
 const priCls={urgent:'eu',priority:'ep',normal:'en',backburner:'eb',awaiting:'ea'};
@@ -544,13 +552,17 @@ function catOf(t){return categories.find(c=>c.id===t.categoryId);}
 
 // ── Stream helpers (Issue 9: use strategy categories) ────────────────────────
 function resolveStreamId(val){
-  // Given an id OR a name (from AI), return the matching category id
   if(!val)return'';
+  // exact child stream key
+  if(CHILD_STREAMS[val])return val;
+  // child stream by label name
+  const childByName=Object.entries(CHILD_STREAMS).find(([k,v])=>v.label.toLowerCase()===val.trim().toLowerCase());
+  if(childByName)return childByName[0];
   if(!rpmPlan?.categories?.length)return val;
-  // exact id match
+  // exact rpm id
   const byId=rpmPlan.categories.find(c=>c.id===val);
   if(byId)return byId.id;
-  // name match (case-insensitive, strip numbers like "1. Physical Body")
+  // name match (case-insensitive, strip leading number)
   const clean=val.replace(/^\d+\.\s*/,'').trim().toLowerCase();
   const byName=rpmPlan.categories.find(c=>c.name.toLowerCase()===clean||c.name.toLowerCase().includes(clean)||clean.includes(c.name.toLowerCase()));
   if(byName)return byName.id;
@@ -561,16 +573,26 @@ function getStreamOpts(selectedVal){
   if(!rpmPlan||!rpmPlan.categories||!rpmPlan.categories.length){
     return Object.entries(SC).map(([k,v])=>`<option value="${k}"${resolvedVal===k?' selected':''}>${v.label}</option>`).join('');
   }
-  return rpmPlan.categories.map(c=>`<option value="${c.id}"${resolvedVal===c.id?' selected':''}>${c.number}. ${c.name}</option>`).join('');
+  // Build options: each rpm category, with child sub-streams nested via optgroup
+  return rpmPlan.categories.map(c=>{
+    const children=Object.entries(CHILD_STREAMS).filter(([,v])=>v.parent===c.id);
+    if(children.length){
+      const childOpts=children.map(([k,v])=>`<option value="${k}"${resolvedVal===k?' selected':''}>&nbsp;&nbsp;↳ ${v.label}</option>`).join('');
+      return `<option value="${c.id}"${resolvedVal===c.id?' selected':''}>${c.number}. ${c.name}</option>${childOpts}`;
+    }
+    return `<option value="${c.id}"${resolvedVal===c.id?' selected':''}>${c.number}. ${c.name}</option>`;
+  }).join('');
 }
 function streamColor(val){
   if(!val)return'#ccc';
+  if(CHILD_STREAMS[val])return CHILD_STREAMS[val].color;
   const cat=rpmPlan?.categories?.find(c=>c.id===val);
   if(cat)return cat.color;
   return SC[val]?.color||'#ccc';
 }
 function streamLabel(val){
   if(!val)return'';
+  if(CHILD_STREAMS[val])return CHILD_STREAMS[val].label;
   const cat=rpmPlan?.categories?.find(c=>c.id===val);
   if(cat)return cat.name;
   return SC[val]?.label||val;
@@ -950,72 +972,64 @@ function renderPlan(){
   h+=`</div>`;
   h+=victoriesPanel();
   h+=delegationPanel();
+  // helper: render one stream section row
+  function planSec(streamKey,label,color){
+    const its=sortedTasks(tasks.filter(t=>t.stream===streamKey));if(!its.length)return'';
+    const isOpen=openSecs[streamKey]!==false;
+    const{total,done}=secProg(streamKey);const pct=total>0?Math.round(done/total*100):0;
+    let itsH='';
+    its.forEach(t=>{if(!taskVisible(t)&&editingId!==t.id)return;itsH+=taskHtml(t);});
+    if(!itsH&&activeFilters.size>0)return'';
+    return`<div class="sec">
+      <div class="shd" onclick="toggleSec('${streamKey}')"><div class="sdot" style="background:${color}"></div><span class="stitle">${label}</span><span class="sct">${done}/${total}</span><span class="sch${isOpen?' op':''}">&#9654;</span></div>
+      <div class="pb"><div class="pf" style="width:${pct}%;background:${color}"></div></div>
+      <div class="its${isOpen?' op':''}">${itsH}</div>
+    </div>`;
+  }
+
   // Use rpmPlan strategy categories as sections when available, else fall back to GC/SC
   if(rpmPlan?.categories?.length){
-    // Group by part (personal / work / other) for visual dividers
+    const knownStreams=new Set([...rpmPlan.categories.map(c=>c.id),...Object.keys(CHILD_STREAMS)]);
     const parts=[...new Set(rpmPlan.categories.map(c=>c.part||'other'))];
-    const partLabels={personal:'Personal RPM',work:'Work & Business',other:'Other'};
+    const partLabels={personal:'Personal RPM',professional:'Professional & Business',other:'Other'};
     parts.forEach(part=>{
       const cats=rpmPlan.categories.filter(c=>(c.part||'other')===part);
       let grpHtml='';
       cats.forEach(cat=>{
-        const its=sortedTasks(tasks.filter(t=>t.stream===cat.id));if(!its.length)return;
-        const isOpen=openSecs[cat.id]!==false;
-        const{total,done}=secProg(cat.id);const pct=total>0?Math.round(done/total*100):0;
-        const sColor=cat.color||'#888';
-        let itsH='';
-        its.forEach(t=>{if(!taskVisible(t)&&editingId!==t.id)return;itsH+=taskHtml(t);});
-        if(!itsH&&activeFilters.size>0)return;
-        grpHtml+=`<div class="sec">
-          <div class="shd" onclick="toggleSec('${cat.id}')"><div class="sdot" style="background:${sColor}"></div><span class="stitle">${cat.name}</span><span class="sct">${done}/${total}</span><span class="sch${isOpen?' op':''}">&#9654;</span></div>
-          <div class="pb"><div class="pf" style="width:${pct}%;background:${sColor}"></div></div>
-          <div class="its${isOpen?' op':''}">${itsH}</div>
-        </div>`;
+        // Render parent category section (direct tasks)
+        const parentSec=planSec(cat.id,cat.name,cat.color||'#888');
+        // Render child stream sub-sections under this parent
+        const children=Object.entries(CHILD_STREAMS).filter(([,v])=>v.parent===cat.id);
+        let childHtml='';
+        children.forEach(([k,v])=>{childHtml+=planSec(k,v.label,v.color);});
+        if(parentSec||childHtml){
+          if(children.length){
+            // Show parent header as group label, then child sections
+            const parentColor=cat.color||'#888';
+            grpHtml+=`<div class="grp" style="padding-left:0;display:flex;align-items:center;gap:6px"><div style="width:8px;height:8px;border-radius:50%;background:${parentColor};flex-shrink:0"></div>${cat.name}</div>`;
+            if(parentSec)grpHtml+=parentSec;
+            grpHtml+=childHtml;
+          } else {
+            grpHtml+=parentSec;
+          }
+        }
       });
       if(grpHtml)h+=`<div class="grp">${partLabels[part]||part}</div>`+grpHtml;
     });
-    // Legacy fallback: tasks still using old SC stream keys
-    const rpmIds=new Set(rpmPlan.categories.map(c=>c.id));
-    const legacyTasks=sortedTasks(tasks.filter(t=>t.stream&&!rpmIds.has(t.stream)));
+    // Legacy: tasks with unknown stream keys (not rpm IDs, not CHILD_STREAMS)
+    const legacyTasks=tasks.filter(t=>t.stream&&!knownStreams.has(t.stream));
     if(legacyTasks.length){
       let legHtml='';
-      // group legacy tasks by their old stream key
-      const legStreams=[...new Set(legacyTasks.map(t=>t.stream))];
-      legStreams.forEach(s=>{
-        const its=sortedTasks(legacyTasks.filter(t=>t.stream===s));if(!its.length)return;
-        const isOpen=openSecs[s]!==false;
-        const{total,done}=secProg(s);const pct=total>0?Math.round(done/total*100):0;
-        const sColor=SC[s]?.color||'#aaa';const sLabel=SC[s]?.label||s;
-        let itsH='';
-        its.forEach(t=>{if(!taskVisible(t)&&editingId!==t.id)return;itsH+=taskHtml(t);});
-        if(!itsH&&activeFilters.size>0)return;
-        legHtml+=`<div class="sec">
-          <div class="shd" onclick="toggleSec('${s}')"><div class="sdot" style="background:${sColor}"></div><span class="stitle">${sLabel}</span><span class="sct">${done}/${total}</span><span class="sch${isOpen?' op':''}">&#9654;</span></div>
-          <div class="pb"><div class="pf" style="width:${pct}%;background:${sColor}"></div></div>
-          <div class="its${isOpen?' op':''}">${itsH}</div>
-        </div>`;
+      [...new Set(legacyTasks.map(t=>t.stream))].forEach(s=>{
+        legHtml+=planSec(s,SC[s]?.label||s,SC[s]?.color||'#aaa');
       });
-      if(legHtml)h+=`<div class="grp" style="color:#aaa">Legacy (reassign stream to update)</div>`+legHtml;
+      if(legHtml)h+=`<div class="grp" style="color:var(--muted)">Legacy (edit task to reassign stream)</div>`+legHtml;
     }
   } else {
     GC.forEach(g=>{
       const hasAny=g.streams.some(s=>tasks.find(t=>t.stream===s));if(!hasAny)return;
       let grpHtml='';
-      g.streams.forEach(s=>{
-        const cfg=SC[s];
-        const its=sortedTasks(tasks.filter(t=>t.stream===s));if(!its.length)return;
-        const isOpen=openSecs[s]!==false;
-        const{total,done}=secProg(s);const pct=total>0?Math.round(done/total*100):0;
-        const sColor=streamColor(s);const sLabel=streamLabel(s)||cfg?.label||s;
-        let itsH='';
-        its.forEach(t=>{if(!taskVisible(t)&&editingId!==t.id)return;itsH+=taskHtml(t);});
-        if(!itsH&&activeFilters.size>0)return;
-        grpHtml+=`<div class="sec">
-          <div class="shd" onclick="toggleSec('${s}')"><div class="sdot" style="background:${sColor}"></div><span class="stitle">${sLabel}</span><span class="sct">${done}/${total}</span><span class="sch${isOpen?' op':''}">&#9654;</span></div>
-          <div class="pb"><div class="pf" style="width:${pct}%;background:${sColor}"></div></div>
-          <div class="its${isOpen?' op':''}">${itsH}</div>
-        </div>`;
-      });
+      g.streams.forEach(s=>{grpHtml+=planSec(s,SC[s]?.label||s,SC[s]?.color||'#888');});
       if(grpHtml)h+=`<div class="grp">${g.label}</div>`+grpHtml;
     });
   }
@@ -1852,8 +1866,13 @@ function mapProgress(cat){
 }
 
 // Tasks linked to a strategy category — match on stream (which = rpm category id)
+function childStreamKeys(catId){
+  // Returns the CHILD_STREAMS keys whose parent is catId
+  return Object.entries(CHILD_STREAMS).filter(([,v])=>v.parent===catId).map(([k])=>k);
+}
 function tasksForCat(catId){
-  return tasks.filter(t=>t.stream===catId);
+  const children=childStreamKeys(catId);
+  return tasks.filter(t=>t.stream===catId||children.includes(t.stream));
 }
 function taskProgressForCat(catId){
   const ts=tasksForCat(catId);
@@ -1987,28 +2006,32 @@ function renderStrExpanded(cat){
   h+=textSec('Weekly Integration','weeklyIntegration',cat.weeklyIntegration,true);
 
   // ── Tasks linked to this category ──────────────────────────────────────────
-  const catTasks=tasksForCat(cat.id);
-  const openT=catTasks.filter(t=>!t.done);
-  const doneT=catTasks.filter(t=>t.done);
   const priColors={urgent:'#a32d2d',priority:'#c0681d',normal:'#555',backburner:'#999',awaiting:'#2050a0'};
-  const taskRows=(tasks_in,isDone)=>tasks_in.slice(0,isDone?5:20).map(t=>{
+  const taskRow=(t,isDone)=>{
     const overdue=!t.done&&t.dueDate&&t.dueDate<TODAY;
+    const streamBadge=t.stream!==cat.id&&CHILD_STREAMS[t.stream]
+      ?`<span style="font-size:10px;background:${CHILD_STREAMS[t.stream].color}22;color:${CHILD_STREAMS[t.stream].color};border-radius:4px;padding:1px 5px;flex-shrink:0">${CHILD_STREAMS[t.stream].label}</span>`:'';
     return`<div class="str-task-row${isDone?' str-task-done':''}">
       <div class="str-task-chk${isDone?' on':''}" onclick="togTask('${t.id}')"></div>
       <span class="str-task-txt">${t.text.replace(/</g,'&lt;')}</span>
+      ${streamBadge}
       ${t.pri&&t.pri!=='normal'?`<span class="str-task-pri" style="color:${priColors[t.pri]||'#555'}">${t.pri}</span>`:''}
       ${t.dueDate?`<span class="str-task-due${overdue?' overdue':''}">${dd(t.dueDate)}</span>`:''}
-      <button class="str-task-edit" onclick="event.stopPropagation();setTab('plan');setTimeout(()=>startEdit('${t.id}'),100)" title="Edit task">✏️</button>
+      <button class="str-task-edit" onclick="event.stopPropagation();setTab('plan');setTimeout(()=>startEdit('${t.id}'),100)" title="Edit">✏️</button>
     </div>`;
-  }).join('');
+  };
+  // All tasks for this category (including child streams)
+  const catTasks=tasksForCat(cat.id);
+  const openT=catTasks.filter(t=>!t.done);
+  const doneT=catTasks.filter(t=>t.done);
 
   h+=`<div class="str-section str-tasks-section">
     <div class="str-sec-lbl">
       Tasks
       <span style="font-weight:400;color:#aaa;text-transform:none;letter-spacing:0">${openT.length} open · ${doneT.length} done</span>
     </div>
-    ${openT.length?taskRows(openT,false):`<div class="str-task-empty">No open tasks for this category yet.</div>`}
-    ${doneT.length?`<details class="str-done-tasks"><summary>${doneT.length} completed task${doneT.length!==1?'s':''}</summary>${taskRows(doneT,true)}</details>`:''}
+    ${openT.length?openT.slice(0,20).map(t=>taskRow(t,false)).join(''):`<div class="str-task-empty">No open tasks for this category yet.</div>`}
+    ${doneT.length?`<details class="str-done-tasks"><summary>${doneT.length} completed task${doneT.length!==1?'s':''}</summary>${doneT.slice(0,5).map(t=>taskRow(t,true)).join('')}</details>`:''}
     <button class="str-add-task-btn" onclick="strAddTask('${cat.id}')">＋ Add task for this category</button>
   </div>`;
 
@@ -2046,8 +2069,9 @@ function renderStrategy(){
   const avgScore=rpmPlan.categories.length>0?Math.round(rpmPlan.categories.reduce((a,c)=>a+c.score,0)/rpmPlan.categories.length*10)/10:0;
   const totalMap=rpmPlan.categories.reduce((a,c)=>a+(c.ninetyDayMap||[]).length,0);
   const doneMap=rpmPlan.categories.reduce((a,c)=>a+(c.ninetyDayMap||[]).filter(i=>i.done).length,0);
-  // Linked task counts across all strategy categories
-  const linkedTasks=tasks.filter(t=>rpmPlan.categories.some(c=>c.id===t.stream));
+  // Linked task counts across all strategy categories (including child sub-streams)
+  const allKnownStreams=new Set([...rpmPlan.categories.map(c=>c.id),...Object.keys(CHILD_STREAMS)]);
+  const linkedTasks=tasks.filter(t=>allKnownStreams.has(t.stream));
   const linkedDone=linkedTasks.filter(t=>t.done).length;
   const linkedOpen=linkedTasks.filter(t=>!t.done).length;
 
