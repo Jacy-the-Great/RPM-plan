@@ -7,6 +7,131 @@
 <style>
 :root{--bg:#fafaf8;--surface:#fff;--fg:#222;--fg2:#555;--border:#eee;--border2:#ddd;--subtle:#f5f5f5;--muted:#888;--accent:#378ADD}
 .dark{--bg:#1a1b1e;--surface:#252629;--fg:#e8e8e8;--fg2:#aaa;--border:#333;--border2:#444;--subtle:#2a2b2e;--muted:#888;--accent:#5a9fd4}
+/* Dark mode overrides */
+.dark body{background:var(--bg);color:var(--fg)}
+.dark .header{border-color:var(--border2)}
+.dark .meta-pill{border-color:var(--border2);color:var(--fg2)}
+.dark .tab{background:var(--surface);color:var(--fg2);border-color:var(--border2)}
+.dark .tab.on{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.dark .ftab{background:var(--subtle);border-color:var(--border);color:var(--muted)}
+.dark .ftab.on{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.dark .ftab-clear{border-color:var(--border);color:var(--muted)}
+.dark .stat,.dark .acard,.dark .streak-card{background:var(--surface);border-color:var(--border)}
+.dark .sv,.dark .streak-num,.dark .atitle{color:var(--fg)}
+.dark .sl,.dark .ss,.dark .streak-lbl,.dark .atitle-sub{color:var(--muted)}
+.dark .shd{background:var(--subtle);border-color:var(--border)}
+.dark .stitle{color:var(--fg)}
+.dark .sct,.dark .sch{color:var(--muted)}
+.dark .pb{background:var(--border)}
+.dark .it{color:var(--fg)}
+.dark .it.dn{color:var(--muted)}
+.dark .inote,.dark .st{color:var(--muted)}
+.dark .st.dn{color:var(--border2)}
+.dark .chk{border-color:var(--border2)}
+.dark .chk.dn{background:var(--fg);border-color:var(--fg)}
+.dark .sc{border-color:var(--border2)}
+.dark .sc.dn{background:var(--muted);border-color:var(--muted)}
+.dark .dp{border-color:var(--border);color:var(--muted);background:transparent}
+.dark .dp:hover{background:var(--subtle)}
+.dark .ib-btn:hover{background:var(--subtle)}
+.dark .grp{color:var(--muted)}
+.dark .grp::after{background:var(--border)}
+.dark .ef{background:var(--subtle);border-color:var(--border)}
+.dark .ef label{color:var(--muted)}
+.dark .ef input,.dark .ef select,.dark .ef textarea{background:var(--surface);border-color:var(--border2);color:var(--fg)}
+.dark .epb{border-color:var(--border2);background:var(--subtle);color:var(--fg2)}
+.dark .epb.en{background:var(--subtle);color:var(--fg);border-color:var(--border2)}
+.dark .ef-save,.dark .dc-self{background:var(--fg)!important;color:var(--bg)!important;border-color:var(--fg)!important}
+.dark .ef-cancel{background:var(--surface);border-color:var(--border2);color:var(--muted)}
+.dark .ef-del{background:var(--surface);border-color:#f09595;color:#f09595}
+.dark .add-card{background:var(--surface);border-color:var(--border)}
+.dark .add-card label{color:var(--muted)}
+.dark .add-card input,.dark .add-card select,.dark .add-card textarea{background:var(--subtle);border-color:var(--border2);color:var(--fg)}
+.dark .apb{border-color:var(--border2);background:var(--subtle);color:var(--fg2)}
+.dark .apb.an{background:var(--subtle);color:var(--fg);border-color:var(--border2)}
+.dark .a-submit{background:var(--fg);color:var(--bg)}
+.dark .a-submit:hover{background:var(--fg2)}
+.dark .add-sub-btn{border-color:var(--border);color:var(--muted)}
+.dark .cat-card{background:var(--surface);border-color:var(--border)}
+.dark .cat-nm{color:var(--fg)}
+.dark .cat-ct{color:var(--muted)}
+.dark .cat-form{background:var(--subtle);border-color:var(--border)}
+.dark .cat-form label{color:var(--muted)}
+.dark .cat-form input,.dark .cat-form textarea{background:var(--surface);border-color:var(--border2);color:var(--fg)}
+.dark .swatch.sel{border-color:var(--fg)}
+.dark .cat-save{background:var(--fg);color:var(--bg)}
+.dark .cat-cancel{background:var(--surface);border-color:var(--border2);color:var(--muted)}
+.dark .cat-del{background:var(--surface);border-color:#f09595;color:#f09595}
+.dark .add-cat-btn{border-color:var(--border);color:var(--muted)}
+.dark .add-cat-btn:hover{background:var(--subtle);color:var(--fg2)}
+.dark .cat-goal-track{background:var(--border)}
+.dark .otbl th{color:var(--muted);border-color:var(--border)}
+.dark .otbl td{border-color:var(--border);color:var(--fg2)}
+.dark .prog-label{color:var(--fg2)}
+.dark .prog-counts,.dark .prog-pct{color:var(--muted)}
+.dark .prog-bar{background:var(--border)}
+.dark .trend-bar-empty{background:var(--border)}
+.dark .trend-lbl{color:var(--muted)}
+.dark .trend-tip{background:var(--fg);color:var(--bg)}
+.dark .trend-leg-item{color:var(--muted)}
+.dark .empty{color:var(--muted)}
+.dark .gsheet-bar{background:var(--subtle);border-color:var(--border)}
+.dark .gsheet-bar input{background:var(--surface);border-color:var(--border2);color:var(--fg)}
+.dark .gsheet-btn{background:var(--fg2);color:var(--bg)}
+.dark .gsheet-btn:hover{background:var(--fg)}
+.dark .gsheet-status{color:var(--muted)}
+.dark .copy-claude-btn{background:var(--subtle);border-color:var(--border);color:var(--muted)}
+.dark .copy-claude-btn:hover{background:var(--surface);color:var(--fg2)}
+.dark .ai-tab-layout{background:var(--surface);border-color:var(--border)}
+.dark .ai-quick-row{background:var(--subtle);border-color:var(--border)}
+.dark .ai-input-area{background:var(--surface);border-color:var(--border)}
+.dark .ai-input-area textarea{background:var(--subtle);border-color:var(--border2);color:var(--fg)}
+.dark .chat-send-btn{background:var(--fg);color:var(--bg)}
+.dark .chat-send-btn:hover{background:var(--fg2)}
+.dark .chat-voice-btn{background:var(--subtle);border-color:var(--border);color:var(--fg2)}
+.dark .chat-message.user{background:var(--subtle)}
+.dark .chat-message.assistant{background:var(--surface);border-color:var(--border)}
+.dark .chat-task-preview{background:var(--subtle);border-color:var(--accent)}
+.dark .chat-task-preview strong{color:var(--fg)}
+.dark .ctf-lbl{color:var(--muted)}
+.dark .ctf-sel,.dark .ctf-inp{background:var(--surface);border-color:var(--border2);color:var(--fg)}
+.dark .chat-add-btn{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.dark .chat-loading{color:var(--muted)}
+.dark .quick-prompt-btn{background:var(--subtle);border-color:var(--border);color:var(--fg2)}
+.dark .quick-prompt-btn:hover{border-color:var(--accent);color:var(--accent)}
+.dark .str-card{background:var(--surface)!important;border-color:var(--border)!important}
+.dark .str-exp{background:var(--surface)!important;border-color:var(--border)!important}
+.dark .str-card-name,.dark .str-sec-lbl,.dark .str-role{color:var(--fg)}
+.dark .str-card-number,.dark .str-card-score,.dark .str-score-label{color:var(--muted)}
+.dark .str-task-row{background:var(--surface);border-color:var(--border)}
+.dark .str-task-row:hover{border-color:var(--border2)}
+.dark .str-task-txt{color:var(--fg)}
+.dark .str-task-done .str-task-txt{color:var(--muted)}
+.dark .str-task-chk{border-color:var(--border2)}
+.dark .str-task-chk.on{background:var(--fg);border-color:var(--fg)}
+.dark .str-task-edit{color:var(--muted)}
+.dark .str-task-empty{color:var(--muted)}
+.dark .str-done-tasks summary{color:var(--muted)}
+.dark .str-task-badge{background:var(--subtle);color:var(--muted)}
+.dark .str-add-task-btn{border-color:var(--border);color:var(--muted)}
+.dark .str-add-task-btn:hover{border-color:var(--accent);color:var(--accent);background:var(--subtle)}
+.dark .str-save-btn{background:var(--fg);color:var(--bg)}
+.dark .str-cancel-btn{border-color:var(--border2);color:var(--fg2)}
+.dark .str-edit-btn{border-color:var(--border2);color:var(--fg2);background:var(--surface)}
+.dark .str-part-label{color:var(--muted);border-color:var(--border)}
+.dark .str-overview-stats .str-ov-stat{background:var(--subtle);border-color:var(--border)}
+.dark .str-ov-lbl{color:var(--muted)}
+.dark .prio-panel{background:var(--subtle);border-color:var(--border)}
+.dark .prio-panel label,.dark .prio-panel h3{color:var(--fg2)}
+.dark .prio-panel input,.dark .prio-panel textarea{background:var(--surface);border-color:var(--border2);color:var(--fg)}
+.dark .victories-panel{background:#2a2010;border-color:#5a4510}
+.dark .vtxt{color:#c8a860}
+.dark .deleg-panel{background:#1a2040;border-color:#2a3868}
+.dark .deleg-badge{background:#1e2c5a;color:#7090d0}
+.dark .dc-wrap{background:#1a2040;border-color:#2a3868}
+.dark .dc-inp{background:var(--surface);border-color:var(--border2);color:var(--fg)}
+.dark .dc-del{background:var(--accent)}
+.dark .dc-cancel{background:var(--surface);border-color:var(--border2);color:var(--muted)}
 body{background:var(--bg);color:var(--fg)}
 .container{background:var(--bg)}
 .card,.item,.add-card,.ef,.victories-panel,.deleg-panel,.prio-panel,.ai-tab-layout,.str-card,.str-exp{background:var(--surface);border-color:var(--border)}
@@ -17,7 +142,7 @@ select,input,textarea{background:var(--surface)!important;color:var(--fg)!import
 .prio-panel{background:var(--subtle);border-color:var(--border)}
 .gsheet-bar{background:var(--subtle);border-color:var(--border)}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,sans-serif;background:#f8f8f6;color:#222;font-size:14px;line-height:1.6}
+body{font-family:Arial,sans-serif;font-size:14px;line-height:1.6}
 .container{max-width:960px;margin:0 auto;padding:2rem 1.5rem}
 .header{margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:2px solid #222}
 .header h1{font-size:28px;font-weight:700;letter-spacing:-0.02em;margin-bottom:4px}
@@ -397,6 +522,24 @@ body{font-family:Arial,sans-serif;background:#f8f8f6;color:#222;font-size:14px;l
   .sub-xbtn{order:2;flex-shrink:0}
   .ai-tab-layout{height:calc(100vh - 180px)}
 }
+/* Weekly history table */
+.wh-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:6px}
+.wh-table th{color:var(--muted);font-weight:600;text-align:right;padding:6px 8px;font-size:10px;text-transform:uppercase;letter-spacing:.05em;border-bottom:2px solid var(--border);white-space:nowrap}
+.wh-table th:first-child{text-align:left}
+.wh-table td{padding:7px 8px;border-bottom:1px solid var(--border);color:var(--fg2);text-align:right;white-space:nowrap}
+.wh-table td:first-child{text-align:left;color:var(--fg);font-weight:500}
+.wh-table tr:last-child td{border-bottom:none}
+.wh-table tr:hover td{background:var(--subtle)}
+.wh-table .current-wk td{background:var(--subtle)}
+.wh-table .current-wk td:first-child{font-weight:700}
+.wh-grade{display:inline-block;width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.wh-spark{display:flex;align-items:flex-end;gap:1px;height:20px;margin-top:2px}
+.wh-spark-bar{min-width:4px;border-radius:1px}
+.wh-no-data{color:var(--muted)!important;font-style:italic}
+.wh-late{color:#a32d2d}
+.dark .wh-late{color:#f09595}
+.wh-good{color:#1d9e75}
+.dark .wh-good{color:#5dcaa5}
 </style>
 </head>
 <body>
@@ -1144,6 +1287,57 @@ function renderCategories(){
 }
 
 // ── Analytics (Wave 3) ────────────────────────────────────────────────────────
+function addDays(dateStr, n){const d=new Date(dateStr+'T00:00:00');d.setDate(d.getDate()+n);return d.toISOString().slice(0,10);}
+
+function buildWeeklyHistory(){
+  if(!log.length)return[];
+  // Collect all weeks that appear in the log, plus every week from earliest to today
+  const logWeeks=new Set(log.map(e=>e.weekStart));
+  const earliest=[...logWeeks].sort()[0];
+  const seen=new Set([...logWeeks]);
+  let cursor=new Date(earliest+'T00:00:00');
+  const todayD=new Date(TODAY+'T00:00:00');
+  while(cursor<=todayD){const ws=wkStart(cursor.toISOString().slice(0,10));if(!seen.has(ws)){seen.add(ws);}cursor.setDate(cursor.getDate()+7);}
+  const allWeeks=[...seen].sort().reverse(); // most recent first
+
+  return allWeeks.map(ws=>{
+    const weekEnd=addDays(ws,6);
+    const isCurrentWk=ws===wkStart(TODAY);
+    const weekLogs=log.filter(e=>e.weekStart===ws);
+    const completed=weekLogs.length;
+    const lateLogs=weekLogs.filter(e=>Number(e.daysLate)>0);
+    const late=lateLogs.length;
+    const onTimeRate=completed>0?Math.round((completed-late)/completed*100):null;
+    const avgDaysLate=lateLogs.length>0?Math.round(lateLogs.reduce((a,e)=>a+Number(e.daysLate),0)/lateLogs.length):null;
+
+    // Lead time: days from task creation to completion (only for tasks still in array)
+    const leadTimes=weekLogs.map(e=>{
+      const t=tasks.find(t=>t.id===e.taskId);
+      if(!t||!t.createdAt)return null;
+      const d=daysDiff(t.createdAt.slice(0,10),e.completedAt);
+      return d>=0?d:null;
+    }).filter(x=>x!==null);
+    const avgLeadTime=leadTimes.length>0?Math.round(leadTimes.reduce((a,b)=>a+b,0)/leadTimes.length):null;
+
+    // Backlog at week end: tasks created before/on weekEnd that aren't yet completed by weekEnd
+    const completedByWeekEnd=new Set(log.filter(e=>e.completedAt&&e.completedAt<=weekEnd).map(e=>e.taskId));
+    const backlog=tasks.filter(t=>t.createdAt&&t.createdAt.slice(0,10)<=weekEnd&&!completedByWeekEnd.has(t.id)).length;
+
+    // New tasks added this week
+    const newAdded=tasks.filter(t=>t.createdAt&&t.createdAt.slice(0,10)>=ws&&t.createdAt.slice(0,10)<=weekEnd).length;
+
+    // Grade: based on on-time rate and whether any completions happened
+    let grade='grey';
+    if(completed>0){
+      if(onTimeRate>=80)grade='green';
+      else if(onTimeRate>=50)grade='amber';
+      else grade='red';
+    }
+
+    return{ws,weekEnd,isCurrentWk,completed,late,onTimeRate,avgDaysLate,avgLeadTime,backlog,newAdded,grade};
+  });
+}
+
 function renderAnalytics(){
   const thisWk=wkStart(TODAY);
   const lastWkD=new Date(TODAY_D);lastWkD.setDate(lastWkD.getDate()-7);
@@ -1151,172 +1345,148 @@ function renderAnalytics(){
   const twLog=log.filter(e=>e.weekStart===thisWk);
   const lwLog=log.filter(e=>e.weekStart===lastWk);
   const twDel=twLog.filter(e=>e.delegatedTo&&e.delegatedTo.trim());
-  const lwDel=lwLog.filter(e=>e.delegatedTo&&e.delegatedTo.trim());
+  const lwDel=lwLog.filter(e=>e.weekStart===lastWk&&e.delegatedTo&&e.delegatedTo.trim());
   const twDelta=twLog.length-lwLog.length;
   const twDelDelta=twDel.length-lwDel.length;
   const ov=tasks.filter(t=>isOv(t));
 
-  // 8-week trend
-  const weeks=[];
-  for(let i=7;i>=0;i--){
-    const d=new Date(TODAY_D);d.setDate(d.getDate()-i*7);
-    const ws=wkStart(d.toISOString().slice(0,10));
-    const wd=new Date(ws+'T00:00:00');
-    const wl=log.filter(e=>e.weekStart===ws);
-    weeks.push({label:`${wd.getDate()} ${MONTHS[wd.getMonth()].slice(0,3)}`,total:wl.length,delegated:wl.filter(e=>e.delegatedTo&&e.delegatedTo.trim()).length});
-  }
-  const maxTotal=Math.max(...weeks.map(w=>w.total),1);
+  // All-time on-time rate
+  const allLate=log.filter(e=>Number(e.daysLate)>0).length;
+  const allOnTimeRate=log.length>0?Math.round((log.length-allLate)/log.length*100):null;
 
-  // Streaks
-  let compStreak=0;
-  const checkD=new Date(TODAY_D);
-  for(let i=0;i<365;i++){
-    const ds=checkD.toISOString().slice(0,10);
-    const had=log.some(e=>e.completedAt===ds);
-    if(!had&&ds!==TODAY)break;
-    if(had)compStreak++;
-    checkD.setDate(checkD.getDate()-1);
-  }
-  let delStreak=0;
-  const checkW=new Date(TODAY_D);
-  for(let i=0;i<52;i++){
-    const ws=wkStart(checkW.toISOString().slice(0,10));
-    const had=log.some(e=>e.weekStart===ws&&e.delegatedTo);
-    if(!had)break;
-    delStreak++;
-    checkW.setDate(checkW.getDate()-7);
-  }
+  // Avg lead time all time
+  const allLeadTimes=log.map(e=>{const t=tasks.find(t=>t.id===e.taskId);if(!t||!t.createdAt)return null;const d=daysDiff(t.createdAt.slice(0,10),e.completedAt);return d>=0?d:null;}).filter(x=>x!==null);
+  const avgLeadTimeAll=allLeadTimes.length>0?Math.round(allLeadTimes.reduce((a,b)=>a+b,0)/allLeadTimes.length):null;
+
   const pendingDel=tasks.filter(t=>t.delegateIntent&&!t.done).length;
-
-  // Delegation success rate
   const doneWithIntent=tasks.filter(t=>t.done&&t.delegateIntent);
   const successDel=doneWithIntent.filter(t=>t.delegatedTo);
   const delSuccessRate=doneWithIntent.length>0?Math.round(successDel.length/doneWithIntent.length*100):null;
 
-  // By person
-  const byPerson={};
-  log.filter(e=>e.delegatedTo&&e.delegatedTo.trim()).forEach(e=>{const n=e.delegatedTo.trim();byPerson[n]=(byPerson[n]||0)+1;});
-  const topPeople=Object.entries(byPerson).sort((a,b)=>b[1]-a[1]).slice(0,5);
-
-  // By stream: delegation rate
-  const byStream={};
-  log.forEach(e=>{
-    const t=tasks.find(t=>t.id===e.taskId);if(!t)return;
-    if(!byStream[t.stream])byStream[t.stream]={total:0,delegated:0};
-    byStream[t.stream].total++;
-    if(e.delegatedTo&&e.delegatedTo.trim())byStream[t.stream].delegated++;
-  });
-
-  // Category progress
-  const catProgress=categories.filter(c=>!c.archived).map(c=>{
-    const ct=tasks.filter(t=>t.categoryId===c.id);
-    const open=ct.filter(t=>!t.done).length;
-    const done=ct.filter(t=>t.done).length;
-    return{cat:c,open,done,total:ct.length};
-  }).filter(cp=>cp.total>0).sort((a,b)=>b.total-a.total);
-
-  // ── Render ─────────────────────────────────────────────────────────────────
+  // ── Summary stats ─────────────────────────────────────────────────────────
   let h=`<div class="stats" style="margin-bottom:1rem">
     <div class="stat"><div class="sl">All-time done</div><div class="sv">${log.length}</div></div>
     <div class="stat"><div class="sl">This week</div><div class="sv">${twLog.length}</div><div class="ss" style="${twDelta>=0?'color:#1d9e75':'color:#a32d2d'}">${twDelta>=0?'+':''}${twDelta} vs last wk</div></div>
-    <div class="stat"><div class="sl">Delegated this wk</div><div class="sv" style="color:#2050a0">${twDel.length}</div><div class="ss" style="${twDelDelta>=0?'color:#1d9e75':'color:#a32d2d'}">${twDelDelta>=0?'+':''}${twDelDelta} vs last wk</div></div>
+    <div class="stat"><div class="sl">On-time rate</div><div class="sv" style="${allOnTimeRate!==null&&allOnTimeRate<70?'color:#a32d2d':allOnTimeRate>=80?'color:#1d9e75':''}">${allOnTimeRate!==null?allOnTimeRate+'%':'—'}</div></div>
+    <div class="stat"><div class="sl">Avg lead time</div><div class="sv">${avgLeadTimeAll!==null?avgLeadTimeAll+'d':'—'}</div><div class="ss">creation → done</div></div>
     <div class="stat"><div class="sl">Currently late</div><div class="sv" style="${ov.length>0?'color:#a32d2d':''}">${ov.length}</div></div>
-    <div class="stat"><div class="sl">Pending delegation</div><div class="sv" style="${pendingDel>0?'color:#2050a0':''}">${pendingDel}</div></div>
   </div>`;
 
-  // Streak row
+  // ── Streaks ────────────────────────────────────────────────────────────────
+  let compStreak=0;
+  const checkD=new Date(TODAY_D);
+  for(let i=0;i<365;i++){const ds=checkD.toISOString().slice(0,10);const had=log.some(e=>e.completedAt===ds);if(!had&&ds!==TODAY)break;if(had)compStreak++;checkD.setDate(checkD.getDate()-1);}
   h+=`<div class="streak-row">
-    <div class="streak-card"><div class="streak-num">${compStreak}</div><div class="streak-lbl">day completion streak</div></div>
-    <div class="streak-card"><div class="streak-num">${delStreak}</div><div class="streak-lbl">week delegation streak</div></div>
-    <div class="streak-card"><div class="streak-num">${delSuccessRate!==null?delSuccessRate+'%':'—'}</div><div class="streak-lbl">delegation success rate</div></div>
+    <div class="streak-card"><div class="streak-num">${compStreak}</div><div class="streak-lbl">Day completion streak</div></div>
+    <div class="streak-card"><div class="streak-num">${twLog.length}</div><div class="streak-lbl">Completions this week</div></div>
+    <div class="streak-card"><div class="streak-num">${delSuccessRate!==null?delSuccessRate+'%':'—'}</div><div class="streak-lbl">Delegation success rate</div></div>
   </div>`;
 
-  // 8-week trend
-  const trendBars=weeks.map(w=>{
+  // ── Weekly History Table ───────────────────────────────────────────────────
+  const history=buildWeeklyHistory();
+  if(history.length>0){
+    const gradeColors={green:'#1d9e75',amber:'#BA7517',red:'#a32d2d',grey:'#ccc'};
+    h+=`<div class="acard">
+      <div class="atitle">Weekly Performance History
+        <span class="atitle-sub">${history.length} weeks tracked</span>
+      </div>
+      <div style="overflow-x:auto">
+        <table class="wh-table">
+          <thead><tr>
+            <th style="text-align:left">Week</th>
+            <th title="Tasks completed this week">Done</th>
+            <th title="Completed on time vs late">On time / Late</th>
+            <th title="Percentage completed on or before due date">On-time %</th>
+            <th title="Average days overdue for late tasks">Avg days late</th>
+            <th title="Average days from task creation to completion">Lead time</th>
+            <th title="Open task backlog at end of week">Backlog</th>
+            <th title="New tasks added this week">New tasks</th>
+          </tr></thead>
+          <tbody>`;
+    history.forEach(w=>{
+      const wEnd=new Date(w.weekEnd+'T00:00:00');
+      const label=`${w.ws.slice(5).replace('-','/')}`;
+      const gradeColor=gradeColors[w.grade]||'#ccc';
+      h+=`<tr class="${w.isCurrentWk?'current-wk':''}">
+        <td><span class="wh-grade" style="background:${gradeColor};margin-right:6px" title="${w.grade} week"></span>${label}${w.isCurrentWk?' <em style="font-size:10px;color:var(--muted)">(now)</em>':''}</td>
+        <td><strong>${w.completed||'—'}</strong></td>
+        <td>${w.completed>0?`<span class="wh-good">${w.completed-w.late}</span> / <span class="${w.late>0?'wh-late':''}">${w.late}</span>`:'<span class="wh-no-data">—</span>'}</td>
+        <td>${w.onTimeRate!==null?`<span style="color:${gradeColor};font-weight:600">${w.onTimeRate}%</span>`:'<span class="wh-no-data">—</span>'}</td>
+        <td>${w.avgDaysLate!==null?`<span class="wh-late">${w.avgDaysLate}d</span>`:'<span class="wh-no-data">—</span>'}</td>
+        <td>${w.avgLeadTime!==null?`${w.avgLeadTime}d`:'<span class="wh-no-data">—</span>'}</td>
+        <td>${w.backlog}</td>
+        <td>${w.newAdded||'—'}</td>
+      </tr>`;
+    });
+    h+=`</tbody></table></div>
+      <div style="margin-top:10px;font-size:10px;color:var(--muted);line-height:1.6">
+        🟢 ≥80% on-time &nbsp;🟡 50-79% &nbsp;🔴 &lt;50% &nbsp;·&nbsp;
+        <strong>Lead time</strong>: days from task creation → completion (tracked tasks only) &nbsp;·&nbsp;
+        <strong>Backlog</strong>: open tasks at end of week (approximation)
+      </div>
+    </div>`;
+  }
+
+  // ── 8-week trend sparkline ─────────────────────────────────────────────────
+  const weeks8=[];
+  for(let i=7;i>=0;i--){const d=new Date(TODAY_D);d.setDate(d.getDate()-i*7);const ws=wkStart(d.toISOString().slice(0,10));const wd=new Date(ws+'T00:00:00');const wl=log.filter(e=>e.weekStart===ws);weeks8.push({label:`${wd.getDate()} ${MONTHS[wd.getMonth()].slice(0,3)}`,total:wl.length,delegated:wl.filter(e=>e.delegatedTo&&e.delegatedTo.trim()).length,late:wl.filter(e=>Number(e.daysLate)>0).length});}
+  const maxTotal=Math.max(...weeks8.map(w=>w.total),1);
+  const trendBars=weeks8.map(w=>{
     const selfH=Math.round((w.total-w.delegated)/maxTotal*60);
     const delH=Math.round(w.delegated/maxTotal*60);
     return`<div class="trend-col">
-      <div class="trend-tip">${w.label}: ${w.total} done${w.delegated?', '+w.delegated+' delegated':''}</div>
+      <div class="trend-tip">${w.label}: ${w.total} done${w.delegated?', '+w.delegated+' delegated':''}${w.late?', '+w.late+' late':''}</div>
       ${delH>0?`<div class="trend-bar-del" style="height:${delH}px"></div>`:''}
       ${selfH>0?`<div class="trend-bar-self" style="height:${selfH}px;border-radius:${delH===0?'3px 3px':'0 0'} 0 0"></div>`:''}
       ${w.total===0?`<div class="trend-bar-empty"></div>`:''}
     </div>`;
   }).join('');
-  const trendLbls=weeks.map(w=>`<div class="trend-lbl">${w.label}</div>`).join('');
   h+=`<div class="acard">
-    <div class="atitle">8-Week Completion Trend <span class="atitle-sub">${twLog.length} completions this week</span></div>
+    <div class="atitle">8-Week Completion Trend <span class="atitle-sub">${twLog.length} this week</span></div>
     <div class="trend-chart">${trendBars}</div>
-    <div class="trend-labels">${trendLbls}</div>
+    <div class="trend-labels">${weeks8.map(w=>`<div class="trend-lbl">${w.label}</div>`).join('')}</div>
     <div class="trend-legend">
       <div class="trend-leg-item"><div class="trend-leg-dot" style="background:#7F77DD"></div>Done by you</div>
       <div class="trend-leg-item"><div class="trend-leg-dot" style="background:#378ADD"></div>Delegated</div>
     </div>
   </div>`;
 
-  // Delegation by person
-  h+=`<div class="acard"><div class="atitle">Delegation by Person <span class="atitle-sub">${log.filter(e=>e.delegatedTo).length} total delegations</span></div>`;
-  if(!topPeople.length){h+=`<div class="empty">No delegations recorded yet. Use the 🤝 flag to start tracking.</div>`;}
-  else{
-    topPeople.forEach(([name,count])=>{
-      const maxCount=topPeople[0][1];
-      const pct=Math.round(count/maxCount*100);
-      h+=`<div class="prog-row"><div class="prog-label">🤝 ${name}</div><div class="prog-counts">${count}</div><div class="prog-bar"><div class="prog-fill" style="width:${pct}%;background:#378ADD"></div></div><div class="prog-pct">${count}x</div></div>`;
-    });
-  }
-  h+=`</div>`;
-
-  // Delegation by stream
-  const streamDelEntries=Object.entries(byStream).filter(([,v])=>v.total>0);
-  if(streamDelEntries.length>0){
-    h+=`<div class="acard"><div class="atitle">Delegation by Stream</div>`;
-    streamDelEntries.sort((a,b)=>b[1].delegated-a[1].delegated).forEach(([k,v])=>{
-      const pct=v.total>0?Math.round(v.delegated/v.total*100):0;
-      const cfg=SC[k];if(!cfg)return;
-      h+=`<div class="prog-row"><div class="prog-label"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:${cfg.color};margin-right:5px;vertical-align:middle"></span>${cfg.label}</div><div class="prog-counts">${v.delegated}/${v.total}</div><div class="prog-bar"><div class="prog-fill" style="width:${pct}%;background:${cfg.color}"></div></div><div class="prog-pct">${pct}%</div></div>`;
-    });
-    h+=`</div>`;
-  }
-
-  // Stream progress
-  h+=`<div class="acard"><div class="atitle">Progress by Stream</div>`;
-  Object.entries(SC).forEach(([k,v])=>{
-    const its=tasks.filter(t=>t.stream===k);if(!its.length)return;
+  // ── Progress by stream (rpmPlan categories + child streams) ──────────────
+  const allStreams=[
+    ...(rpmPlan?.categories?.length?rpmPlan.categories.map(c=>({key:c.id,label:c.name,color:c.color})):[]),
+    ...Object.entries(CHILD_STREAMS).map(([k,v])=>({key:k,label:v.label,color:v.color})),
+    ...((!rpmPlan?.categories?.length)?Object.entries(SC).map(([k,v])=>({key:k,label:v.label,color:v.color})):[]),
+  ];
+  const streamRows=allStreams.map(s=>{
+    const its=tasks.filter(t=>t.stream===s.key);if(!its.length)return'';
     let tot=0,dn=0;its.forEach(t=>{tot+=leafCount(t);dn+=doneCount(t);});
     const pct=tot>0?Math.round(dn/tot*100):0;
-    h+=`<div class="prog-row"><div class="prog-label"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:${v.color};margin-right:5px;vertical-align:middle"></span>${v.label}</div><div class="prog-counts">${dn}/${tot}</div><div class="prog-bar"><div class="prog-fill" style="width:${pct}%;background:${v.color}"></div></div><div class="prog-pct">${pct}%</div></div>`;
-  });
+    return`<div class="prog-row"><div class="prog-label"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:${s.color};margin-right:5px;vertical-align:middle"></span>${s.label}</div><div class="prog-counts">${dn}/${tot}</div><div class="prog-bar"><div class="prog-fill" style="width:${pct}%;background:${s.color}"></div></div><div class="prog-pct">${pct}%</div></div>`;
+  }).join('');
+  if(streamRows)h+=`<div class="acard"><div class="atitle">Progress by Stream</div>${streamRows}</div>`;
+
+  // ── Delegation by person ───────────────────────────────────────────────────
+  const byPerson={};
+  log.filter(e=>e.delegatedTo&&e.delegatedTo.trim()).forEach(e=>{const n=e.delegatedTo.trim();byPerson[n]=(byPerson[n]||0)+1;});
+  const topPeople=Object.entries(byPerson).sort((a,b)=>b[1]-a[1]).slice(0,5);
+  h+=`<div class="acard"><div class="atitle">Delegation by Person <span class="atitle-sub">${log.filter(e=>e.delegatedTo).length} total</span></div>`;
+  if(!topPeople.length){h+=`<div class="empty">No delegations recorded yet.</div>`;}
+  else{topPeople.forEach(([name,count])=>{const pct=Math.round(count/topPeople[0][1]*100);h+=`<div class="prog-row"><div class="prog-label">🤝 ${name}</div><div class="prog-counts">${count}</div><div class="prog-bar"><div class="prog-fill" style="width:${pct}%;background:#378ADD"></div></div><div class="prog-pct">${count}x</div></div>`;});}
   h+=`</div>`;
 
-  // Category progress (goal line of sight)
-  if(catProgress.length>0){
-    h+=`<div class="acard"><div class="atitle">RPM Category Progress <span class="atitle-sub">goal line of sight</span></div>`;
-    catProgress.forEach(({cat,open,done,total})=>{
-      const pct=total>0?Math.round(done/total*100):0;
-      h+=`<div style="margin-bottom:10px">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px">
-          <div style="width:9px;height:9px;border-radius:50%;background:${cat.color};flex-shrink:0"></div>
-          <span style="font-size:12px;font-weight:600;flex:1">${cat.name}</span>
-          <span style="font-size:11px;color:#aaa">${done}/${total} · ${pct}%</span>
-        </div>
-        ${cat.result?`<div style="font-size:11px;color:#888;margin-bottom:4px;padding-left:17px;line-height:1.4">→ ${cat.result.slice(0,100)}${cat.result.length>100?'…':''}</div>`:''}
-        <div style="padding-left:17px"><div style="height:5px;background:#eee;border-radius:3px;overflow:hidden"><div style="height:100%;width:${pct}%;background:${cat.color};border-radius:3px;transition:width .3s"></div></div></div>
-      </div>`;
-    });
-    h+=`</div>`;
-  }
-
-  // Overdue items
+  // ── Overdue items ──────────────────────────────────────────────────────────
   h+=`<div class="acard"><div class="atitle">Overdue Items</div>`;
   if(!ov.length){h+=`<div class="empty">No overdue items 🎉</div>`;}
   else{
     h+=`<table class="otbl"><tr><th>Task</th><th>Stream</th><th>Days late</th><th>Delegate?</th></tr>`;
     ov.sort((a,b)=>(a.dueDate<b.dueDate?-1:1)).forEach(t=>{
       const dv=daysDiff(t.dueDate,TODAY);
-      h+=`<tr><td style="max-width:200px">${t.text}</td><td>${SC[t.stream]?.label||t.stream}</td><td style="color:#a32d2d;font-weight:600">${dv}d</td><td style="color:${t.delegateIntent?'#2050a0':'#ccc'}">${t.delegateIntent?'🤝 yes':'—'}</td></tr>`;
+      h+=`<tr><td style="max-width:200px">${t.text}</td><td>${streamLabel(t.stream)||t.stream}</td><td style="color:#a32d2d;font-weight:600">${dv}d</td><td style="color:${t.delegateIntent?'#2050a0':'var(--muted)'}">${t.delegateIntent?'🤝 yes':'—'}</td></tr>`;
     });
     h+=`</table>`;
   }
   h+=`</div>`;
+
   document.getElementById('analytics-view').innerHTML=h;
 }
 
