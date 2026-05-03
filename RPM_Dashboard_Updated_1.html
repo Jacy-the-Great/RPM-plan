@@ -543,11 +543,25 @@ function showSaved(){const el=document.getElementById('save-ind');if(!el)return;
 function catOf(t){return categories.find(c=>c.id===t.categoryId);}
 
 // ── Stream helpers (Issue 9: use strategy categories) ────────────────────────
+function resolveStreamId(val){
+  // Given an id OR a name (from AI), return the matching category id
+  if(!val)return'';
+  if(!rpmPlan?.categories?.length)return val;
+  // exact id match
+  const byId=rpmPlan.categories.find(c=>c.id===val);
+  if(byId)return byId.id;
+  // name match (case-insensitive, strip numbers like "1. Physical Body")
+  const clean=val.replace(/^\d+\.\s*/,'').trim().toLowerCase();
+  const byName=rpmPlan.categories.find(c=>c.name.toLowerCase()===clean||c.name.toLowerCase().includes(clean)||clean.includes(c.name.toLowerCase()));
+  if(byName)return byName.id;
+  return val;
+}
 function getStreamOpts(selectedVal){
+  const resolvedVal=resolveStreamId(selectedVal);
   if(!rpmPlan||!rpmPlan.categories||!rpmPlan.categories.length){
-    return Object.entries(SC).map(([k,v])=>`<option value="${k}"${selectedVal===k?' selected':''}>${v.label}</option>`).join('');
+    return Object.entries(SC).map(([k,v])=>`<option value="${k}"${resolvedVal===k?' selected':''}>${v.label}</option>`).join('');
   }
-  return rpmPlan.categories.map(c=>`<option value="${c.id}"${selectedVal===c.id?' selected':''}>${c.number}. ${c.name}</option>`).join('');
+  return rpmPlan.categories.map(c=>`<option value="${c.id}"${resolvedVal===c.id?' selected':''}>${c.number}. ${c.name}</option>`).join('');
 }
 function streamColor(val){
   if(!val)return'#ccc';
@@ -1381,7 +1395,7 @@ function addChatTaskFromPreview(idx){
   if(!msg||!msg.taskData)return;
   const td=msg.taskData;
   if(!td.text){alert('Task text is required');return;}
-  const stream=document.getElementById('ctf-stream-'+idx)?.value||'innovation';
+  const stream=document.getElementById('ctf-stream-'+idx)?.value||'';
   const pri=document.getElementById('ctf-pri-'+idx)?.value||'normal';
   const catId=document.getElementById('ctf-cat-'+idx)?.value||'';
   const dueDate=document.getElementById('ctf-due-'+idx)?.value||'';
@@ -1412,7 +1426,7 @@ async function sendChat(){
     const r=await fetch(OPENAI_API_URL,{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({message:msg,categories,streams:Object.keys(SC),priorities,tasks:tasks.filter(t=>!t.done).slice(0,40)})
+      body:JSON.stringify({message:msg,categories,streams:rpmPlan?.categories?.length?rpmPlan.categories.map(c=>c.id+':'+c.name):Object.keys(SC),priorities,tasks:tasks.filter(t=>!t.done).slice(0,40)})
     });
     if(!r.ok)throw new Error('API error');
     const d=await r.json();
