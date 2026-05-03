@@ -5,6 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RPM Weekly Plan — Jacy Macnee</title>
 <style>
+:root{--bg:#fafaf8;--surface:#fff;--fg:#222;--fg2:#555;--border:#eee;--border2:#ddd;--subtle:#f5f5f5;--muted:#888;--accent:#378ADD}
+.dark{--bg:#1a1b1e;--surface:#252629;--fg:#e8e8e8;--fg2:#aaa;--border:#333;--border2:#444;--subtle:#2a2b2e;--muted:#888;--accent:#5a9fd4}
+body{background:var(--bg);color:var(--fg)}
+.container{background:var(--bg)}
+.card,.item,.add-card,.ef,.victories-panel,.deleg-panel,.prio-panel,.ai-tab-layout,.str-card,.str-exp{background:var(--surface);border-color:var(--border)}
+.tab{background:var(--surface);color:var(--fg2);border-color:var(--border2)}
+.tab.on{background:var(--fg);color:var(--surface);border-color:var(--fg)}
+select,input,textarea{background:var(--surface)!important;color:var(--fg)!important;border-color:var(--border2)!important}
+.inote{color:var(--fg2)}
+.prio-panel{background:var(--subtle);border-color:var(--border)}
+.gsheet-bar{background:var(--subtle);border-color:var(--border)}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:Arial,sans-serif;background:#f8f8f6;color:#222;font-size:14px;line-height:1.6}
 .container{max-width:960px;margin:0 auto;padding:2rem 1.5rem}
@@ -127,17 +138,12 @@ body{font-family:Arial,sans-serif;background:#f8f8f6;color:#222;font-size:14px;l
 .chk-row{display:flex;align-items:center;gap:8px;margin-top:6px;font-size:12px;color:#555;cursor:pointer}
 .chk-row input[type=checkbox]{width:14px;height:14px;cursor:pointer;flex-shrink:0}
 .sub-erow{display:flex;align-items:center;gap:6px;margin-top:4px}
-.sub-erow input{font-size:12px;padding:5px 8px;border:1px solid #ddd;border-radius:6px;background:#fff;color:#222;outline:none;font-family:Arial,sans-serif}
-.sub-etxt{flex:1}
-.sub-edate{width:130px;flex:none}
+.sub-etxt{flex:1!important;min-width:0!important;width:auto!important;font-size:12px;padding:5px 8px;border:1px solid var(--border2);border-radius:6px;background:var(--surface);color:var(--fg);outline:none;font-family:Arial,sans-serif}
+.sub-edate{width:120px!important;flex:none!important;font-size:12px;padding:5px 8px;border:1px solid var(--border2);border-radius:6px;background:var(--surface);color:var(--fg);outline:none;font-family:Arial,sans-serif}
 .sub-xbtn{width:20px;height:20px;border:none;background:transparent;cursor:pointer;color:#ccc;font-size:15px;flex-shrink:0;padding:0;border-radius:4px;line-height:1}
 .sub-xbtn:hover{background:#fee;color:#a32d2d}
 .add-sub-btn{font-size:11px;color:#888;background:transparent;border:1px dashed #ddd;border-radius:6px;padding:4px 10px;cursor:pointer;font-family:Arial,sans-serif;margin-top:4px;width:100%;text-align:left;transition:all .12s}
 .add-sub-btn:hover{border-color:#aaa;color:#555}
-/* Fix subtask inputs inside add-card — .add-card input{width:100%} has higher specificity and breaks flex layout */
-.add-card .sub-erow input{width:auto;padding:5px 8px;font-size:12px;}
-.add-card .sub-erow .sub-etxt{flex:1;min-width:0;}
-.add-card .sub-erow .sub-edate{width:120px;flex:none;}
 /* Add card */
 .add-card{background:#fff;border:1px solid #e5e5e5;border-radius:10px;padding:1.25rem;margin-bottom:1.25rem}
 .add-card label{font-size:11px;color:#aaa;text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:4px;margin-top:10px}
@@ -274,6 +280,18 @@ body{font-family:Arial,sans-serif;background:#f8f8f6;color:#222;font-size:14px;l
 /* Task age badge */
 .task-age{font-size:10px;color:#bbb;border:1px solid #eee;border-radius:4px;padding:0 4px;margin-left:4px;font-weight:400;white-space:nowrap}
 .task-age.old{color:#c07a40;border-color:#f0d0b0;background:#fff8f2}
+/* API status bar */
+.api-status-bar{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.api-pill{font-size:11px;padding:4px 10px;border-radius:99px;border:1px solid var(--border2);background:var(--surface);color:var(--muted);cursor:pointer;font-weight:600;transition:all .15s}
+.api-pill.connected{background:#e8f5e9;color:#2e7d32;border-color:#a5d6a7}
+.dark .api-pill.connected{background:#1b3a1d;color:#81c784;border-color:#2e7d32}
+/* Compact task layout */
+.item{position:relative;display:flex;align-items:flex-start;gap:0;padding:8px 10px 8px 0;border-bottom:1px solid var(--border)}
+.item-stripe{width:3px;flex-shrink:0;align-self:stretch;border-radius:2px;margin-right:8px;min-height:20px}
+.item-compact-row{display:flex;align-items:center;gap:6px;width:100%;min-width:0}
+.task-chevron{background:none;border:none;cursor:pointer;color:var(--muted);font-size:9px;padding:4px 6px;flex-shrink:0;align-self:center;transition:color .15s}
+.task-chevron:hover{color:var(--fg)}
+.item-open{padding-bottom:10px}
 /* Chat task preview editable fields */
 .ctf-grid{display:flex;flex-direction:column;gap:4px;margin-top:6px;margin-bottom:6px}
 .ctf-row{display:flex;align-items:center;gap:6px}
@@ -371,14 +389,20 @@ body{font-family:Arial,sans-serif;background:#f8f8f6;color:#222;font-size:14px;l
         <span class="meta-pill">Jacy Macnee</span>
         <span class="meta-pill" id="today-pill">—</span>
         <span class="save-ind" id="save-ind">✓ Saved</span>
+        <button id="dark-toggle" onclick="toggleDark()" style="background:none;border:none;cursor:pointer;font-size:16px;padding:2px 4px;margin-left:4px" title="Toggle dark mode">🌙</button>
       </div>
     </div>
-  <div class="gsheet-bar">
-    <span style="font-size:11px;font-weight:600;color:#555;white-space:nowrap">API</span>
-    <input id="sheet-url" type="text" placeholder="Vercel API URL"/>
-    <button class="gsheet-btn" onclick="connectSheet()">Connect</button>
-    <span class="gsheet-status" id="sheet-status">Not connected</span>
-    <button class="copy-claude-btn" onclick="copyForClaude()">📋 Copy for Claude</button>
+  <div class="api-status-bar">
+    <span id="api-status-pill" class="api-pill" onclick="toggleApiBar()" title="Click to configure API">⚡ Not connected</span>
+    <button class="copy-claude-btn" onclick="copyForClaude()" style="margin-left:auto">📋 Copy</button>
+  </div>
+  <div id="api-bar-expanded" style="display:none">
+    <div class="gsheet-bar">
+      <span style="font-size:11px;font-weight:600;color:var(--fg2);white-space:nowrap">API URL</span>
+      <input id="sheet-url" type="text" placeholder="Vercel API URL"/>
+      <button class="gsheet-btn" onclick="connectSheet()">Connect</button>
+      <span class="gsheet-status" id="sheet-status">Not connected</span>
+    </div>
   </div>
   <div class="tabs" id="main-tabs"></div>
   <div class="stats" id="stats-row"></div>
@@ -463,6 +487,7 @@ let tasks=[],log=[],categories=[];
 let openSecs={},tab='plan',activeFilters=new Set();
 let editingId=null,editState={},editSubs=[];
 let addPri='normal',addSubs=[];
+let openTasks={};
 let sheetUrl=DEFAULT_SHEET_URL;
 let editingCatId=null,editingCatState={};
 let pendingDelegationId=null; // Wave 2: delegation flow
@@ -497,6 +522,26 @@ function doneCount(t){return(t.done?1:0)+((t.subs||[]).filter(s=>s.done).length)
 function showSaved(){const el=document.getElementById('save-ind');if(!el)return;el.classList.add('show');clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('show'),2000);}
 function catOf(t){return categories.find(c=>c.id===t.categoryId);}
 
+// ── Stream helpers (Issue 9: use strategy categories) ────────────────────────
+function getStreamOpts(selectedVal){
+  if(!rpmPlan||!rpmPlan.categories||!rpmPlan.categories.length){
+    return Object.entries(SC).map(([k,v])=>`<option value="${k}"${selectedVal===k?' selected':''}>${v.label}</option>`).join('');
+  }
+  return rpmPlan.categories.map(c=>`<option value="${c.id}"${selectedVal===c.id?' selected':''}>${c.number}. ${c.name}</option>`).join('');
+}
+function streamColor(val){
+  if(!val)return'#ccc';
+  const cat=rpmPlan?.categories?.find(c=>c.id===val);
+  if(cat)return cat.color;
+  return SC[val]?.color||'#ccc';
+}
+function streamLabel(val){
+  if(!val)return'';
+  const cat=rpmPlan?.categories?.find(c=>c.id===val);
+  if(cat)return cat.name;
+  return SC[val]?.label||val;
+}
+
 // ── Persistence ───────────────────────────────────────────────────────────────
 async function save(){
   const payload={tasks,log,categories,priorities};
@@ -524,7 +569,7 @@ function connectSheet(){
   if(!url){alert('Paste your API URL first');return;}
   sheetUrl=url;localStorage.setItem('rpm_sheet_url',url);
   document.getElementById('sheet-status').textContent='Connecting...';
-  loadData().then(()=>{document.getElementById('sheet-status').textContent='Connected';renderAll();})
+  loadData().then(()=>{document.getElementById('sheet-status').textContent='Connected';updateApiPill();renderAll();})
     .catch(()=>document.getElementById('sheet-status').textContent='Connection failed');
 }
 
@@ -639,6 +684,16 @@ async function togVictory(id){
   t.isDailyVictory=!t.isDailyVictory;await save();renderAll();
 }
 async function togWeekFocus(id){const t=tasks.find(t=>t.id===id);if(!t)return;t.isWeeklyFocus=!t.isWeeklyFocus;await save();renderAll();}
+function resetStaleVictories(){
+  const todayDone=new Set(log.filter(e=>e.completedAt===TODAY).map(e=>e.taskId));
+  let changed=false;
+  tasks.forEach(t=>{
+    if(t.isDailyVictory&&t.done&&!todayDone.has(t.id)){
+      t.isDailyVictory=false;changed=true;
+    }
+  });
+  if(changed)save();
+}
 async function togDelegateIntent(id){
   const t=tasks.find(t=>t.id===id);if(!t)return;
   t.delegateIntent=!t.delegateIntent;
@@ -667,7 +722,7 @@ async function saveEdit(){
   syncEditSubsFromDOM();
   const t=tasks.find(t=>t.id===editingId);if(!t)return;
   t.text=editState.text;t.stream=editState.stream;t.pri=editState.pri;
-  t.dueDate=editState.dueDate;t.note=editState.note;t.categoryId=editState.categoryId;
+  t.dueDate=editState.dueDate;t.note=editState.note;t.categoryId=editState.stream;
   t.subs=editSubs.filter(s=>s.text.trim());
   t.delegateIntent=editState.delegateIntent;t.delegatedTo=editState.delegatedTo;
   editingId=null;await save();renderAll();
@@ -677,22 +732,15 @@ async function deleteTask(id){tasks=tasks.filter(t=>t.id!==id);editingId=null;aw
 
 // ── Edit form HTML ─────────────────────────────────────────────────────────────
 function editFormHtml(t){
-  const sOpts=Object.entries(SC).map(([k,v])=>`<option value="${k}"${editState.stream===k?' selected':''}>${v.label}</option>`).join('');
-  const catOpts=`<option value="">— no category —</option>`+categories.filter(c=>!c.archived).map(c=>`<option value="${c.id}"${editState.categoryId===c.id?' selected':''}>${c.name}</option>`).join('');
+  const sOpts=getStreamOpts(editState.stream);
   const pBtns=['urgent','priority','normal','backburner','awaiting'].map(p=>`<button class="epb${editState.pri===p?' '+priCls[p]:''}" data-pri="${p}" onclick="selEP('${p}')">${PC[p].l||'Normal'}</button>`).join('');
   const subRows=editSubs.map((s,i)=>`<div class="sub-erow"><input class="sub-etxt" data-esub="${i}" value="${(s.text||'').replace(/"/g,'&quot;')}" placeholder="Subtask…"><input class="sub-edate" data-esub="${i}" type="date" value="${s.dueDate||''}"><button class="sub-xbtn" onclick="removeEditSub(${i})">×</button></div>`).join('');
-  // Category goal line-of-sight
-  const cat=catOf({categoryId:editState.categoryId});
-  const catGoal=cat&&cat.result?`<div style="background:#f8f8f0;border:1px solid #e8e0c0;border-radius:6px;padding:7px 10px;font-size:11px;color:#666;margin-top:4px;line-height:1.5"><span style="font-weight:700;color:#444">90-day goal:</span> ${cat.result}</div>`:'';
   return`<div class="ef">
     <label>Task</label><textarea id="ef-text" oninput="editState.text=this.value">${editState.text}</textarea>
     <div class="efr2">
       <div><label>Stream</label><select onchange="editState.stream=this.value">${sOpts}</select></div>
       <div><label>Due date</label><input type="date" value="${editState.dueDate}" onchange="editState.dueDate=this.value"></div>
     </div>
-    <label>Category (RPM)</label>
-    <select onchange="editState.categoryId=this.value;this.closest('.ef').querySelector('.cat-goal-wrap').innerHTML=catGoalHtml(this.value)">${catOpts}</select>
-    <div class="cat-goal-wrap">${catGoal}</div>
     <label>Priority</label><div class="eprow">${pBtns}</div>
     <label>Note</label><input type="text" value="${(editState.note||'').replace(/"/g,'&quot;')}" oninput="editState.note=this.value" placeholder="Context, blockers…">
     <label>Delegation</label>
@@ -727,50 +775,49 @@ function subDueTxt(s){
 }
 
 // ── Task HTML ─────────────────────────────────────────────────────────────────
+function toggleTask(id){openTasks[id]=!openTasks[id];renderAll();}
 function taskHtml(t){
-  const isEdit=editingId===t.id,isPending=pendingDelegationId===t.id;
+  const isEdit=editingId===t.id;
+  const isPending=pendingDelegationId===t.id;
+  const isOpen=openTasks[t.id]||isEdit||isPending;
   const cat=catOf(t);
-  let h=`<div class="item">`;
-  if(isToday(t)&&!t.done)h+=`<div class="today-dot"></div>`;
-  if(cat)h+=`<div class="cat-pip" style="background:${cat.color}" title="${cat.name}"></div>`;
-  h+=`<div class="chk${t.done?' dn':''}" onclick="togTask('${t.id}')"></div><div class="ib">`;
-  h+=`<span class="it${t.done?' dn':''}">`;
-  h+=t.text+bHtml(t.pri);
-  if(isOv(t)&&!t.done)h+=`<span class="bdg" style="background:#fcebeb;color:#a32d2d">Late</span>`;
-  if(t.createdAt&&!t.done){const da=daysDiff(t.createdAt,TODAY);if(da>=14)h+=`<span class="task-age${da>=30?' old':''}" title="Added ${t.createdAt}">${da}d old</span>`;}
-  if(t.delegateIntent&&!t.done){
-    const delTxt=t.delegatedTo?`🤝 ${t.delegatedTo}`:'🤝 To delegate';
-    const delBg=t.delegatedTo?'#e1f5ee':'#e8eeff';
-    const delTc=t.delegatedTo?'#0f6e56':'#2050a0';
-    h+=`<span class="bdg" style="background:${delBg};color:${delTc}">${delTxt}</span>`;
-  }
-  h+=`<span class="dp ${dpC(t)}" onclick="startEdit('${t.id}')">${dpTxt(t)}</span></span>`;
-  if(t.note&&!t.done)h+=`<div class="inote">${t.note}</div>`;
-  // Delegation choice prompt
-  if(isPending){
-    h+=`<div class="dc-wrap">
-      <div class="dc-title">🤝 How was this completed?</div>
-      <div class="dc-row">
-        <button class="dc-self" onclick="completeDelegation('${t.id}','')">✓ I did it</button>
-        <span class="dc-divider">or</span>
-        <input type="text" id="dc-inp-${t.id}" class="dc-inp" placeholder="Delegated to (name)…" onkeydown="if(event.key==='Enter')completeDelegationInput('${t.id}')">
-        <button class="dc-del" onclick="completeDelegationInput('${t.id}')">✓ Delegated</button>
-        <button class="dc-cancel" onclick="cancelDelegation()">Cancel</button>
-      </div>
-    </div>`;
-  }
-  if(isEdit)h+=editFormHtml(t);
-  if(t.subs&&t.subs.length&&!isEdit&&!isPending){
-    h+=`<div class="subs">`;
-    t.subs.forEach(s=>{h+=`<div class="sub"><div class="sc${s.done?' dn':''}" onclick="togSub('${t.id}','${s.id}')"></div><div class="sub-ib"><span class="st${s.done?' dn':''}">${s.text}</span>${subDueTxt(s)}</div></div>`;});
+  const catColor=cat?cat.color:streamColor(t.stream);
+
+  let h=`<div class="item${isOpen?' item-open':''}">`;
+  // Left accent stripe
+  h+=`<div class="item-stripe" style="background:${catColor}"></div>`;
+  // Checkbox
+  h+=`<div class="chk${t.done?' dn':''}" onclick="togTask('${t.id}')"></div>`;
+  // Main content
+  h+=`<div class="ib">`;
+  h+=`<div class="item-compact-row">`;
+  h+=`<span class="it${t.done?' dn':''}" style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${t.text}</span>`;
+  if(bHtml(t.pri))h+=bHtml(t.pri);
+  if(isOv(t)&&!t.done)h+=`<span class="bdg" style="background:#fcebeb;color:#a32d2d;flex-shrink:0">Late</span>`;
+  if(t.delegateIntent&&!t.done){const n=t.delegatedTo?`🤝 ${t.delegatedTo}`:'🤝';h+=`<span class="bdg" style="background:#e8eeff;color:#2050a0;flex-shrink:0">${n}</span>`;}
+  if(t.createdAt&&!t.done){const da=daysDiff(t.createdAt,TODAY);if(da>=30)h+=`<span class="task-age old" title="Added ${t.createdAt}">${da}d</span>`;}
+  h+=`<span class="dp ${dpC(t)}" onclick="startEdit('${t.id}')" style="flex-shrink:0">${dpTxt(t)}</span>`;
+  h+=`</div>`; // end item-compact-row
+
+  // Expanded content
+  if(isOpen){
+    if(t.note&&!t.done)h+=`<div class="inote">${t.note}</div>`;
+    if(isPending){h+=`<div class="dc-wrap"><div class="dc-title">🤝 How was this completed?</div><div class="dc-row"><button class="dc-self" onclick="completeDelegation('${t.id}','')">✓ I did it</button><span class="dc-divider">or</span><input type="text" id="dc-inp-${t.id}" class="dc-inp" placeholder="Delegated to (name)…" onkeydown="if(event.key==='Enter')completeDelegationInput('${t.id}')"><button class="dc-del" onclick="completeDelegationInput('${t.id}')">✓ Delegated</button><button class="dc-cancel" onclick="cancelDelegation()">Cancel</button></div></div>`;}
+    if(isEdit)h+=editFormHtml(t);
+    if(t.subs&&t.subs.length&&!isEdit&&!isPending){h+=`<div class="subs">`;t.subs.forEach(s=>{h+=`<div class="sub"><div class="sc${s.done?' dn':''}" onclick="togSub('${t.id}','${s.id}')"></div><div class="sub-ib"><span class="st${s.done?' dn':''}">${s.text}</span>${subDueTxt(s)}</div></div>`;});h+=`</div>`;}
+    // Action buttons only when expanded
+    h+=`<div class="task-acts">`;
+    h+=`<button class="ib-btn star${t.isDailyVictory?' on':''}" onclick="togVictory('${t.id}')" title="⭐ Daily Victory">⭐</button>`;
+    h+=`<button class="ib-btn flag${t.isWeeklyFocus?' on':''}" onclick="togWeekFocus('${t.id}')" title="🚩 This Week">🚩</button>`;
+    h+=`<button class="ib-btn delegate${t.delegateIntent?' on':''}" onclick="togDelegateIntent('${t.id}')" title="🤝 Delegate">🤝</button>`;
+    if(!isEdit)h+=`<button class="ib-btn" onclick="startEdit('${t.id}')" title="Edit">✏️</button>`;
     h+=`</div>`;
   }
-  h+=`</div><div class="task-acts">`;
-  h+=`<button class="ib-btn star${t.isDailyVictory?' on':''}" onclick="togVictory('${t.id}')" title="⭐ Daily Victories">⭐</button>`;
-  h+=`<button class="ib-btn flag${t.isWeeklyFocus?' on':''}" onclick="togWeekFocus('${t.id}')" title="🚩 This Week">🚩</button>`;
-  h+=`<button class="ib-btn delegate${t.delegateIntent?' on':''}" onclick="togDelegateIntent('${t.id}')" title="🤝 Flag for delegation">🤝</button>`;
-  if(!isEdit)h+=`<button class="ib-btn" onclick="startEdit('${t.id}')" title="Edit">✏️</button>`;
-  h+=`</div></div>`;
+  h+=`</div>`; // end ib
+
+  // Chevron expand button
+  if(!isEdit&&!isPending)h+=`<button class="task-chevron" onclick="toggleTask('${t.id}')" title="${isOpen?'Collapse':'Expand'}">${isOpen?'▼':'▶'}</button>`;
+  h+=`</div>`;
   return h;
 }
 
@@ -877,12 +924,13 @@ function renderPlan(){
       const its=sortedTasks(tasks.filter(t=>t.stream===s));if(!its.length)return;
       const isOpen=openSecs[s]!==false;
       const{total,done}=secProg(s);const pct=total>0?Math.round(done/total*100):0;
+      const sColor=streamColor(s);const sLabel=streamLabel(s)||cfg?.label||s;
       let itsH='';
       its.forEach(t=>{if(!taskVisible(t)&&editingId!==t.id)return;itsH+=taskHtml(t);});
       if(!itsH&&activeFilters.size>0)return;
       grpHtml+=`<div class="sec">
-        <div class="shd" onclick="toggleSec('${s}')"><div class="sdot" style="background:${cfg.color}"></div><span class="stitle">${cfg.label}</span><span class="sct">${done}/${total}</span><span class="sch${isOpen?' op':''}">&#9654;</span></div>
-        <div class="pb"><div class="pf" style="width:${pct}%;background:${cfg.color}"></div></div>
+        <div class="shd" onclick="toggleSec('${s}')"><div class="sdot" style="background:${sColor}"></div><span class="stitle">${sLabel}</span><span class="sct">${done}/${total}</span><span class="sch${isOpen?' op':''}">&#9654;</span></div>
+        <div class="pb"><div class="pf" style="width:${pct}%;background:${sColor}"></div></div>
         <div class="its${isOpen?' op':''}">${itsH}</div>
       </div>`;
     });
@@ -894,8 +942,7 @@ function renderPlan(){
 
 // ── Add task view ─────────────────────────────────────────────────────────────
 function renderAdd(){
-  const sOpts=Object.entries(SC).map(([k,v])=>`<option value="${k}">${v.label}</option>`).join('');
-  const catOpts=`<option value="">— no category —</option>`+categories.filter(c=>!c.archived).map(c=>`<option value="${c.id}">${c.name}</option>`).join('');
+  const sOpts=getStreamOpts('');
   const pBtns=['urgent','priority','normal','backburner','awaiting'].map(p=>`<button class="apb${p==='normal'?' an':''}" data-p="${p}" onclick="selAP('${p}')">${PC[p].l||'Normal'}</button>`).join('');
   const subRows=addSubs.map((s,i)=>`<div class="sub-erow"><input class="sub-etxt" data-asub="${i}" value="${(s.text||'').replace(/"/g,'&quot;')}" placeholder="Subtask…"><input class="sub-edate" data-asub="${i}" type="date" value="${s.dueDate||''}"><button class="sub-xbtn" onclick="removeAddSub(${i})">×</button></div>`).join('');
   document.getElementById('add-view').innerHTML=`<div class="add-card">
@@ -903,9 +950,6 @@ function renderAdd(){
     <div class="ar2" style="margin-top:10px">
       <div><label>Stream</label><select id="a-stream">${sOpts}</select></div>
       <div><label>Due date</label><input type="date" id="a-date"></div>
-    </div>
-    <div class="ar2" style="margin-top:8px">
-      <div><label>Category (RPM)</label><select id="a-cat">${catOpts}</select></div>
     </div>
     <label style="margin-top:10px">Priority</label>
     <div class="aprow">${pBtns}</div>
@@ -926,12 +970,13 @@ function renderAdd(){
 async function addTask(){
   syncAddSubsFromDOM();
   const text=(document.getElementById('a-text').value||'').trim();if(!text)return;
+  const aStream=document.getElementById('a-stream').value;
   tasks.push({
-    id:uid(),stream:document.getElementById('a-stream').value,text,pri:addPri,
+    id:uid(),stream:aStream,text,pri:addPri,
     dueDate:document.getElementById('a-date').value||'',
     note:(document.getElementById('a-note').value||'').trim(),
     done:false,subs:addSubs.filter(s=>s.text.trim()).map(s=>({...s})),
-    categoryId:document.getElementById('a-cat').value||'',
+    categoryId:aStream,
     createdAt:TODAY,isDailyVictory:false,isWeeklyFocus:false,
     delegateIntent:document.getElementById('a-delegate').checked,delegatedTo:'',
   });
@@ -1217,9 +1262,10 @@ const OPENAI_API_URL = 'https://rpm-dashboard-api.vercel.app/api/openai';
 
 function renderChatQuickPrompts(){
   const prompts=[
-    {label:'💡 Generate today',prompt:'What tasks should I focus on today?'},
-    {label:'⚡ Suggest priorities',prompt:'Which of my tasks should I prioritize or delegate?'},
-    {label:'🔨 Break this down',prompt:'Break down the current task into subtasks for me'},
+    {label:'🎯 Today\'s focus',prompt:'Given my overdue tasks and priorities, what should I focus on today? Be specific.'},
+    {label:'📊 How am I tracking?',prompt:'Analyse my task completion and strategic alignment. Where am I on track and where am I falling behind?'},
+    {label:'🤝 What to delegate?',prompt:'Which of my tasks should I delegate based on my workload and strategic priorities?'},
+    {label:'⚡ Add a task',prompt:'Create a task: '},
   ];
   let html='';
   prompts.forEach(p=>{
@@ -1241,15 +1287,13 @@ function renderChat(){
     html+=`<div class="chat-message ${cls}">${m.content.replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>')}</div>`;
     if(m.taskData){
       const td=m.taskData;
-      const streamOpts=Object.entries(SC).map(([k,v])=>`<option value="${k}"${(td.stream||'innovation')===k?' selected':''}>${v.label}</option>`).join('');
+      const streamOpts=getStreamOpts(td.stream||'');
       const priOpts=['normal','priority','urgent','backburner','awaiting'].map(p=>`<option value="${p}"${(td.priority||'normal')===p?' selected':''}>${p.charAt(0).toUpperCase()+p.slice(1)}</option>`).join('');
-      const catOpts=`<option value="">None</option>`+categories.filter(c=>!c.archived).map(c=>`<option value="${c.id}"${td.categoryId===c.id?' selected':''}>${c.name}</option>`).join('');
       let thtml=`<div class="chat-task-preview">`;
       thtml+=`<strong>${td.text.replace(/</g,'&lt;')}</strong>`;
       thtml+=`<div class="ctf-grid">`;
       thtml+=`<div class="ctf-row"><label class="ctf-lbl">Stream</label><select class="ctf-sel" id="ctf-stream-${i}">${streamOpts}</select></div>`;
       thtml+=`<div class="ctf-row"><label class="ctf-lbl">Priority</label><select class="ctf-sel" id="ctf-pri-${i}">${priOpts}</select></div>`;
-      thtml+=`<div class="ctf-row"><label class="ctf-lbl">Category</label><select class="ctf-sel" id="ctf-cat-${i}">${catOpts}</select></div>`;
       thtml+=`<div class="ctf-row"><label class="ctf-lbl">Due date</label><input type="date" class="ctf-inp" id="ctf-due-${i}" value="${td.dueDate||''}"></div>`;
       thtml+=`<div class="ctf-row"><label class="ctf-lbl">Delegate to</label><input type="text" class="ctf-inp" id="ctf-del-${i}" value="${(td.delegatedTo||'').replace(/"/g,'&quot;')}" placeholder="Name (optional)"></div>`;
       thtml+=`</div>`;
@@ -1286,7 +1330,7 @@ function parseTaskFromAI(aiText){
   }
 
   let dueDate='';
-  if(dueMatch&&dueMatch[1]){
+  if(dueMatch&&dueMatch[1]&&!/leave blank|not specified|n\/a|none|tbd/i.test(dueMatch[1])){
     const dueStr=dueMatch[1].trim().toLowerCase();
     const d=new Date();
     if(dueStr==='today') dueDate=TODAY;
@@ -1298,7 +1342,7 @@ function parseTaskFromAI(aiText){
   let pri=priorityMatch&&priorityMatch[1]?priorityMatch[1].trim().toLowerCase():'normal';
   if(!['urgent','priority','normal','backburner','awaiting'].includes(pri)) pri='normal';
 
-  const delegateTo=assignedMatch&&assignedMatch[1]?assignedMatch[1].trim():'';
+  const delegateTo=assignedMatch&&assignedMatch[1]&&!/leave blank|n\/a|none/i.test(assignedMatch[1])?assignedMatch[1].trim():'';
 
   return{
     text:taskMatch&&taskMatch[1]?taskMatch[1].trim():'',
@@ -1997,6 +2041,16 @@ function addMapItem(catId){
   renderStrategy();
 }
 
+// ── Dark mode ─────────────────────────────────────────────────────────────────
+function toggleDark(){
+  const isDark=document.body.classList.toggle('dark');
+  localStorage.setItem('rpm_dark',isDark?'1':'0');
+  document.getElementById('dark-toggle').textContent=isDark?'☀️':'🌙';
+}
+// ── API bar ───────────────────────────────────────────────────────────────────
+function toggleApiBar(){document.getElementById('api-bar-expanded').style.display=document.getElementById('api-bar-expanded').style.display==='none'?'block':'none';}
+function updateApiPill(){const pill=document.getElementById('api-status-pill');if(!pill)return;if(sheetUrl){pill.textContent='✓ Connected';pill.classList.add('connected');}else{pill.textContent='⚡ Not connected';pill.classList.remove('connected');}}
+
 // ── Render all ────────────────────────────────────────────────────────────────
 function renderAll(){
   renderStats();
@@ -2027,13 +2081,16 @@ document.getElementById('main-tabs').innerHTML=`
 const savedUrl=localStorage.getItem('rpm_sheet_url');
 if(savedUrl)sheetUrl=savedUrl;
 if(sheetUrl){const u=document.getElementById('sheet-url');const s=document.getElementById('sheet-status');if(u)u.value=sheetUrl;if(s)s.textContent='Connected';}
+updateApiPill();
 // Restore filter state across sessions
 try{const sf=localStorage.getItem('rpm_filters');if(sf)activeFilters=new Set(JSON.parse(sf));}catch(e){}
 // Load strategic priorities
 loadPriorities();
 // Load strategy plan
 loadStrategy();
-(async()=>{await loadData();renderAll();})();
+// Init dark mode
+if(localStorage.getItem('rpm_dark')==='1'){document.body.classList.add('dark');document.getElementById('dark-toggle').textContent='☀️';}
+(async()=>{await loadData();resetStaleVictories();renderAll();})();
 </script>
 </body>
 </html>
