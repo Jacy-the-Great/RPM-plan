@@ -610,24 +610,24 @@ function connectSheet(){
 // ── Copy for Claude ───────────────────────────────────────────────────────────
 function copyForClaude(){
   const lines=['# My RPM Task List','',`Date: ${TODAY}`,`Open tasks: ${tasks.filter(t=>!t.done).length}`,''];
-  GC.forEach(g=>{
-    const gT=tasks.filter(t=>g.streams.includes(t.stream)&&!t.done);if(!gT.length)return;
-    lines.push(`## ${g.label}`);
-    g.streams.forEach(s=>{
-      const its=tasks.filter(t=>t.stream===s&&!t.done);if(!its.length)return;
-      lines.push(`### ${SC[s].label}`);
-      sortedTasks(its).forEach(t=>{
-        let l=`- [ ] ${t.text}`;
-        if(t.pri&&t.pri!=='normal')l+=` [${PC[t.pri].l||t.pri}]`;
-        if(t.dueDate)l+=` (due: ${t.dueDate}${isOv(t)?' LATE':''})`;
-        if(t.isDailyVictory)l+=` ⭐`;
-        if(t.isWeeklyFocus)l+=` 🚩`;
-        if(t.delegateIntent)l+=` 🤝${t.delegatedTo?' → '+t.delegatedTo:''}`;
-        lines.push(l);
-        (t.subs||[]).forEach(s=>{let sl=`  - [ ] ${s.text}`;if(s.dueDate)sl+=` (due: ${s.dueDate})`;lines.push(sl);});
-        if(t.note)lines.push(`  *${t.note}*`);
-      });lines.push('');
-    });
+  // Use rpmPlan categories if available, else fall back to GC
+  const exportSections = rpmPlan?.categories?.length
+    ? rpmPlan.categories.map(c=>({label:c.name,streams:[c.id]}))
+    : GC.flatMap(g=>g.streams.map(s=>({label:SC[s]?.label||s,streams:[s]})));
+  exportSections.forEach(sec=>{
+    const its=tasks.filter(t=>sec.streams.includes(t.stream)&&!t.done);if(!its.length)return;
+    lines.push(`### ${sec.label}`);
+    sortedTasks(its).forEach(t=>{
+      let l=`- [ ] ${t.text}`;
+      if(t.pri&&t.pri!=='normal')l+=` [${PC[t.pri].l||t.pri}]`;
+      if(t.dueDate)l+=` (due: ${t.dueDate}${isOv(t)?' LATE':''})`;
+      if(t.isDailyVictory)l+=` ⭐`;
+      if(t.isWeeklyFocus)l+=` 🚩`;
+      if(t.delegateIntent)l+=` 🤝${t.delegatedTo?' → '+t.delegatedTo:''}`;
+      lines.push(l);
+      (t.subs||[]).forEach(s=>{let sl=`  - [ ] ${s.text}`;if(s.dueDate)sl+=` (due: ${s.dueDate})`;lines.push(sl);});
+      if(t.note)lines.push(`  *${t.note}*`);
+    });lines.push('');
   });
   const md=lines.join('\n');
   navigator.clipboard.writeText(md).then(()=>{const btn=document.querySelector('.copy-claude-btn');const orig=btn.textContent;btn.textContent='✓ Copied!';setTimeout(()=>btn.textContent=orig,2000);}).catch(()=>alert('Copy failed'));
@@ -869,7 +869,7 @@ function delegationPanel(){
   const doneThisWk=log.filter(e=>e.weekStart===wkStart(TODAY)&&e.delegatedTo).length;
   return`<div class="deleg-panel">
     <div class="deleg-hd"><div class="deleg-ttl">🤝 Pending Delegations</div><span class="deleg-hint">${doneThisWk} delegated this week</span></div>
-    ${pending.slice(0,8).map(t=>`<div class="deleg-row"><div class="chk" onclick="togTask('${t.id}')" style="width:14px;height:14px;border-radius:3px;flex-shrink:0"></div><span style="font-size:12px;color:#333;flex:1">${t.text}</span><span class="deleg-badge">${SC[t.stream]?.label||t.stream}</span></div>`).join('')}
+    ${pending.slice(0,8).map(t=>`<div class="deleg-row"><div class="chk" onclick="togTask('${t.id}')" style="width:14px;height:14px;border-radius:3px;flex-shrink:0"></div><span style="font-size:12px;color:#333;flex:1">${t.text}</span><span class="deleg-badge">${streamLabel(t.stream)}</span></div>`).join('')}
   </div>`;
 }
 
@@ -950,26 +950,75 @@ function renderPlan(){
   h+=`</div>`;
   h+=victoriesPanel();
   h+=delegationPanel();
-  GC.forEach(g=>{
-    const hasAny=g.streams.some(s=>tasks.find(t=>t.stream===s));if(!hasAny)return;
-    let grpHtml='';
-    g.streams.forEach(s=>{
-      const cfg=SC[s];
-      const its=sortedTasks(tasks.filter(t=>t.stream===s));if(!its.length)return;
-      const isOpen=openSecs[s]!==false;
-      const{total,done}=secProg(s);const pct=total>0?Math.round(done/total*100):0;
-      const sColor=streamColor(s);const sLabel=streamLabel(s)||cfg?.label||s;
-      let itsH='';
-      its.forEach(t=>{if(!taskVisible(t)&&editingId!==t.id)return;itsH+=taskHtml(t);});
-      if(!itsH&&activeFilters.size>0)return;
-      grpHtml+=`<div class="sec">
-        <div class="shd" onclick="toggleSec('${s}')"><div class="sdot" style="background:${sColor}"></div><span class="stitle">${sLabel}</span><span class="sct">${done}/${total}</span><span class="sch${isOpen?' op':''}">&#9654;</span></div>
-        <div class="pb"><div class="pf" style="width:${pct}%;background:${sColor}"></div></div>
-        <div class="its${isOpen?' op':''}">${itsH}</div>
-      </div>`;
+  // Use rpmPlan strategy categories as sections when available, else fall back to GC/SC
+  if(rpmPlan?.categories?.length){
+    // Group by part (personal / work / other) for visual dividers
+    const parts=[...new Set(rpmPlan.categories.map(c=>c.part||'other'))];
+    const partLabels={personal:'Personal RPM',work:'Work & Business',other:'Other'};
+    parts.forEach(part=>{
+      const cats=rpmPlan.categories.filter(c=>(c.part||'other')===part);
+      let grpHtml='';
+      cats.forEach(cat=>{
+        const its=sortedTasks(tasks.filter(t=>t.stream===cat.id));if(!its.length)return;
+        const isOpen=openSecs[cat.id]!==false;
+        const{total,done}=secProg(cat.id);const pct=total>0?Math.round(done/total*100):0;
+        const sColor=cat.color||'#888';
+        let itsH='';
+        its.forEach(t=>{if(!taskVisible(t)&&editingId!==t.id)return;itsH+=taskHtml(t);});
+        if(!itsH&&activeFilters.size>0)return;
+        grpHtml+=`<div class="sec">
+          <div class="shd" onclick="toggleSec('${cat.id}')"><div class="sdot" style="background:${sColor}"></div><span class="stitle">${cat.name}</span><span class="sct">${done}/${total}</span><span class="sch${isOpen?' op':''}">&#9654;</span></div>
+          <div class="pb"><div class="pf" style="width:${pct}%;background:${sColor}"></div></div>
+          <div class="its${isOpen?' op':''}">${itsH}</div>
+        </div>`;
+      });
+      if(grpHtml)h+=`<div class="grp">${partLabels[part]||part}</div>`+grpHtml;
     });
-    if(grpHtml)h+=`<div class="grp">${g.label}</div>`+grpHtml;
-  });
+    // Legacy fallback: tasks still using old SC stream keys
+    const rpmIds=new Set(rpmPlan.categories.map(c=>c.id));
+    const legacyTasks=sortedTasks(tasks.filter(t=>t.stream&&!rpmIds.has(t.stream)));
+    if(legacyTasks.length){
+      let legHtml='';
+      // group legacy tasks by their old stream key
+      const legStreams=[...new Set(legacyTasks.map(t=>t.stream))];
+      legStreams.forEach(s=>{
+        const its=sortedTasks(legacyTasks.filter(t=>t.stream===s));if(!its.length)return;
+        const isOpen=openSecs[s]!==false;
+        const{total,done}=secProg(s);const pct=total>0?Math.round(done/total*100):0;
+        const sColor=SC[s]?.color||'#aaa';const sLabel=SC[s]?.label||s;
+        let itsH='';
+        its.forEach(t=>{if(!taskVisible(t)&&editingId!==t.id)return;itsH+=taskHtml(t);});
+        if(!itsH&&activeFilters.size>0)return;
+        legHtml+=`<div class="sec">
+          <div class="shd" onclick="toggleSec('${s}')"><div class="sdot" style="background:${sColor}"></div><span class="stitle">${sLabel}</span><span class="sct">${done}/${total}</span><span class="sch${isOpen?' op':''}">&#9654;</span></div>
+          <div class="pb"><div class="pf" style="width:${pct}%;background:${sColor}"></div></div>
+          <div class="its${isOpen?' op':''}">${itsH}</div>
+        </div>`;
+      });
+      if(legHtml)h+=`<div class="grp" style="color:#aaa">Legacy (reassign stream to update)</div>`+legHtml;
+    }
+  } else {
+    GC.forEach(g=>{
+      const hasAny=g.streams.some(s=>tasks.find(t=>t.stream===s));if(!hasAny)return;
+      let grpHtml='';
+      g.streams.forEach(s=>{
+        const cfg=SC[s];
+        const its=sortedTasks(tasks.filter(t=>t.stream===s));if(!its.length)return;
+        const isOpen=openSecs[s]!==false;
+        const{total,done}=secProg(s);const pct=total>0?Math.round(done/total*100):0;
+        const sColor=streamColor(s);const sLabel=streamLabel(s)||cfg?.label||s;
+        let itsH='';
+        its.forEach(t=>{if(!taskVisible(t)&&editingId!==t.id)return;itsH+=taskHtml(t);});
+        if(!itsH&&activeFilters.size>0)return;
+        grpHtml+=`<div class="sec">
+          <div class="shd" onclick="toggleSec('${s}')"><div class="sdot" style="background:${sColor}"></div><span class="stitle">${sLabel}</span><span class="sct">${done}/${total}</span><span class="sch${isOpen?' op':''}">&#9654;</span></div>
+          <div class="pb"><div class="pf" style="width:${pct}%;background:${sColor}"></div></div>
+          <div class="its${isOpen?' op':''}">${itsH}</div>
+        </div>`;
+      });
+      if(grpHtml)h+=`<div class="grp">${g.label}</div>`+grpHtml;
+    });
+  }
   if(!h.includes('class="sec"'))h+=`<div class="empty">No tasks match the current filters</div>`;
   document.getElementById('plan-view').innerHTML=h;
 }
