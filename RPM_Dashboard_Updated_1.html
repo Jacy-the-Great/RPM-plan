@@ -64,6 +64,16 @@
 .dark .cat-del{background:var(--surface);border-color:#f09595;color:#f09595}
 .dark .add-cat-btn{border-color:var(--border);color:var(--muted)}
 .dark .add-cat-btn:hover{background:var(--subtle);color:var(--fg2)}
+/* Archive tab */
+.archived-list{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.archived-row{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;border:1px solid var(--border);background:var(--surface)}
+.archived-row:hover{border-color:var(--border2)}
+.archived-txt{flex:1;font-size:13px;color:var(--muted);text-decoration:line-through}
+.archived-stream{font-size:10px;color:var(--muted);flex-shrink:0}
+.archived-date{font-size:10px;color:var(--muted);flex-shrink:0}
+.archived-restore{padding:4px 10px;border-radius:5px;border:1px solid var(--border2);background:transparent;color:var(--fg2);font-size:11px;cursor:pointer;font-family:Arial,sans-serif;white-space:nowrap}
+.archived-restore:hover{border-color:var(--accent);color:var(--accent)}
+.archive-empty{font-size:13px;color:var(--muted);text-align:center;padding:2rem 0;font-style:italic}
 .dark .cat-goal-track{background:var(--border)}
 .dark .otbl th{color:var(--muted);border-color:var(--border)}
 .dark .otbl td{border-color:var(--border);color:var(--fg2)}
@@ -241,6 +251,7 @@ body{font-family:Arial,sans-serif;font-size:14px;line-height:1.6}
 .ib-btn.star.on{color:#BA7517}
 .ib-btn.flag.on{color:#378ADD}
 .ib-btn.delegate.on{color:#2050a0}
+.ib-btn.ghost.on{color:#9b59b6}
 /* Edit form */
 .ef{background:#f5f5f2;border-radius:8px;padding:12px 14px;margin:5px 0 10px;border:1px solid #e0e0dc}
 .ef label{font-size:10px;color:#aaa;text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:3px;margin-top:8px}
@@ -422,6 +433,18 @@ body{font-family:Arial,sans-serif;font-size:14px;line-height:1.6}
 .ctf-lbl{font-size:10px;font-weight:600;color:#888;min-width:68px;flex-shrink:0}
 .ctf-sel,.ctf-inp{flex:1;font-size:11px;padding:3px 6px;border:1px solid #ddd;border-radius:4px;background:#fff;color:#222;outline:none;font-family:Arial,sans-serif;min-width:0}
 /* Strategy Tab */
+/* Wheel of Life */
+.wol-wrap{display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap;margin-bottom:1rem}
+.wol-chart{flex-shrink:0}
+.wol-sliders{flex:1;min-width:260px;max-height:420px;overflow-y:auto}
+.wol-slider-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.wol-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.wol-name{font-size:11px;color:var(--fg2);width:130px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wol-score-val{font-size:11px;font-weight:700;width:20px;text-align:right;flex-shrink:0}
+.wol-input{flex:1;-webkit-appearance:none;appearance:none;height:4px;border-radius:2px;outline:none;cursor:pointer}
+.dark .wol-sliders::-webkit-scrollbar{width:4px}
+.dark .wol-sliders::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+.wol-save-hint{font-size:10px;color:var(--muted);margin-top:6px;font-style:italic}
 .str-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-top:8px}
 .str-part-label{font-size:10px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.1em;margin:16px 0 8px}
 .str-part-label:first-child{margin-top:0}
@@ -588,6 +611,7 @@ body{font-family:Arial,sans-serif;font-size:14px;line-height:1.6}
       </div>
     </div>
     <div id="strategy-view" style="display:none"></div>
+    <div id="archived-view" style="display:none"></div>
   </div>
 <script>
 // ── Date ─────────────────────────────────────────────────────────────────────
@@ -624,8 +648,8 @@ const GC=[
 // Tasks assigned these streams appear as sub-sections in Plan and count toward the parent in Strategy
 // Change the parent IDs here if you want to reassign which RPM category they roll up to
 const CHILD_STREAMS={
-  innovation:{label:'Innovation',       color:'#7F77DD', parent:'rpm-08'},
   sales:     {label:'Sales Mastery',    color:'#1D9E75', parent:'rpm-08'},
+  innovation:{label:'Innovation',       color:'#7F77DD', parent:'rpm-08'},
   marketing: {label:'Marketing',        color:'#378ADD', parent:'rpm-08'},
 };
 const PC={urgent:{l:'Urgent',bg:'#FCEBEB',tc:'#A32D2D'},priority:{l:'Priority',bg:'#FAECE7',tc:'#993C1D'},normal:{l:'',bg:'',tc:''},backburner:{l:'Backburner',bg:'#F1EFE8',tc:'#5F5E5A'},awaiting:{l:'Awaiting',bg:'#FAEEDA',tc:'#854F0B'}};
@@ -802,6 +826,7 @@ function copyForClaude(){
 function toggleFilter(f){if(activeFilters.has(f))activeFilters.delete(f);else activeFilters.add(f);localStorage.setItem('rpm_filters',JSON.stringify([...activeFilters]));renderPlan();}
 function clearFilters(){activeFilters.clear();localStorage.removeItem('rpm_filters');renderPlan();}
 function taskVisible(t){
+  if(t.isArchived) return false;
   if(activeFilters.size===0)return true;
   for(const f of activeFilters){
     if(f==='today'     &&!isToday(t))                           return false;
@@ -883,6 +908,19 @@ async function togVictory(id){
   t.isDailyVictory=!t.isDailyVictory;await save();renderAll();
 }
 async function togWeekFocus(id){const t=tasks.find(t=>t.id===id);if(!t)return;t.isWeeklyFocus=!t.isWeeklyFocus;await save();renderAll();}
+async function togGhost(id){const t=tasks.find(t=>t.id===id);if(!t)return;t.isGhost=!t.isGhost;await save();renderAll();}
+async function archiveTask(id){
+  if(!confirm('Archive this task? It will be removed from Plan but saved in Archived tab.'))return;
+  const t=tasks.find(t=>t.id===id);if(!t)return;
+  t.isArchived=true;t.isDailyVictory=false;t.isWeeklyFocus=false;
+  editingId=null;
+  await save();renderAll();
+}
+async function restoreTask(id){
+  const t=tasks.find(t=>t.id===id);if(!t)return;
+  t.isArchived=false;
+  await save();renderAll();
+}
 function resetStaleVictories(){
   const todayDone=new Set(log.filter(e=>e.completedAt===TODAY).map(e=>e.taskId));
   let changed=false;
@@ -990,7 +1028,7 @@ function taskHtml(t){
   // Main content
   h+=`<div class="ib">`;
   h+=`<div class="item-compact-row">`;
-  h+=`<span class="it${t.done?' dn':''}" style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${t.text}</span>`;
+  h+=`<span class="it${t.done?' dn':''}" style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${t.isGhost?'👻 ':''}${t.text}</span>`;
   if(bHtml(t.pri))h+=bHtml(t.pri);
   if(isOv(t)&&!t.done)h+=`<span class="bdg" style="background:#fcebeb;color:#a32d2d;flex-shrink:0">Late</span>`;
   if(t.delegateIntent&&!t.done){const n=t.delegatedTo?`🤝 ${t.delegatedTo}`:'🤝';h+=`<span class="bdg" style="background:#e8eeff;color:#2050a0;flex-shrink:0">${n}</span>`;}
@@ -1009,7 +1047,9 @@ function taskHtml(t){
     h+=`<button class="ib-btn star${t.isDailyVictory?' on':''}" onclick="togVictory('${t.id}')" title="⭐ Daily Victory">⭐</button>`;
     h+=`<button class="ib-btn flag${t.isWeeklyFocus?' on':''}" onclick="togWeekFocus('${t.id}')" title="🚩 This Week">🚩</button>`;
     h+=`<button class="ib-btn delegate${t.delegateIntent?' on':''}" onclick="togDelegateIntent('${t.id}')" title="🤝 Delegate">🤝</button>`;
+    h+=`<button class="ib-btn ghost${t.isGhost?' on':''}" onclick="togGhost('${t.id}')" title="👻 Haunting me">👻</button>`;
     if(!isEdit)h+=`<button class="ib-btn" onclick="startEdit('${t.id}')" title="Edit">✏️</button>`;
+    if(!isEdit)h+=`<button class="ib-btn" onclick="archiveTask('${t.id}')" title="📦 Archive (remove from plan)">📦</button>`;
     h+=`</div>`;
   }
   h+=`</div>`; // end ib
@@ -1217,7 +1257,7 @@ async function addTask(){
     note:(document.getElementById('a-note').value||'').trim(),
     done:false,subs:addSubs.filter(s=>s.text.trim()).map(s=>({...s})),
     categoryId:aStream,
-    createdAt:TODAY,isDailyVictory:false,isWeeklyFocus:false,
+    createdAt:TODAY,isDailyVictory:false,isWeeklyFocus:false,isGhost:false,isArchived:false,
     delegateIntent:document.getElementById('a-delegate').checked,delegatedTo:'',
   });
   await save();addSubs=[];addPri='normal';
@@ -1565,9 +1605,10 @@ function renderChat(){
       thtml+=`<div class="ctf-row"><label class="ctf-lbl">Delegate to</label><input type="text" class="ctf-inp" id="ctf-del-${i}" value="${(td.delegatedTo||'').replace(/"/g,'&quot;')}" placeholder="Name (optional)"></div>`;
       thtml+=`</div>`;
       if(td.subs&&td.subs.length>0){
-        thtml+=`<div style="font-size:10px;color:#888;margin-bottom:3px">Subtasks:</div>`;
-        td.subs.forEach(s=>thtml+=`<div style="font-size:11px;color:#444;margin:1px 0 1px 8px">• ${s.text.replace(/</g,'&lt;')}</div>`);
+        thtml+=`<div style="font-size:10px;color:var(--muted);margin-bottom:3px;font-weight:600">Subtasks:</div>`;
+        td.subs.forEach(s=>thtml+=`<div style="font-size:11px;color:var(--fg2);margin:2px 0 2px 10px;display:flex;gap:5px;align-items:baseline"><span style="color:var(--accent);font-size:9px">▸</span>${s.text.replace(/</g,'&lt;')}</div>`);
       }
+      if(td.note)thtml+=`<div style="font-size:11px;color:var(--fg2);font-style:italic;margin:4px 0 6px;padding:6px 8px;background:var(--subtle);border-radius:5px;border-left:3px solid var(--accent)">💡 ${td.note.replace(/</g,'&lt;')}</div>`;
       thtml+=`<button class="chat-add-btn" onclick="addChatTaskFromPreview(${i})">+ Add Task</button>`;
       thtml+=`</div>`;
       html+=thtml;
@@ -1637,7 +1678,7 @@ function addChatTaskFromPreview(idx){
     id:uid(),stream,text:td.text,pri,dueDate,
     note:td.note||'',done:false,subs:td.subs||[],
     categoryId:catId,createdAt:TODAY,
-    isDailyVictory:false,isWeeklyFocus:false,
+    isDailyVictory:false,isWeeklyFocus:false,isGhost:false,isArchived:false,
     delegateIntent:delegateTo.length>0,
     delegatedTo:delegateTo,
   });
@@ -1676,6 +1717,26 @@ async function sendChat(){
 function quickPrompt(prompt){
   document.getElementById('chat-input').value=prompt;
   sendChat();
+}
+
+// ── Archived view ─────────────────────────────────────────────────────────────
+function renderArchived(){
+  const el=document.getElementById('archived-view');if(!el)return;
+  const archived=tasks.filter(t=>t.isArchived).sort((a,b)=>b.createdAt>a.createdAt?1:-1);
+  if(!archived.length){el.innerHTML=`<div class="archive-empty">No archived tasks yet.<br><span style="font-size:11px">Use 📦 on any task to remove it from Plan without deleting it.</span></div>`;return;}
+  let h=`<div style="font-size:12px;color:var(--muted);margin-bottom:10px">${archived.length} archived task${archived.length!==1?'s':''}</div>`;
+  h+=`<div class="archived-list">`;
+  archived.forEach(t=>{
+    h+=`<div class="archived-row">
+      <span class="archived-txt">${t.text.replace(/</g,'&lt;')}</span>
+      <span class="archived-stream">${streamLabel(t.stream)||''}</span>
+      <span class="archived-date">${t.createdAt?t.createdAt.slice(0,10):''}</span>
+      <button class="archived-restore" onclick="restoreTask('${t.id}')">↩ Restore</button>
+      <button class="archived-restore" style="border-color:#f09595;color:#a32d2d" onclick="deleteTask('${t.id}')">🗑 Delete</button>
+    </div>`;
+  });
+  h+=`</div>`;
+  el.innerHTML=h;
 }
 
 // ── Strategy Tab ─────────────────────────────────────────────────────────────
@@ -2216,6 +2277,105 @@ function renderStrExpanded(cat){
   return h;
 }
 
+function renderWheelOfLife(cats){
+  if(!cats||!cats.length)return'';
+  const size=320,cx=160,cy=160,maxR=110,n=cats.length;
+  function pt(i,score){
+    const angle=(Math.PI*2*i/n)-Math.PI/2;
+    const r=maxR*(Math.max(0,Math.min(10,score||0))/10);
+    return{x:cx+r*Math.cos(angle),y:cy+r*Math.sin(angle)};
+  }
+  function outerPt(i,r){
+    const angle=(Math.PI*2*i/n)-Math.PI/2;
+    return{x:cx+r*Math.cos(angle),y:cy+r*Math.sin(angle)};
+  }
+
+  let svg=`<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" style="overflow:visible">`;
+
+  // Background rings at 2,4,6,8,10
+  [2,4,6,8,10].forEach(ring=>{
+    const r=maxR*(ring/10);
+    const pts=cats.map((_,i)=>outerPt(i,r));
+    const poly=pts.map(p=>`${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' ');
+    svg+=`<polygon points="${poly}" fill="none" stroke="var(--border)" stroke-width="${ring===10?1.5:0.8}"/>`;
+    // Score label on vertical spoke
+    svg+=`<text x="${(cx+2).toFixed(1)}" y="${(cy-r+4).toFixed(1)}" font-size="8" fill="var(--muted)" text-anchor="middle">${ring}</text>`;
+  });
+
+  // Spokes
+  cats.forEach((_,i)=>{
+    const op=outerPt(i,maxR+2);
+    svg+=`<line x1="${cx}" y1="${cy}" x2="${op.x.toFixed(1)}" y2="${op.y.toFixed(1)}" stroke="var(--border)" stroke-width="0.8"/>`;
+  });
+
+  // Score polygon
+  const scorePts=cats.map((c,i)=>pt(i,c.score||0));
+  const scorePoly=scorePts.map(p=>`${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' ');
+  svg+=`<polygon points="${scorePoly}" fill="${cats[0]?.color||'#378ADD'}28" stroke="${cats[0]?.color||'#378ADD'}" stroke-width="1.5" stroke-linejoin="round"/>`;
+
+  // Score dots
+  cats.forEach((cat,i)=>{
+    const p=pt(i,cat.score||0);
+    svg+=`<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="4" fill="${cat.color||'#888'}" stroke="var(--surface)" stroke-width="1.5"/>`;
+  });
+
+  // Category labels
+  cats.forEach((cat,i)=>{
+    const angle=(Math.PI*2*i/n)-Math.PI/2;
+    const labelR=maxR+22;
+    const lx=cx+labelR*Math.cos(angle);
+    const ly=cy+labelR*Math.sin(angle);
+    const anchor=Math.abs(Math.cos(angle))<0.15?'middle':Math.cos(angle)>0?'start':'end';
+    // Short label: first word or first 10 chars
+    const short=cat.name.split(' ')[0].slice(0,10);
+    svg+=`<text x="${lx.toFixed(1)}" y="${(ly-4).toFixed(1)}" font-size="8.5" fill="var(--fg2)" text-anchor="${anchor}" font-family="Arial,sans-serif">${short}</text>`;
+    svg+=`<text x="${lx.toFixed(1)}" y="${(ly+7).toFixed(1)}" font-size="9" fill="${cat.color||'#888'}" text-anchor="${anchor}" font-weight="700" font-family="Arial,sans-serif">${cat.score||0}</text>`;
+  });
+
+  svg+=`</svg>`;
+
+  // Sliders panel
+  let sliders=`<div class="wol-sliders">`;
+  cats.forEach((cat,i)=>{
+    const score=cat.score||0;
+    sliders+=`<div class="wol-slider-row">
+      <div class="wol-dot" style="background:${cat.color||'#888'}"></div>
+      <div class="wol-name" title="${cat.name}">${cat.number}. ${cat.name.split(' ').slice(0,3).join(' ')}</div>
+      <input type="range" class="wol-input" min="0" max="10" step="1" value="${score}"
+        style="accent-color:${cat.color||'#378ADD'}"
+        oninput="updateWolScore('${cat.id}',this.value)"
+        id="wol-${cat.id}">
+      <div class="wol-score-val" id="wolv-${cat.id}" style="color:${cat.color||'#888'}">${score}</div>
+    </div>`;
+  });
+  sliders+=`<div class="wol-save-hint">Scores auto-save with your strategy data</div>`;
+  sliders+=`</div>`;
+
+  return`<div class="wol-wrap">
+    <div class="wol-chart">${svg}</div>
+    ${sliders}
+  </div>`;
+}
+
+function updateWolScore(catId, val){
+  const cat=rpmPlan?.categories?.find(c=>c.id===catId);
+  if(!cat)return;
+  cat.score=Number(val);
+  // Update score display label
+  const valEl=document.getElementById('wolv-'+catId);if(valEl)valEl.textContent=val;
+  // Redraw SVG only (efficient - replace just the wol-chart div)
+  const chartEl=document.querySelector('.wol-chart');
+  if(chartEl){
+    const newSvg=renderWheelOfLife(rpmPlan.categories);
+    const tmp=document.createElement('div');tmp.innerHTML=newSvg;
+    const newChart=tmp.querySelector('.wol-chart');
+    if(newChart)chartEl.innerHTML=newChart.innerHTML;
+  }
+  // Debounced save
+  clearTimeout(window._wolSaveTimer);
+  window._wolSaveTimer=setTimeout(()=>save(),1500);
+}
+
 function renderStrategy(){
   const el=document.getElementById('strategy-view');
   if(!el)return;
@@ -2253,6 +2413,11 @@ function renderStrategy(){
       <div class="str-ov-stat"><div class="str-ov-num">${linkedDone}/${linkedDone+linkedOpen}</div><div class="str-ov-lbl">Tasks done</div></div>
     </div>
   </div>`;
+
+  h+=`<div class="acard" style="margin-bottom:1.25rem">
+  <div class="atitle">🎡 Wheel of Life <span class="atitle-sub">Drag sliders to update scores</span></div>
+  ${renderWheelOfLife(rpmPlan.categories)}
+</div>`;
 
   h+=`<div class="str-part-label">Personal Life</div>`;
   h+=`<div class="str-grid">`;
@@ -2394,12 +2559,13 @@ function renderAll(){
   else if(tab==='analytics')renderAnalytics();
   else if(tab==='ai'){renderChat();renderChatQuickPrompts();}
   else if(tab==='strategy')renderStrategy();
+  else if(tab==='archived')renderArchived();
 }
 function toggleSec(id){openSecs[id]=openSecs[id]===false?true:false;renderAll();}
 function setTab(t){
   tab=t;
   document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('on',b.dataset.t===t));
-  ['plan','add','categories','analytics','ai','strategy'].forEach(v=>{document.getElementById(v+'-view').style.display=t===v?'block':'none';});
+  ['plan','add','categories','analytics','ai','strategy','archived'].forEach(v=>{document.getElementById(v+'-view').style.display=t===v?'block':'none';});
   renderAll();
   if(t==='ai') document.getElementById('chat-input')?.focus();
 }
@@ -2411,7 +2577,8 @@ document.getElementById('main-tabs').innerHTML=`
   <button class="tab" data-t="categories" onclick="setTab('categories')">Categories</button>
   <button class="tab" data-t="analytics" onclick="setTab('analytics')">Analytics</button>
   <button class="tab" data-t="ai" onclick="setTab('ai')">🤖 AI Assistant</button>
-  <button class="tab" data-t="strategy" onclick="setTab('strategy')">📋 Strategy</button>`;
+  <button class="tab" data-t="strategy" onclick="setTab('strategy')">📋 Strategy</button>
+  <button class="tab" data-t="archived" onclick="setTab('archived')">📦 Archived</button>`;
 const savedUrl=localStorage.getItem('rpm_sheet_url');
 if(savedUrl)sheetUrl=savedUrl;
 if(sheetUrl){const u=document.getElementById('sheet-url');const s=document.getElementById('sheet-status');if(u)u.value=sheetUrl;if(s)s.textContent='Connected';}
