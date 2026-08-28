@@ -161,6 +161,8 @@ body{font-family:Arial,sans-serif;font-size:14px;line-height:1.6}
 .meta-pill{font-size:11px;padding:3px 10px;border-radius:99px;border:1px solid #ddd;color:#555}
 .save-ind{font-size:11px;color:#1d9e75;opacity:0;transition:opacity .4s;margin-left:auto}
 .save-ind.show{opacity:1}
+.rw-toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,16px);background:var(--fg);color:var(--bg);font-size:13px;font-weight:600;padding:11px 20px;border-radius:99px;box-shadow:0 6px 20px rgba(0,0,0,.18);opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:9999;max-width:90vw;text-align:center}
+.rw-toast.show{opacity:1;transform:translate(-50%,0)}
 .tabs{display:flex;gap:6px;margin-bottom:1.5rem;flex-wrap:wrap}
 .tab{padding:7px 18px;border-radius:99px;border:1px solid #ccc;cursor:pointer;font-size:13px;background:#fff;color:#555;transition:all .15s}
 .tab.on{background:#222;color:#fff;border-color:#222;font-weight:500}
@@ -225,6 +227,7 @@ body{font-family:Arial,sans-serif;font-size:14px;line-height:1.6}
 .it{font-size:13px;color:#222;line-height:1.5}
 .it.dn{text-decoration:line-through;color:#bbb}
 .inote{font-size:11px;color:#999;margin-top:3px;font-style:italic;line-height:1.4}
+.ireward{font-size:11px;color:var(--fg2);margin-top:3px;line-height:1.4}
 /* Subtasks */
 .subs{margin-top:4px;padding-left:2px}
 .sub{display:flex;align-items:flex-start;gap:8px;padding:3px 0}
@@ -238,6 +241,7 @@ body{font-family:Arial,sans-serif;font-size:14px;line-height:1.6}
 .sub-due.late{color:#a32d2d}.sub-due.today{color:#854f0b}
 /* Badges / dates */
 .bdg{display:inline-block;font-size:10px;padding:1px 7px;border-radius:99px;font-weight:600;margin-left:5px;vertical-align:middle}
+.reward-bdg{display:inline-block;font-size:12px;margin-left:5px;vertical-align:middle;cursor:default}
 .dp{display:inline-flex;font-size:10px;padding:1px 7px;border-radius:99px;margin-left:6px;cursor:pointer;border:1px solid #ddd;color:#aaa;vertical-align:middle;transition:all .12s}
 .dp:hover{background:#f5f5f2}
 .dp.ov{border-color:#f09595;color:#a32d2d;background:#fcebeb}
@@ -582,6 +586,7 @@ body{font-family:Arial,sans-serif;font-size:14px;line-height:1.6}
 </style>
 </head>
 <body>
+<div id="reward-toast" class="rw-toast"></div>
 <div class="container">
     <div class="header">
       <h1>RPM Weekly Plan</h1>
@@ -732,6 +737,7 @@ function bHtml(pri){const p=PC[pri];if(!p||!p.l)return'';return`<span class="bdg
 function leafCount(t){return 1+(t.subs||[]).length;}
 function doneCount(t){return(t.done?1:0)+((t.subs||[]).filter(s=>s.done).length);}
 function showSaved(){const el=document.getElementById('save-ind');if(!el)return;el.classList.add('show');clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('show'),2000);}
+function showRewardToast(text){const el=document.getElementById('reward-toast');if(!el)return;el.textContent='✅ Task complete — Reward: '+text;el.classList.add('show');clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('show'),3500);}
 function catOf(t){return categories.find(c=>c.id===t.categoryId);}
 
 // ── Stream helpers (Issue 9: use strategy categories) ────────────────────────
@@ -905,14 +911,14 @@ async function togTask(id){
   // Normal done
   t.done=true;
   log.push({taskId:id,completedAt:TODAY,dueDate:t.dueDate||null,daysLate:t.dueDate?daysDiff(t.dueDate,TODAY):null,weekStart:wkStart(TODAY),delegatedTo:''});
-  pendingDelegationId=null;await save();renderAll();
+  pendingDelegationId=null;if(t.reward)showRewardToast(t.reward);await save();renderAll();
 }
 async function togSub(tid,sid){const t=tasks.find(t=>t.id===tid);if(!t)return;const s=t.subs.find(s=>s.id===sid);if(!s)return;s.done=!s.done;await save();renderAll();}
 async function completeDelegation(id,delegatedTo){
   const t=tasks.find(t=>t.id===id);if(!t)return;
   t.done=true;t.delegatedTo=delegatedTo||'';
   log.push({taskId:id,completedAt:TODAY,dueDate:t.dueDate||null,daysLate:t.dueDate?daysDiff(t.dueDate,TODAY):null,weekStart:wkStart(TODAY),delegatedTo:delegatedTo||''});
-  pendingDelegationId=null;await save();renderAll();
+  pendingDelegationId=null;if(t.reward)showRewardToast(t.reward);await save();renderAll();
 }
 function completeDelegationInput(id){
   const inp=document.getElementById('dc-inp-'+id);
@@ -961,7 +967,7 @@ function syncAddSubsFromDOM(){document.querySelectorAll('[data-asub]').forEach(e
 function startEdit(id){
   const t=tasks.find(t=>t.id===id);if(!t)return;
   editingId=id;
-  editState={text:t.text,stream:t.stream,pri:t.pri,dueDate:t.dueDate||'',note:t.note||'',categoryId:t.categoryId||'',delegateIntent:t.delegateIntent||false,delegatedTo:t.delegatedTo||''};
+  editState={text:t.text,stream:t.stream,pri:t.pri,dueDate:t.dueDate||'',note:t.note||'',reward:t.reward||'',categoryId:t.categoryId||'',delegateIntent:t.delegateIntent||false,delegatedTo:t.delegatedTo||''};
   editSubs=(t.subs||[]).map(s=>({...s}));
   renderAll();
   setTimeout(()=>{const el=document.getElementById('ef-text');if(el){el.focus();el.selectionStart=el.selectionEnd=el.value.length;}},60);
@@ -976,7 +982,7 @@ async function saveEdit(){
   syncEditSubsFromDOM();
   const t=tasks.find(t=>t.id===editingId);if(!t)return;
   t.text=editState.text;t.stream=editState.stream;t.pri=editState.pri;
-  t.dueDate=editState.dueDate;t.note=editState.note;t.categoryId=editState.stream;
+  t.dueDate=editState.dueDate;t.note=editState.note;t.reward=editState.reward;t.categoryId=editState.stream;
   t.subs=editSubs.filter(s=>s.text.trim());
   t.delegateIntent=editState.delegateIntent;t.delegatedTo=editState.delegatedTo;
   editingId=null;await save();renderAll();
@@ -997,6 +1003,7 @@ function editFormHtml(t){
     </div>
     <label>Priority</label><div class="eprow">${pBtns}</div>
     <label>Note</label><input type="text" value="${(editState.note||'').replace(/"/g,'&quot;')}" oninput="editState.note=this.value" placeholder="Context, blockers…">
+    <label>🎁 Reward</label><input type="text" value="${(editState.reward||'').replace(/"/g,'&quot;')}" oninput="editState.reward=this.value" placeholder="Treat yourself when it's done…">
     <label>Delegation</label>
     <label class="chk-row" style="text-transform:none;font-size:12px;letter-spacing:0">
       <input type="checkbox" ${editState.delegateIntent?'checked':''} onchange="editState.delegateIntent=this.checked;document.getElementById('ef-delto-wrap').style.display=this.checked?'block':'none'">
@@ -1049,6 +1056,7 @@ function taskHtml(t){
   if(bHtml(t.pri))h+=bHtml(t.pri);
   if(isOv(t)&&!t.done)h+=`<span class="bdg" style="background:#fcebeb;color:#a32d2d;flex-shrink:0">Late</span>`;
   if(t.delegateIntent&&!t.done){const n=t.delegatedTo?`🤝 ${t.delegatedTo}`:'🤝';h+=`<span class="bdg" style="background:#e8eeff;color:#2050a0;flex-shrink:0">${n}</span>`;}
+  if(t.reward)h+=`<span class="reward-bdg" title="Reward: ${t.reward.replace(/"/g,'&quot;')}" style="flex-shrink:0">🎁</span>`;
   if(t.createdAt&&!t.done){const da=daysDiff(t.createdAt,TODAY);if(da>=30)h+=`<span class="task-age old" title="Added ${t.createdAt}">${da}d</span>`;}
   h+=`<span class="dp ${dpC(t)}" onclick="startEdit('${t.id}')" style="flex-shrink:0">${dpTxt(t)}</span>`;
   h+=`</div>`; // end item-compact-row
@@ -1056,6 +1064,7 @@ function taskHtml(t){
   // Expanded content
   if(isOpen){
     if(t.note&&!t.done)h+=`<div class="inote">${t.note}</div>`;
+    if(t.reward)h+=`<div class="ireward">🎁 ${t.reward}</div>`;
     if(isPending){h+=`<div class="dc-wrap"><div class="dc-title">🤝 How was this completed?</div><div class="dc-row"><button class="dc-self" onclick="completeDelegation('${t.id}','')">✓ I did it</button><span class="dc-divider">or</span><input type="text" id="dc-inp-${t.id}" class="dc-inp" placeholder="Delegated to (name)…" onkeydown="if(event.key==='Enter')completeDelegationInput('${t.id}')"><button class="dc-del" onclick="completeDelegationInput('${t.id}')">✓ Delegated</button><button class="dc-cancel" onclick="cancelDelegation()">Cancel</button></div></div>`;}
     if(isEdit)h+=editFormHtml(t);
     if(t.subs&&t.subs.length&&!isEdit&&!isPending){h+=`<div class="subs">`;t.subs.forEach(s=>{h+=`<div class="sub"><div class="sc${s.done?' dn':''}" onclick="togSub('${t.id}','${s.id}')"></div><div class="sub-ib"><span class="st${s.done?' dn':''}">${s.text}</span>${subDueTxt(s)}</div></div>`;});h+=`</div>`;}
@@ -1274,7 +1283,7 @@ async function addTask(){
     note:(document.getElementById('a-note').value||'').trim(),
     done:false,subs:addSubs.filter(s=>s.text.trim()).map(s=>({...s})),
     categoryId:aStream,
-    createdAt:TODAY,isDailyVictory:false,isWeeklyFocus:false,isGhost:false,isArchived:false,
+    createdAt:TODAY,isDailyVictory:false,isWeeklyFocus:false,isGhost:false,isArchived:false,reward:'',
     delegateIntent:document.getElementById('a-delegate').checked,delegatedTo:'',
   });
   await save();addSubs=[];addPri='normal';
@@ -1695,7 +1704,7 @@ function addChatTaskFromPreview(idx){
     id:uid(),stream,text:td.text,pri,dueDate,
     note:td.note||'',done:false,subs:td.subs||[],
     categoryId:catId,createdAt:TODAY,
-    isDailyVictory:false,isWeeklyFocus:false,isGhost:false,isArchived:false,
+    isDailyVictory:false,isWeeklyFocus:false,isGhost:false,isArchived:false,reward:'',
     delegateIntent:delegateTo.length>0,
     delegatedTo:delegateTo,
   });
@@ -2489,7 +2498,7 @@ async function submitStrQuickAdd(catId){
     id:uid(),stream:catId,text,pri:priEl?.value||'normal',
     dueDate:dateEl?.value||'',note:'',done:false,subs:[],
     categoryId:catId,createdAt:TODAY,
-    isDailyVictory:false,isWeeklyFocus:false,isGhost:false,isArchived:false,
+    isDailyVictory:false,isWeeklyFocus:false,isGhost:false,isArchived:false,reward:'',
     delegateIntent:false,delegatedTo:'',
   };
   tasks.push(task);
