@@ -612,7 +612,6 @@ body{font-family:Arial,sans-serif;font-size:14px;line-height:1.6}
     </div>
   </div>
   <div class="tabs" id="main-tabs"></div>
-  <div class="stats" id="stats-row"></div>
     <div id="plan-view"></div>
     <div id="add-view" style="display:none"></div>
     <div id="categories-view" style="display:none"></div>
@@ -872,26 +871,6 @@ function sortedTasks(arr){
   });
 }
 
-// ── Stats ─────────────────────────────────────────────────────────────────────
-function computeStats(){
-  let total=0,done=0,todayC=0,lateC=0,delegateC=0;
-  tasks.forEach(t=>{
-    total+=leafCount(t);done+=doneCount(t);
-    if(isToday(t)&&!t.done)todayC++;
-    if(isOv(t))lateC++;
-    if(t.delegateIntent&&!t.done)delegateC++;
-  });
-  return{total,done,today:todayC,late:lateC,delegate:delegateC,pct:total>0?Math.round(done/total*100):0};
-}
-function renderStats(){
-  const s=computeStats();
-  document.getElementById('stats-row').innerHTML=`
-    <div class="stat"><div class="sl">Total items</div><div class="sv">${s.total}</div></div>
-    <div class="stat"><div class="sl">Completed</div><div class="sv">${s.done}</div><div class="ss">${s.pct}% done</div></div>
-    <div class="stat"><div class="sl">Due today</div><div class="sv">${s.today}</div><div class="ss">remaining</div></div>
-    <div class="stat"><div class="sl">Late</div><div class="sv" style="${s.late>0?'color:#a32d2d':''}">${s.late}</div><div class="ss">${s.late>0?'overdue':'on track'}</div></div>
-    <div class="stat"><div class="sl">To delegate</div><div class="sv" style="${s.delegate>0?'color:#2050a0':''}">${s.delegate}</div><div class="ss">pending</div></div>`;
-}
 
 // ── Task actions ──────────────────────────────────────────────────────────────
 async function togTask(id){
@@ -1290,7 +1269,7 @@ async function addTask(){
     delegateIntent:document.getElementById('a-delegate').checked,delegatedTo:'',
   });
   await save();addSubs=[];addPri='normal';
-  renderStats();renderAdd();
+  renderAdd();
   const fl=document.getElementById('aflash');fl.classList.add('show');setTimeout(()=>fl.classList.remove('show'),1500);
 }
 
@@ -2620,7 +2599,6 @@ function updateApiPill(){const pill=document.getElementById('api-status-pill');i
 
 // ── Render all ────────────────────────────────────────────────────────────────
 function renderAll(){
-  renderStats();
   if(tab==='plan')renderPlan();
   else if(tab==='add')renderAdd();
   else if(tab==='categories')renderCategories();
