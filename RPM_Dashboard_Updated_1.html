@@ -1261,6 +1261,8 @@ function renderAdd(){
     <div class="aprow">${pBtns}</div>
     <label style="margin-top:10px">Note <span style="color:#ccc;font-size:10px;text-transform:none;letter-spacing:0">(optional)</span></label>
     <input type="text" id="a-note" placeholder="Context, blockers…">
+    <label style="margin-top:10px">🎁 Reward <span style="color:#ccc;font-size:10px;text-transform:none;letter-spacing:0">(optional)</span></label>
+    <input type="text" id="a-reward" placeholder="Treat yourself when it's done…">
     <label class="chk-row" style="text-transform:none;font-size:12px;letter-spacing:0;margin-top:10px;cursor:pointer">
       <input type="checkbox" id="a-delegate" style="width:auto;padding:0;border:none">
       🤝 Intend to delegate this task
@@ -1283,7 +1285,8 @@ async function addTask(){
     note:(document.getElementById('a-note').value||'').trim(),
     done:false,subs:addSubs.filter(s=>s.text.trim()).map(s=>({...s})),
     categoryId:aStream,
-    createdAt:TODAY,isDailyVictory:false,isWeeklyFocus:false,isGhost:false,isArchived:false,reward:'',
+    createdAt:TODAY,isDailyVictory:false,isWeeklyFocus:false,isGhost:false,isArchived:false,
+    reward:(document.getElementById('a-reward').value||'').trim(),
     delegateIntent:document.getElementById('a-delegate').checked,delegatedTo:'',
   });
   await save();addSubs=[];addPri='normal';
